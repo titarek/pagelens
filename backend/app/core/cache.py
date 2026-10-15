@@ -46,7 +46,7 @@ class JobStorage:
         ttl = ttl_seconds or settings.redis_cache_ttl_seconds
         try:
             serialized = json.dumps(payload, default=str)
-            self.client.setex(f"pagelens:job:{job_id}", ttl, serialized)
+            self.client.set(f"pagelens:job:{job_id}", serialized, ex=ttl)
             return True
         except Exception as e:
             logger.error(f"Error setting job {job_id} in cache: {e}")
