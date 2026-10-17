@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bloated Anti-Pattern Site - PageLens Fixture</title>
+    <script src="http://cdn.insecure.com/tracker.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+.rule_0 { color: #000000; margin: 0px; padding: 10px; }
+.rule_1 { color: #000001; margin: 1px; padding: 10px; }
+.rule_2 { color: #000002; margin: 2px; padding: 10px; }
+.rule_3 { color: #000003; margin: 3px; padding: 10px; }
+.rule_4 { color: #000004; margin: 4px; padding: 10px; }
+.rule_5 { color: #000005; margin: 5px; padding: 10px; }
+.rule_6 { color: #000006; margin: 6px; padding: 10px; }
+.rule_7 { color: #000007; margin: 7px; padding: 10px; }
+.rule_8 { color: #000008; margin: 8px; padding: 10px; }
+.rule_9 { color: #000009; margin: 9px; padding: 10px; }
+.rule_10 { color: #00000a; margin: 10px; padding: 10px; }
+.rule_11 { color: #00000b; margin: 11px; padding: 10px; }
+.rule_12 { color: #00000c; margin: 12px; padding: 10px; }
+.rule_13 { color: #00000d; margin: 13px; padding: 10px; }
+.rule_14 { color: #00000e; margin: 14px; padding: 10px; }
+.rule_15 { color: #00000f; margin: 15px; padding: 10px; }
+.rule_16 { color: #000010; margin: 16px; padding: 10px; }
+.rule_17 { color: #000011; margin: 17px; padding: 10px; }
+.rule_18 { color: #000012; margin: 18px; padding: 10px; }
+.rule_19 { color: #000013; margin: 19px; padding: 10px; }
+.rule_20 { color: #000014; margin: 20px; padding: 10px; }
+.rule_21 { color: #000015; margin: 21px; padding: 10px; }
+.rule_22 { color: #000016; margin: 22px; padding: 10px; }
+.rule_23 { color: #000017; margin: 23px; padding: 10px; }
+.rule_24 { color: #000018; margin: 24px; padding: 10px; }
+.rule_25 { color: #000019; margin: 25px; padding: 10px; }
+.rule_26 { color: #00001a; margin: 26px; padding: 10px; }
+.rule_27 { color: #00001b; margin: 27px; padding: 10px; }
+.rule_28 { color: #00001c; margin: 28px; padding: 10px; }
+.rule_29 { color: #00001d; margin: 29px; padding: 10px; }
+.rule_30 { color: #00001e; margin: 30px; padding: 10px; }
+.rule_31 { color: #00001f; margin: 31px; padding: 10px; }
+.rule_32 { color: #000020; margin: 32px; padding: 10px; }
+.rule_33 { color: #000021; margin: 33px; padding: 10px; }
+.rule_34 { color: #000022; margin: 34px; padding: 10px; }
+.rule_35 { color: #000023; margin: 35px; padding: 10px; }
+.rule_36 { color: #000024; margin: 36px; padding: 10px; }
+.rule_37 { color: #000025; margin: 37px; padding: 10px; }
+.rule_38 { color: #000026; margin: 38px; padding: 10px; }
+.rule_39 { color: #000027; margin: 39px; padding: 10px; }
+.rule_40 { color: #000028; margin: 40px; padding: 10px; }
+.rule_41 { color: #000029; margin: 41px; padding: 10px; }
+.rule_42 { color: #00002a; margin: 42px; padding: 10px; }
+.rule_43 { color: #00002b; margin: 43px; padding: 10px; }
+.rule_44 { color: #00002c; margin: 44px; padding: 10px; }
+.rule_45 { color: #00002d; margin: 45px; padding: 10px; }
+.rule_46 { color: #00002e; margin: 46px; padding: 10px; }
+.rule_47 { color: #00002f; margin: 47px; padding: 10px; }
+.rule_48 { color: #000030; margin: 48px; padding: 10px; }
+.rule_49 { color: #000031; margin: 49px; padding: 10px; }
+.rule_50 { color: #000032; margin: 50px; padding: 10px; }
+.rule_51 { color: #000033; margin: 51px; padding: 10px; }
+.rule_52 { color: #000034; margin: 52px; padding: 10px; }
+.rule_53 { color: #000035; margin: 53px; padding: 10px; }
+.rule_54 { color: #000036; margin: 54px; padding: 10px; }
+.rule_55 { color: #000037; margin: 55px; padding: 10px; }
+.rule_56 { color: #000038; margin: 56px; padding: 10px; }
+.rule_57 { color: #000039; margin: 57px; padding: 10px; }
+.rule_58 { color: #00003a; margin: 58px; padding: 10px; }
+.rule_59 { color: #00003b; margin: 59px; padding: 10px; }
+.rule_60 { color: #00003c; margin: 60px; padding: 10px; }
+.rule_61 { color: #00003d; margin: 61px; padding: 10px; }
+.rule_62 { color: #00003e; margin: 62px; padding: 10px; }
+.rule_63 { color: #00003f; margin: 63px; padding: 10px; }
+.rule_64 { color: #000040; margin: 64px; padding: 10px; }
+.rule_65 { color: #000041; margin: 65px; padding: 10px; }
+.rule_66 { color: #000042; margin: 66px; padding: 10px; }
+.rule_67 { color: #000043; margin: 67px; padding: 10px; }
+.rule_68 { color: #000044; margin: 68px; padding: 10px; }
+.rule_69 { color: #000045; margin: 69px; padding: 10px; }
+.rule_70 { color: #000046; margin: 70px; padding: 10px; }
+.rule_71 { color: #000047; margin: 71px; padding: 10px; }
+.rule_72 { color: #000048; margin: 72px; padding: 10px; }
+.rule_73 { color: #000049; margin: 73px; padding: 10px; }
+.rule_74 { color: #00004a; margin: 74px; padding: 10px; }
+.rule_75 { color: #00004b; margin: 75px; padding: 10px; }
+.rule_76 { color: #00004c; margin: 76px; padding: 10px; }
+.rule_77 { color: #00004d; margin: 77px; padding: 10px; }
+.rule_78 { color: #00004e; margin: 78px; padding: 10px; }
+.rule_79 { color: #00004f; margin: 79px; padding: 10px; }
+.rule_80 { color: #000050; margin: 80px; padding: 10px; }
+.rule_81 { color: #000051; margin: 81px; padding: 10px; }
+.rule_82 { color: #000052; margin: 82px; padding: 10px; }
+.rule_83 { color: #000053; margin: 83px; padding: 10px; }
+.rule_84 { color: #000054; margin: 84px; padding: 10px; }
+.rule_85 { color: #000055; margin: 85px; padding: 10px; }
+.rule_86 { color: #000056; margin: 86px; padding: 10px; }
+.rule_87 { color: #000057; margin: 87px; padding: 10px; }
+.rule_88 { color: #000058; margin: 88px; padding: 10px; }
+.rule_89 { color: #000059; margin: 89px; padding: 10px; }
+.rule_90 { color: #00005a; margin: 90px; padding: 10px; }
+.rule_91 { color: #00005b; margin: 91px; padding: 10px; }
+.rule_92 { color: #00005c; margin: 92px; padding: 10px; }
+.rule_93 { color: #00005d; margin: 93px; padding: 10px; }
+.rule_94 { color: #00005e; margin: 94px; padding: 10px; }
+.rule_95 { color: #00005f; margin: 95px; padding: 10px; }
+.rule_96 { color: #000060; margin: 96px; padding: 10px; }
+.rule_97 { color: #000061; margin: 97px; padding: 10px; }
+.rule_98 { color: #000062; margin: 98px; padding: 10px; }
+.rule_99 { color: #000063; margin: 99px; padding: 10px; }
+.rule_100 { color: #000064; margin: 100px; padding: 10px; }
+.rule_101 { color: #000065; margin: 101px; padding: 10px; }
+.rule_102 { color: #000066; margin: 102px; padding: 10px; }
+.rule_103 { color: #000067; margin: 103px; padding: 10px; }
+.rule_104 { color: #000068; margin: 104px; padding: 10px; }
+.rule_105 { color: #000069; margin: 105px; padding: 10px; }
+.rule_106 { color: #00006a; margin: 106px; padding: 10px; }
+.rule_107 { color: #00006b; margin: 107px; padding: 10px; }
+.rule_108 { color: #00006c; margin: 108px; padding: 10px; }
+.rule_109 { color: #00006d; margin: 109px; padding: 10px; }
+.rule_110 { color: #00006e; margin: 110px; padding: 10px; }
+.rule_111 { color: #00006f; margin: 111px; padding: 10px; }
+.rule_112 { color: #000070; margin: 112px; padding: 10px; }
+.rule_113 { color: #000071; margin: 113px; padding: 10px; }
+.rule_114 { color: #000072; margin: 114px; padding: 10px; }
+.rule_115 { color: #000073; margin: 115px; padding: 10px; }
+.rule_116 { color: #000074; margin: 116px; padding: 10px; }
+.rule_117 { color: #000075; margin: 117px; padding: 10px; }
+.rule_118 { color: #000076; margin: 118px; padding: 10px; }
+.rule_119 { color: #000077; margin: 119px; padding: 10px; }
+.rule_120 { color: #000078; margin: 120px; padding: 10px; }
+.rule_121 { color: #000079; margin: 121px; padding: 10px; }
+.rule_122 { color: #00007a; margin: 122px; padding: 10px; }
+.rule_123 { color: #00007b; margin: 123px; padding: 10px; }
+.rule_124 { color: #00007c; margin: 124px; padding: 10px; }
+.rule_125 { color: #00007d; margin: 125px; padding: 10px; }
+.rule_126 { color: #00007e; margin: 126px; padding: 10px; }
+.rule_127 { color: #00007f; margin: 127px; padding: 10px; }
+.rule_128 { color: #000080; margin: 128px; padding: 10px; }
+.rule_129 { color: #000081; margin: 129px; padding: 10px; }
+.rule_130 { color: #000082; margin: 130px; padding: 10px; }
+.rule_131 { color: #000083; margin: 131px; padding: 10px; }
+.rule_132 { color: #000084; margin: 132px; padding: 10px; }
+.rule_133 { color: #000085; margin: 133px; padding: 10px; }
+.rule_134 { color: #000086; margin: 134px; padding: 10px; }
+.rule_135 { color: #000087; margin: 135px; padding: 10px; }
+.rule_136 { color: #000088; margin: 136px; padding: 10px; }
+.rule_137 { color: #000089; margin: 137px; padding: 10px; }
+.rule_138 { color: #00008a; margin: 138px; padding: 10px; }
+.rule_139 { color: #00008b; margin: 139px; padding: 10px; }
+.rule_140 { color: #00008c; margin: 140px; padding: 10px; }
+.rule_141 { color: #00008d; margin: 141px; padding: 10px; }
+.rule_142 { color: #00008e; margin: 142px; padding: 10px; }
+.rule_143 { color: #00008f; margin: 143px; padding: 10px; }
+.rule_144 { color: #000090; margin: 144px; padding: 10px; }
+.rule_145 { color: #000091; margin: 145px; padding: 10px; }
+.rule_146 { color: #000092; margin: 146px; padding: 10px; }
+.rule_147 { color: #000093; margin: 147px; padding: 10px; }
+.rule_148 { color: #000094; margin: 148px; padding: 10px; }
+.rule_149 { color: #000095; margin: 149px; padding: 10px; }
+.rule_150 { color: #000096; margin: 150px; padding: 10px; }
+.rule_151 { color: #000097; margin: 151px; padding: 10px; }
+.rule_152 { color: #000098; margin: 152px; padding: 10px; }
+.rule_153 { color: #000099; margin: 153px; padding: 10px; }
+.rule_154 { color: #00009a; margin: 154px; padding: 10px; }
+.rule_155 { color: #00009b; margin: 155px; padding: 10px; }
+.rule_156 { color: #00009c; margin: 156px; padding: 10px; }
+.rule_157 { color: #00009d; margin: 157px; padding: 10px; }
+.rule_158 { color: #00009e; margin: 158px; padding: 10px; }
+.rule_159 { color: #00009f; margin: 159px; padding: 10px; }
+.rule_160 { color: #0000a0; margin: 160px; padding: 10px; }
+.rule_161 { color: #0000a1; margin: 161px; padding: 10px; }
+.rule_162 { color: #0000a2; margin: 162px; padding: 10px; }
+.rule_163 { color: #0000a3; margin: 163px; padding: 10px; }
+.rule_164 { color: #0000a4; margin: 164px; padding: 10px; }
+.rule_165 { color: #0000a5; margin: 165px; padding: 10px; }
+.rule_166 { color: #0000a6; margin: 166px; padding: 10px; }
+.rule_167 { color: #0000a7; margin: 167px; padding: 10px; }
+.rule_168 { color: #0000a8; margin: 168px; padding: 10px; }
+.rule_169 { color: #0000a9; margin: 169px; padding: 10px; }
+.rule_170 { color: #0000aa; margin: 170px; padding: 10px; }
+.rule_171 { color: #0000ab; margin: 171px; padding: 10px; }
+.rule_172 { color: #0000ac; margin: 172px; padding: 10px; }
+.rule_173 { color: #0000ad; margin: 173px; padding: 10px; }
+.rule_174 { color: #0000ae; margin: 174px; padding: 10px; }
+.rule_175 { color: #0000af; margin: 175px; padding: 10px; }
+.rule_176 { color: #0000b0; margin: 176px; padding: 10px; }
+.rule_177 { color: #0000b1; margin: 177px; padding: 10px; }
+.rule_178 { color: #0000b2; margin: 178px; padding: 10px; }
+.rule_179 { color: #0000b3; margin: 179px; padding: 10px; }
+.rule_180 { color: #0000b4; margin: 180px; padding: 10px; }
+.rule_181 { color: #0000b5; margin: 181px; padding: 10px; }
+.rule_182 { color: #0000b6; margin: 182px; padding: 10px; }
+.rule_183 { color: #0000b7; margin: 183px; padding: 10px; }
+.rule_184 { color: #0000b8; margin: 184px; padding: 10px; }
+.rule_185 { color: #0000b9; margin: 185px; padding: 10px; }
+.rule_186 { color: #0000ba; margin: 186px; padding: 10px; }
+.rule_187 { color: #0000bb; margin: 187px; padding: 10px; }
+.rule_188 { color: #0000bc; margin: 188px; padding: 10px; }
+.rule_189 { color: #0000bd; margin: 189px; padding: 10px; }
+.rule_190 { color: #0000be; margin: 190px; padding: 10px; }
+.rule_191 { color: #0000bf; margin: 191px; padding: 10px; }
+.rule_192 { color: #0000c0; margin: 192px; padding: 10px; }
+.rule_193 { color: #0000c1; margin: 193px; padding: 10px; }
+.rule_194 { color: #0000c2; margin: 194px; padding: 10px; }
+.rule_195 { color: #0000c3; margin: 195px; padding: 10px; }
+.rule_196 { color: #0000c4; margin: 196px; padding: 10px; }
+.rule_197 { color: #0000c5; margin: 197px; padding: 10px; }
+.rule_198 { color: #0000c6; margin: 198px; padding: 10px; }
+.rule_199 { color: #0000c7; margin: 199px; padding: 10px; }
+.rule_200 { color: #0000c8; margin: 200px; padding: 10px; }
+.rule_201 { color: #0000c9; margin: 201px; padding: 10px; }
+.rule_202 { color: #0000ca; margin: 202px; padding: 10px; }
+.rule_203 { color: #0000cb; margin: 203px; padding: 10px; }
+.rule_204 { color: #0000cc; margin: 204px; padding: 10px; }
+.rule_205 { color: #0000cd; margin: 205px; padding: 10px; }
+.rule_206 { color: #0000ce; margin: 206px; padding: 10px; }
+.rule_207 { color: #0000cf; margin: 207px; padding: 10px; }
+.rule_208 { color: #0000d0; margin: 208px; padding: 10px; }
+.rule_209 { color: #0000d1; margin: 209px; padding: 10px; }
+.rule_210 { color: #0000d2; margin: 210px; padding: 10px; }
+.rule_211 { color: #0000d3; margin: 211px; padding: 10px; }
+.rule_212 { color: #0000d4; margin: 212px; padding: 10px; }
+.rule_213 { color: #0000d5; margin: 213px; padding: 10px; }
+.rule_214 { color: #0000d6; margin: 214px; padding: 10px; }
+.rule_215 { color: #0000d7; margin: 215px; padding: 10px; }
+.rule_216 { color: #0000d8; margin: 216px; padding: 10px; }
+.rule_217 { color: #0000d9; margin: 217px; padding: 10px; }
+.rule_218 { color: #0000da; margin: 218px; padding: 10px; }
+.rule_219 { color: #0000db; margin: 219px; padding: 10px; }
+.rule_220 { color: #0000dc; margin: 220px; padding: 10px; }
+.rule_221 { color: #0000dd; margin: 221px; padding: 10px; }
+.rule_222 { color: #0000de; margin: 222px; padding: 10px; }
+.rule_223 { color: #0000df; margin: 223px; padding: 10px; }
+.rule_224 { color: #0000e0; margin: 224px; padding: 10px; }
+.rule_225 { color: #0000e1; margin: 225px; padding: 10px; }
+.rule_226 { color: #0000e2; margin: 226px; padding: 10px; }
+.rule_227 { color: #0000e3; margin: 227px; padding: 10px; }
+.rule_228 { color: #0000e4; margin: 228px; padding: 10px; }
+.rule_229 { color: #0000e5; margin: 229px; padding: 10px; }
+.rule_230 { color: #0000e6; margin: 230px; padding: 10px; }
+.rule_231 { color: #0000e7; margin: 231px; padding: 10px; }
+.rule_232 { color: #0000e8; margin: 232px; padding: 10px; }
+.rule_233 { color: #0000e9; margin: 233px; padding: 10px; }
+.rule_234 { color: #0000ea; margin: 234px; padding: 10px; }
+.rule_235 { color: #0000eb; margin: 235px; padding: 10px; }
+.rule_236 { color: #0000ec; margin: 236px; padding: 10px; }
+.rule_237 { color: #0000ed; margin: 237px; padding: 10px; }
+.rule_238 { color: #0000ee; margin: 238px; padding: 10px; }
+.rule_239 { color: #0000ef; margin: 239px; padding: 10px; }
+.rule_240 { color: #0000f0; margin: 240px; padding: 10px; }
+.rule_241 { color: #0000f1; margin: 241px; padding: 10px; }
+.rule_242 { color: #0000f2; margin: 242px; padding: 10px; }
+.rule_243 { color: #0000f3; margin: 243px; padding: 10px; }
+.rule_244 { color: #0000f4; margin: 244px; padding: 10px; }
+.rule_245 { color: #0000f5; margin: 245px; padding: 10px; }
+.rule_246 { color: #0000f6; margin: 246px; padding: 10px; }
+.rule_247 { color: #0000f7; margin: 247px; padding: 10px; }
+.rule_248 { color: #0000f8; margin: 248px; padding: 10px; }
+.rule_249 { color: #0000f9; margin: 249px; padding: 10px; }
+.rule_250 { color: #0000fa; margin: 250px; padding: 10px; }
+.rule_251 { color: #0000fb; margin: 251px; padding: 10px; }
+.rule_252 { color: #0000fc; margin: 252px; padding: 10px; }
+.rule_253 { color: #0000fd; margin: 253px; padding: 10px; }
+.rule_254 { color: #0000fe; margin: 254px; padding: 10px; }
+.rule_255 { color: #0000ff; margin: 255px; padding: 10px; }
+.rule_256 { color: #000100; margin: 256px; padding: 10px; }
+.rule_257 { color: #000101; margin: 257px; padding: 10px; }
+.rule_258 { color: #000102; margin: 258px; padding: 10px; }
+.rule_259 { color: #000103; margin: 259px; padding: 10px; }
+.rule_260 { color: #000104; margin: 260px; padding: 10px; }
+.rule_261 { color: #000105; margin: 261px; padding: 10px; }
+.rule_262 { color: #000106; margin: 262px; padding: 10px; }
+.rule_263 { color: #000107; margin: 263px; padding: 10px; }
+.rule_264 { color: #000108; margin: 264px; padding: 10px; }
+.rule_265 { color: #000109; margin: 265px; padding: 10px; }
+.rule_266 { color: #00010a; margin: 266px; padding: 10px; }
+.rule_267 { color: #00010b; margin: 267px; padding: 10px; }
+.rule_268 { color: #00010c; margin: 268px; padding: 10px; }
+.rule_269 { color: #00010d; margin: 269px; padding: 10px; }
+.rule_270 { color: #00010e; margin: 270px; padding: 10px; }
+.rule_271 { color: #00010f; margin: 271px; padding: 10px; }
+.rule_272 { color: #000110; margin: 272px; padding: 10px; }
+.rule_273 { color: #000111; margin: 273px; padding: 10px; }
+.rule_274 { color: #000112; margin: 274px; padding: 10px; }
+.rule_275 { color: #000113; margin: 275px; padding: 10px; }
+.rule_276 { color: #000114; margin: 276px; padding: 10px; }
+.rule_277 { color: #000115; margin: 277px; padding: 10px; }
+.rule_278 { color: #000116; margin: 278px; padding: 10px; }
+.rule_279 { color: #000117; margin: 279px; padding: 10px; }
+.rule_280 { color: #000118; margin: 280px; padding: 10px; }
+.rule_281 { color: #000119; margin: 281px; padding: 10px; }
+.rule_282 { color: #00011a; margin: 282px; padding: 10px; }
+.rule_283 { color: #00011b; margin: 283px; padding: 10px; }
+.rule_284 { color: #00011c; margin: 284px; padding: 10px; }
+.rule_285 { color: #00011d; margin: 285px; padding: 10px; }
+.rule_286 { color: #00011e; margin: 286px; padding: 10px; }
+.rule_287 { color: #00011f; margin: 287px; padding: 10px; }
+.rule_288 { color: #000120; margin: 288px; padding: 10px; }
+.rule_289 { color: #000121; margin: 289px; padding: 10px; }
+.rule_290 { color: #000122; margin: 290px; padding: 10px; }
+.rule_291 { color: #000123; margin: 291px; padding: 10px; }
+.rule_292 { color: #000124; margin: 292px; padding: 10px; }
+.rule_293 { color: #000125; margin: 293px; padding: 10px; }
+.rule_294 { color: #000126; margin: 294px; padding: 10px; }
+.rule_295 { color: #000127; margin: 295px; padding: 10px; }
+.rule_296 { color: #000128; margin: 296px; padding: 10px; }
+.rule_297 { color: #000129; margin: 297px; padding: 10px; }
+.rule_298 { color: #00012a; margin: 298px; padding: 10px; }
+.rule_299 { color: #00012b; margin: 299px; padding: 10px; }
+.rule_300 { color: #00012c; margin: 300px; padding: 10px; }
+.rule_301 { color: #00012d; margin: 301px; padding: 10px; }
+.rule_302 { color: #00012e; margin: 302px; padding: 10px; }
+.rule_303 { color: #00012f; margin: 303px; padding: 10px; }
+.rule_304 { color: #000130; margin: 304px; padding: 10px; }
+.rule_305 { color: #000131; margin: 305px; padding: 10px; }
+.rule_306 { color: #000132; margin: 306px; padding: 10px; }
+.rule_307 { color: #000133; margin: 307px; padding: 10px; }
+.rule_308 { color: #000134; margin: 308px; padding: 10px; }
+.rule_309 { color: #000135; margin: 309px; padding: 10px; }
+.rule_310 { color: #000136; margin: 310px; padding: 10px; }
+.rule_311 { color: #000137; margin: 311px; padding: 10px; }
+.rule_312 { color: #000138; margin: 312px; padding: 10px; }
+.rule_313 { color: #000139; margin: 313px; padding: 10px; }
+.rule_314 { color: #00013a; margin: 314px; padding: 10px; }
+.rule_315 { color: #00013b; margin: 315px; padding: 10px; }
+.rule_316 { color: #00013c; margin: 316px; padding: 10px; }
+.rule_317 { color: #00013d; margin: 317px; padding: 10px; }
+.rule_318 { color: #00013e; margin: 318px; padding: 10px; }
+.rule_319 { color: #00013f; margin: 319px; padding: 10px; }
+.rule_320 { color: #000140; margin: 320px; padding: 10px; }
+.rule_321 { color: #000141; margin: 321px; padding: 10px; }
+.rule_322 { color: #000142; margin: 322px; padding: 10px; }
+.rule_323 { color: #000143; margin: 323px; padding: 10px; }
+.rule_324 { color: #000144; margin: 324px; padding: 10px; }
+.rule_325 { color: #000145; margin: 325px; padding: 10px; }
+.rule_326 { color: #000146; margin: 326px; padding: 10px; }
+.rule_327 { color: #000147; margin: 327px; padding: 10px; }
+.rule_328 { color: #000148; margin: 328px; padding: 10px; }
+.rule_329 { color: #000149; margin: 329px; padding: 10px; }
+.rule_330 { color: #00014a; margin: 330px; padding: 10px; }
+.rule_331 { color: #00014b; margin: 331px; padding: 10px; }
+.rule_332 { color: #00014c; margin: 332px; padding: 10px; }
+.rule_333 { color: #00014d; margin: 333px; padding: 10px; }
+.rule_334 { color: #00014e; margin: 334px; padding: 10px; }
+.rule_335 { color: #00014f; margin: 335px; padding: 10px; }
+.rule_336 { color: #000150; margin: 336px; padding: 10px; }
+.rule_337 { color: #000151; margin: 337px; padding: 10px; }
+.rule_338 { color: #000152; margin: 338px; padding: 10px; }
+.rule_339 { color: #000153; margin: 339px; padding: 10px; }
+.rule_340 { color: #000154; margin: 340px; padding: 10px; }
+.rule_341 { color: #000155; margin: 341px; padding: 10px; }
+.rule_342 { color: #000156; margin: 342px; padding: 10px; }
+.rule_343 { color: #000157; margin: 343px; padding: 10px; }
+.rule_344 { color: #000158; margin: 344px; padding: 10px; }
+.rule_345 { color: #000159; margin: 345px; padding: 10px; }
+.rule_346 { color: #00015a; margin: 346px; padding: 10px; }
+.rule_347 { color: #00015b; margin: 347px; padding: 10px; }
+.rule_348 { color: #00015c; margin: 348px; padding: 10px; }
+.rule_349 { color: #00015d; margin: 349px; padding: 10px; }
+.rule_350 { color: #00015e; margin: 350px; padding: 10px; }
+.rule_351 { color: #00015f; margin: 351px; padding: 10px; }
+.rule_352 { color: #000160; margin: 352px; padding: 10px; }
+.rule_353 { color: #000161; margin: 353px; padding: 10px; }
+.rule_354 { color: #000162; margin: 354px; padding: 10px; }
+.rule_355 { color: #000163; margin: 355px; padding: 10px; }
+.rule_356 { color: #000164; margin: 356px; padding: 10px; }
+.rule_357 { color: #000165; margin: 357px; padding: 10px; }
+.rule_358 { color: #000166; margin: 358px; padding: 10px; }
+.rule_359 { color: #000167; margin: 359px; padding: 10px; }
+.rule_360 { color: #000168; margin: 360px; padding: 10px; }
+.rule_361 { color: #000169; margin: 361px; padding: 10px; }
+.rule_362 { color: #00016a; margin: 362px; padding: 10px; }
+.rule_363 { color: #00016b; margin: 363px; padding: 10px; }
+.rule_364 { color: #00016c; margin: 364px; padding: 10px; }
+.rule_365 { color: #00016d; margin: 365px; padding: 10px; }
+.rule_366 { color: #00016e; margin: 366px; padding: 10px; }
+.rule_367 { color: #00016f; margin: 367px; padding: 10px; }
+.rule_368 { color: #000170; margin: 368px; padding: 10px; }
+.rule_369 { color: #000171; margin: 369px; padding: 10px; }
+.rule_370 { color: #000172; margin: 370px; padding: 10px; }
+.rule_371 { color: #000173; margin: 371px; padding: 10px; }
+.rule_372 { color: #000174; margin: 372px; padding: 10px; }
+.rule_373 { color: #000175; margin: 373px; padding: 10px; }
+.rule_374 { color: #000176; margin: 374px; padding: 10px; }
+.rule_375 { color: #000177; margin: 375px; padding: 10px; }
+.rule_376 { color: #000178; margin: 376px; padding: 10px; }
+.rule_377 { color: #000179; margin: 377px; padding: 10px; }
+.rule_378 { color: #00017a; margin: 378px; padding: 10px; }
+.rule_379 { color: #00017b; margin: 379px; padding: 10px; }
+.rule_380 { color: #00017c; margin: 380px; padding: 10px; }
+.rule_381 { color: #00017d; margin: 381px; padding: 10px; }
+.rule_382 { color: #00017e; margin: 382px; padding: 10px; }
+.rule_383 { color: #00017f; margin: 383px; padding: 10px; }
+.rule_384 { color: #000180; margin: 384px; padding: 10px; }
+.rule_385 { color: #000181; margin: 385px; padding: 10px; }
+.rule_386 { color: #000182; margin: 386px; padding: 10px; }
+.rule_387 { color: #000183; margin: 387px; padding: 10px; }
+.rule_388 { color: #000184; margin: 388px; padding: 10px; }
+.rule_389 { color: #000185; margin: 389px; padding: 10px; }
+.rule_390 { color: #000186; margin: 390px; padding: 10px; }
+.rule_391 { color: #000187; margin: 391px; padding: 10px; }
+.rule_392 { color: #000188; margin: 392px; padding: 10px; }
+.rule_393 { color: #000189; margin: 393px; padding: 10px; }
+.rule_394 { color: #00018a; margin: 394px; padding: 10px; }
+.rule_395 { color: #00018b; margin: 395px; padding: 10px; }
+.rule_396 { color: #00018c; margin: 396px; padding: 10px; }
+.rule_397 { color: #00018d; margin: 397px; padding: 10px; }
+.rule_398 { color: #00018e; margin: 398px; padding: 10px; }
+.rule_399 { color: #00018f; margin: 399px; padding: 10px; }
+.rule_400 { color: #000190; margin: 400px; padding: 10px; }
+.rule_401 { color: #000191; margin: 401px; padding: 10px; }
+.rule_402 { color: #000192; margin: 402px; padding: 10px; }
+.rule_403 { color: #000193; margin: 403px; padding: 10px; }
+.rule_404 { color: #000194; margin: 404px; padding: 10px; }
+.rule_405 { color: #000195; margin: 405px; padding: 10px; }
+.rule_406 { color: #000196; margin: 406px; padding: 10px; }
+.rule_407 { color: #000197; margin: 407px; padding: 10px; }
+.rule_408 { color: #000198; margin: 408px; padding: 10px; }
+.rule_409 { color: #000199; margin: 409px; padding: 10px; }
+.rule_410 { color: #00019a; margin: 410px; padding: 10px; }
+.rule_411 { color: #00019b; margin: 411px; padding: 10px; }
+.rule_412 { color: #00019c; margin: 412px; padding: 10px; }
+.rule_413 { color: #00019d; margin: 413px; padding: 10px; }
+.rule_414 { color: #00019e; margin: 414px; padding: 10px; }
+.rule_415 { color: #00019f; margin: 415px; padding: 10px; }
+.rule_416 { color: #0001a0; margin: 416px; padding: 10px; }
+.rule_417 { color: #0001a1; margin: 417px; padding: 10px; }
+.rule_418 { color: #0001a2; margin: 418px; padding: 10px; }
+.rule_419 { color: #0001a3; margin: 419px; padding: 10px; }
+.rule_420 { color: #0001a4; margin: 420px; padding: 10px; }
+.rule_421 { color: #0001a5; margin: 421px; padding: 10px; }
+.rule_422 { color: #0001a6; margin: 422px; padding: 10px; }
+.rule_423 { color: #0001a7; margin: 423px; padding: 10px; }
+.rule_424 { color: #0001a8; margin: 424px; padding: 10px; }
+.rule_425 { color: #0001a9; margin: 425px; padding: 10px; }
+.rule_426 { color: #0001aa; margin: 426px; padding: 10px; }
+.rule_427 { color: #0001ab; margin: 427px; padding: 10px; }
+.rule_428 { color: #0001ac; margin: 428px; padding: 10px; }
+.rule_429 { color: #0001ad; margin: 429px; padding: 10px; }
+.rule_430 { color: #0001ae; margin: 430px; padding: 10px; }
+.rule_431 { color: #0001af; margin: 431px; padding: 10px; }
+.rule_432 { color: #0001b0; margin: 432px; padding: 10px; }
+.rule_433 { color: #0001b1; margin: 433px; padding: 10px; }
+.rule_434 { color: #0001b2; margin: 434px; padding: 10px; }
+.rule_435 { color: #0001b3; margin: 435px; padding: 10px; }
+.rule_436 { color: #0001b4; margin: 436px; padding: 10px; }
+.rule_437 { color: #0001b5; margin: 437px; padding: 10px; }
+.rule_438 { color: #0001b6; margin: 438px; padding: 10px; }
+.rule_439 { color: #0001b7; margin: 439px; padding: 10px; }
+.rule_440 { color: #0001b8; margin: 440px; padding: 10px; }
+.rule_441 { color: #0001b9; margin: 441px; padding: 10px; }
+.rule_442 { color: #0001ba; margin: 442px; padding: 10px; }
+.rule_443 { color: #0001bb; margin: 443px; padding: 10px; }
+.rule_444 { color: #0001bc; margin: 444px; padding: 10px; }
+.rule_445 { color: #0001bd; margin: 445px; padding: 10px; }
+.rule_446 { color: #0001be; margin: 446px; padding: 10px; }
+.rule_447 { color: #0001bf; margin: 447px; padding: 10px; }
+.rule_448 { color: #0001c0; margin: 448px; padding: 10px; }
+.rule_449 { color: #0001c1; margin: 449px; padding: 10px; }
+.rule_450 { color: #0001c2; margin: 450px; padding: 10px; }
+.rule_451 { color: #0001c3; margin: 451px; padding: 10px; }
+.rule_452 { color: #0001c4; margin: 452px; padding: 10px; }
+.rule_453 { color: #0001c5; margin: 453px; padding: 10px; }
+.rule_454 { color: #0001c6; margin: 454px; padding: 10px; }
+.rule_455 { color: #0001c7; margin: 455px; padding: 10px; }
+.rule_456 { color: #0001c8; margin: 456px; padding: 10px; }
+.rule_457 { color: #0001c9; margin: 457px; padding: 10px; }
+.rule_458 { color: #0001ca; margin: 458px; padding: 10px; }
+.rule_459 { color: #0001cb; margin: 459px; padding: 10px; }
+.rule_460 { color: #0001cc; margin: 460px; padding: 10px; }
+.rule_461 { color: #0001cd; margin: 461px; padding: 10px; }
+.rule_462 { color: #0001ce; margin: 462px; padding: 10px; }
+.rule_463 { color: #0001cf; margin: 463px; padding: 10px; }
+.rule_464 { color: #0001d0; margin: 464px; padding: 10px; }
+.rule_465 { color: #0001d1; margin: 465px; padding: 10px; }
+.rule_466 { color: #0001d2; margin: 466px; padding: 10px; }
+.rule_467 { color: #0001d3; margin: 467px; padding: 10px; }
+.rule_468 { color: #0001d4; margin: 468px; padding: 10px; }
+.rule_469 { color: #0001d5; margin: 469px; padding: 10px; }
+.rule_470 { color: #0001d6; margin: 470px; padding: 10px; }
+.rule_471 { color: #0001d7; margin: 471px; padding: 10px; }
+.rule_472 { color: #0001d8; margin: 472px; padding: 10px; }
+.rule_473 { color: #0001d9; margin: 473px; padding: 10px; }
+.rule_474 { color: #0001da; margin: 474px; padding: 10px; }
+.rule_475 { color: #0001db; margin: 475px; padding: 10px; }
+.rule_476 { color: #0001dc; margin: 476px; padding: 10px; }
+.rule_477 { color: #0001dd; margin: 477px; padding: 10px; }
+.rule_478 { color: #0001de; margin: 478px; padding: 10px; }
+.rule_479 { color: #0001df; margin: 479px; padding: 10px; }
+.rule_480 { color: #0001e0; margin: 480px; padding: 10px; }
+.rule_481 { color: #0001e1; margin: 481px; padding: 10px; }
+.rule_482 { color: #0001e2; margin: 482px; padding: 10px; }
+.rule_483 { color: #0001e3; margin: 483px; padding: 10px; }
+.rule_484 { color: #0001e4; margin: 484px; padding: 10px; }
+.rule_485 { color: #0001e5; margin: 485px; padding: 10px; }
+.rule_486 { color: #0001e6; margin: 486px; padding: 10px; }
+.rule_487 { color: #0001e7; margin: 487px; padding: 10px; }
+.rule_488 { color: #0001e8; margin: 488px; padding: 10px; }
+.rule_489 { color: #0001e9; margin: 489px; padding: 10px; }
+.rule_490 { color: #0001ea; margin: 490px; padding: 10px; }
+.rule_491 { color: #0001eb; margin: 491px; padding: 10px; }
+.rule_492 { color: #0001ec; margin: 492px; padding: 10px; }
+.rule_493 { color: #0001ed; margin: 493px; padding: 10px; }
+.rule_494 { color: #0001ee; margin: 494px; padding: 10px; }
+.rule_495 { color: #0001ef; margin: 495px; padding: 10px; }
+.rule_496 { color: #0001f0; margin: 496px; padding: 10px; }
+.rule_497 { color: #0001f1; margin: 497px; padding: 10px; }
+.rule_498 { color: #0001f2; margin: 498px; padding: 10px; }
+.rule_499 { color: #0001f3; margin: 499px; padding: 10px; }
+.rule_500 { color: #0001f4; margin: 500px; padding: 10px; }
+.rule_501 { color: #0001f5; margin: 501px; padding: 10px; }
+.rule_502 { color: #0001f6; margin: 502px; padding: 10px; }
+.rule_503 { color: #0001f7; margin: 503px; padding: 10px; }
+.rule_504 { color: #0001f8; margin: 504px; padding: 10px; }
+.rule_505 { color: #0001f9; margin: 505px; padding: 10px; }
+.rule_506 { color: #0001fa; margin: 506px; padding: 10px; }
+.rule_507 { color: #0001fb; margin: 507px; padding: 10px; }
+.rule_508 { color: #0001fc; margin: 508px; padding: 10px; }
+.rule_509 { color: #0001fd; margin: 509px; padding: 10px; }
+.rule_510 { color: #0001fe; margin: 510px; padding: 10px; }
+.rule_511 { color: #0001ff; margin: 511px; padding: 10px; }
+.rule_512 { color: #000200; margin: 512px; padding: 10px; }
+.rule_513 { color: #000201; margin: 513px; padding: 10px; }
+.rule_514 { color: #000202; margin: 514px; padding: 10px; }
+.rule_515 { color: #000203; margin: 515px; padding: 10px; }
+.rule_516 { color: #000204; margin: 516px; padding: 10px; }
+.rule_517 { color: #000205; margin: 517px; padding: 10px; }
+.rule_518 { color: #000206; margin: 518px; padding: 10px; }
+.rule_519 { color: #000207; margin: 519px; padding: 10px; }
+.rule_520 { color: #000208; margin: 520px; padding: 10px; }
+.rule_521 { color: #000209; margin: 521px; padding: 10px; }
+.rule_522 { color: #00020a; margin: 522px; padding: 10px; }
+.rule_523 { color: #00020b; margin: 523px; padding: 10px; }
+.rule_524 { color: #00020c; margin: 524px; padding: 10px; }
+.rule_525 { color: #00020d; margin: 525px; padding: 10px; }
+.rule_526 { color: #00020e; margin: 526px; padding: 10px; }
+.rule_527 { color: #00020f; margin: 527px; padding: 10px; }
+.rule_528 { color: #000210; margin: 528px; padding: 10px; }
+.rule_529 { color: #000211; margin: 529px; padding: 10px; }
+.rule_530 { color: #000212; margin: 530px; padding: 10px; }
+.rule_531 { color: #000213; margin: 531px; padding: 10px; }
+.rule_532 { color: #000214; margin: 532px; padding: 10px; }
+.rule_533 { color: #000215; margin: 533px; padding: 10px; }
+.rule_534 { color: #000216; margin: 534px; padding: 10px; }
+.rule_535 { color: #000217; margin: 535px; padding: 10px; }
+.rule_536 { color: #000218; margin: 536px; padding: 10px; }
+.rule_537 { color: #000219; margin: 537px; padding: 10px; }
+.rule_538 { color: #00021a; margin: 538px; padding: 10px; }
+.rule_539 { color: #00021b; margin: 539px; padding: 10px; }
+.rule_540 { color: #00021c; margin: 540px; padding: 10px; }
+.rule_541 { color: #00021d; margin: 541px; padding: 10px; }
+.rule_542 { color: #00021e; margin: 542px; padding: 10px; }
+.rule_543 { color: #00021f; margin: 543px; padding: 10px; }
+.rule_544 { color: #000220; margin: 544px; padding: 10px; }
+.rule_545 { color: #000221; margin: 545px; padding: 10px; }
+.rule_546 { color: #000222; margin: 546px; padding: 10px; }
+.rule_547 { color: #000223; margin: 547px; padding: 10px; }
+.rule_548 { color: #000224; margin: 548px; padding: 10px; }
+.rule_549 { color: #000225; margin: 549px; padding: 10px; }
+.rule_550 { color: #000226; margin: 550px; padding: 10px; }
+.rule_551 { color: #000227; margin: 551px; padding: 10px; }
+.rule_552 { color: #000228; margin: 552px; padding: 10px; }
+.rule_553 { color: #000229; margin: 553px; padding: 10px; }
+.rule_554 { color: #00022a; margin: 554px; padding: 10px; }
+.rule_555 { color: #00022b; margin: 555px; padding: 10px; }
+.rule_556 { color: #00022c; margin: 556px; padding: 10px; }
+.rule_557 { color: #00022d; margin: 557px; padding: 10px; }
+.rule_558 { color: #00022e; margin: 558px; padding: 10px; }
+.rule_559 { color: #00022f; margin: 559px; padding: 10px; }
+.rule_560 { color: #000230; margin: 560px; padding: 10px; }
+.rule_561 { color: #000231; margin: 561px; padding: 10px; }
+.rule_562 { color: #000232; margin: 562px; padding: 10px; }
+.rule_563 { color: #000233; margin: 563px; padding: 10px; }
+.rule_564 { color: #000234; margin: 564px; padding: 10px; }
+.rule_565 { color: #000235; margin: 565px; padding: 10px; }
+.rule_566 { color: #000236; margin: 566px; padding: 10px; }
+.rule_567 { color: #000237; margin: 567px; padding: 10px; }
+.rule_568 { color: #000238; margin: 568px; padding: 10px; }
+.rule_569 { color: #000239; margin: 569px; padding: 10px; }
+.rule_570 { color: #00023a; margin: 570px; padding: 10px; }
+.rule_571 { color: #00023b; margin: 571px; padding: 10px; }
+.rule_572 { color: #00023c; margin: 572px; padding: 10px; }
+.rule_573 { color: #00023d; margin: 573px; padding: 10px; }
+.rule_574 { color: #00023e; margin: 574px; padding: 10px; }
+.rule_575 { color: #00023f; margin: 575px; padding: 10px; }
+.rule_576 { color: #000240; margin: 576px; padding: 10px; }
+.rule_577 { color: #000241; margin: 577px; padding: 10px; }
+.rule_578 { color: #000242; margin: 578px; padding: 10px; }
+.rule_579 { color: #000243; margin: 579px; padding: 10px; }
+.rule_580 { color: #000244; margin: 580px; padding: 10px; }
+.rule_581 { color: #000245; margin: 581px; padding: 10px; }
+.rule_582 { color: #000246; margin: 582px; padding: 10px; }
+.rule_583 { color: #000247; margin: 583px; padding: 10px; }
+.rule_584 { color: #000248; margin: 584px; padding: 10px; }
+.rule_585 { color: #000249; margin: 585px; padding: 10px; }
+.rule_586 { color: #00024a; margin: 586px; padding: 10px; }
+.rule_587 { color: #00024b; margin: 587px; padding: 10px; }
+.rule_588 { color: #00024c; margin: 588px; padding: 10px; }
+.rule_589 { color: #00024d; margin: 589px; padding: 10px; }
+.rule_590 { color: #00024e; margin: 590px; padding: 10px; }
+.rule_591 { color: #00024f; margin: 591px; padding: 10px; }
+.rule_592 { color: #000250; margin: 592px; padding: 10px; }
+.rule_593 { color: #000251; margin: 593px; padding: 10px; }
+.rule_594 { color: #000252; margin: 594px; padding: 10px; }
+.rule_595 { color: #000253; margin: 595px; padding: 10px; }
+.rule_596 { color: #000254; margin: 596px; padding: 10px; }
+.rule_597 { color: #000255; margin: 597px; padding: 10px; }
+.rule_598 { color: #000256; margin: 598px; padding: 10px; }
+.rule_599 { color: #000257; margin: 599px; padding: 10px; }
+.rule_600 { color: #000258; margin: 600px; padding: 10px; }
+.rule_601 { color: #000259; margin: 601px; padding: 10px; }
+.rule_602 { color: #00025a; margin: 602px; padding: 10px; }
+.rule_603 { color: #00025b; margin: 603px; padding: 10px; }
+.rule_604 { color: #00025c; margin: 604px; padding: 10px; }
+.rule_605 { color: #00025d; margin: 605px; padding: 10px; }
+.rule_606 { color: #00025e; margin: 606px; padding: 10px; }
+.rule_607 { color: #00025f; margin: 607px; padding: 10px; }
+.rule_608 { color: #000260; margin: 608px; padding: 10px; }
+.rule_609 { color: #000261; margin: 609px; padding: 10px; }
+.rule_610 { color: #000262; margin: 610px; padding: 10px; }
+.rule_611 { color: #000263; margin: 611px; padding: 10px; }
+.rule_612 { color: #000264; margin: 612px; padding: 10px; }
+.rule_613 { color: #000265; margin: 613px; padding: 10px; }
+.rule_614 { color: #000266; margin: 614px; padding: 10px; }
+.rule_615 { color: #000267; margin: 615px; padding: 10px; }
+.rule_616 { color: #000268; margin: 616px; padding: 10px; }
+.rule_617 { color: #000269; margin: 617px; padding: 10px; }
+.rule_618 { color: #00026a; margin: 618px; padding: 10px; }
+.rule_619 { color: #00026b; margin: 619px; padding: 10px; }
+.rule_620 { color: #00026c; margin: 620px; padding: 10px; }
+.rule_621 { color: #00026d; margin: 621px; padding: 10px; }
+.rule_622 { color: #00026e; margin: 622px; padding: 10px; }
+.rule_623 { color: #00026f; margin: 623px; padding: 10px; }
+.rule_624 { color: #000270; margin: 624px; padding: 10px; }
+.rule_625 { color: #000271; margin: 625px; padding: 10px; }
+.rule_626 { color: #000272; margin: 626px; padding: 10px; }
+.rule_627 { color: #000273; margin: 627px; padding: 10px; }
+.rule_628 { color: #000274; margin: 628px; padding: 10px; }
+.rule_629 { color: #000275; margin: 629px; padding: 10px; }
+.rule_630 { color: #000276; margin: 630px; padding: 10px; }
+.rule_631 { color: #000277; margin: 631px; padding: 10px; }
+.rule_632 { color: #000278; margin: 632px; padding: 10px; }
+.rule_633 { color: #000279; margin: 633px; padding: 10px; }
+.rule_634 { color: #00027a; margin: 634px; padding: 10px; }
+.rule_635 { color: #00027b; margin: 635px; padding: 10px; }
+.rule_636 { color: #00027c; margin: 636px; padding: 10px; }
+.rule_637 { color: #00027d; margin: 637px; padding: 10px; }
+.rule_638 { color: #00027e; margin: 638px; padding: 10px; }
+.rule_639 { color: #00027f; margin: 639px; padding: 10px; }
+.rule_640 { color: #000280; margin: 640px; padding: 10px; }
+.rule_641 { color: #000281; margin: 641px; padding: 10px; }
+.rule_642 { color: #000282; margin: 642px; padding: 10px; }
+.rule_643 { color: #000283; margin: 643px; padding: 10px; }
+.rule_644 { color: #000284; margin: 644px; padding: 10px; }
+.rule_645 { color: #000285; margin: 645px; padding: 10px; }
+.rule_646 { color: #000286; margin: 646px; padding: 10px; }
+.rule_647 { color: #000287; margin: 647px; padding: 10px; }
+.rule_648 { color: #000288; margin: 648px; padding: 10px; }
+.rule_649 { color: #000289; margin: 649px; padding: 10px; }
+.rule_650 { color: #00028a; margin: 650px; padding: 10px; }
+.rule_651 { color: #00028b; margin: 651px; padding: 10px; }
+.rule_652 { color: #00028c; margin: 652px; padding: 10px; }
+.rule_653 { color: #00028d; margin: 653px; padding: 10px; }
+.rule_654 { color: #00028e; margin: 654px; padding: 10px; }
+.rule_655 { color: #00028f; margin: 655px; padding: 10px; }
+.rule_656 { color: #000290; margin: 656px; padding: 10px; }
+.rule_657 { color: #000291; margin: 657px; padding: 10px; }
+.rule_658 { color: #000292; margin: 658px; padding: 10px; }
+.rule_659 { color: #000293; margin: 659px; padding: 10px; }
+.rule_660 { color: #000294; margin: 660px; padding: 10px; }
+.rule_661 { color: #000295; margin: 661px; padding: 10px; }
+.rule_662 { color: #000296; margin: 662px; padding: 10px; }
+.rule_663 { color: #000297; margin: 663px; padding: 10px; }
+.rule_664 { color: #000298; margin: 664px; padding: 10px; }
+.rule_665 { color: #000299; margin: 665px; padding: 10px; }
+.rule_666 { color: #00029a; margin: 666px; padding: 10px; }
+.rule_667 { color: #00029b; margin: 667px; padding: 10px; }
+.rule_668 { color: #00029c; margin: 668px; padding: 10px; }
+.rule_669 { color: #00029d; margin: 669px; padding: 10px; }
+.rule_670 { color: #00029e; margin: 670px; padding: 10px; }
+.rule_671 { color: #00029f; margin: 671px; padding: 10px; }
+.rule_672 { color: #0002a0; margin: 672px; padding: 10px; }
+.rule_673 { color: #0002a1; margin: 673px; padding: 10px; }
+.rule_674 { color: #0002a2; margin: 674px; padding: 10px; }
+.rule_675 { color: #0002a3; margin: 675px; padding: 10px; }
+.rule_676 { color: #0002a4; margin: 676px; padding: 10px; }
+.rule_677 { color: #0002a5; margin: 677px; padding: 10px; }
+.rule_678 { color: #0002a6; margin: 678px; padding: 10px; }
+.rule_679 { color: #0002a7; margin: 679px; padding: 10px; }
+.rule_680 { color: #0002a8; margin: 680px; padding: 10px; }
+.rule_681 { color: #0002a9; margin: 681px; padding: 10px; }
+.rule_682 { color: #0002aa; margin: 682px; padding: 10px; }
+.rule_683 { color: #0002ab; margin: 683px; padding: 10px; }
+.rule_684 { color: #0002ac; margin: 684px; padding: 10px; }
+.rule_685 { color: #0002ad; margin: 685px; padding: 10px; }
+.rule_686 { color: #0002ae; margin: 686px; padding: 10px; }
+.rule_687 { color: #0002af; margin: 687px; padding: 10px; }
+.rule_688 { color: #0002b0; margin: 688px; padding: 10px; }
+.rule_689 { color: #0002b1; margin: 689px; padding: 10px; }
+.rule_690 { color: #0002b2; margin: 690px; padding: 10px; }
+.rule_691 { color: #0002b3; margin: 691px; padding: 10px; }
+.rule_692 { color: #0002b4; margin: 692px; padding: 10px; }
+.rule_693 { color: #0002b5; margin: 693px; padding: 10px; }
+.rule_694 { color: #0002b6; margin: 694px; padding: 10px; }
+.rule_695 { color: #0002b7; margin: 695px; padding: 10px; }
+.rule_696 { color: #0002b8; margin: 696px; padding: 10px; }
+.rule_697 { color: #0002b9; margin: 697px; padding: 10px; }
+.rule_698 { color: #0002ba; margin: 698px; padding: 10px; }
+.rule_699 { color: #0002bb; margin: 699px; padding: 10px; }
+.rule_700 { color: #0002bc; margin: 700px; padding: 10px; }
+.rule_701 { color: #0002bd; margin: 701px; padding: 10px; }
+.rule_702 { color: #0002be; margin: 702px; padding: 10px; }
+.rule_703 { color: #0002bf; margin: 703px; padding: 10px; }
+.rule_704 { color: #0002c0; margin: 704px; padding: 10px; }
+.rule_705 { color: #0002c1; margin: 705px; padding: 10px; }
+.rule_706 { color: #0002c2; margin: 706px; padding: 10px; }
+.rule_707 { color: #0002c3; margin: 707px; padding: 10px; }
+.rule_708 { color: #0002c4; margin: 708px; padding: 10px; }
+.rule_709 { color: #0002c5; margin: 709px; padding: 10px; }
+.rule_710 { color: #0002c6; margin: 710px; padding: 10px; }
+.rule_711 { color: #0002c7; margin: 711px; padding: 10px; }
+.rule_712 { color: #0002c8; margin: 712px; padding: 10px; }
+.rule_713 { color: #0002c9; margin: 713px; padding: 10px; }
+.rule_714 { color: #0002ca; margin: 714px; padding: 10px; }
+.rule_715 { color: #0002cb; margin: 715px; padding: 10px; }
+.rule_716 { color: #0002cc; margin: 716px; padding: 10px; }
+.rule_717 { color: #0002cd; margin: 717px; padding: 10px; }
+.rule_718 { color: #0002ce; margin: 718px; padding: 10px; }
+.rule_719 { color: #0002cf; margin: 719px; padding: 10px; }
+.rule_720 { color: #0002d0; margin: 720px; padding: 10px; }
+.rule_721 { color: #0002d1; margin: 721px; padding: 10px; }
+.rule_722 { color: #0002d2; margin: 722px; padding: 10px; }
+.rule_723 { color: #0002d3; margin: 723px; padding: 10px; }
+.rule_724 { color: #0002d4; margin: 724px; padding: 10px; }
+.rule_725 { color: #0002d5; margin: 725px; padding: 10px; }
+.rule_726 { color: #0002d6; margin: 726px; padding: 10px; }
+.rule_727 { color: #0002d7; margin: 727px; padding: 10px; }
+.rule_728 { color: #0002d8; margin: 728px; padding: 10px; }
+.rule_729 { color: #0002d9; margin: 729px; padding: 10px; }
+.rule_730 { color: #0002da; margin: 730px; padding: 10px; }
+.rule_731 { color: #0002db; margin: 731px; padding: 10px; }
+.rule_732 { color: #0002dc; margin: 732px; padding: 10px; }
+.rule_733 { color: #0002dd; margin: 733px; padding: 10px; }
+.rule_734 { color: #0002de; margin: 734px; padding: 10px; }
+.rule_735 { color: #0002df; margin: 735px; padding: 10px; }
+.rule_736 { color: #0002e0; margin: 736px; padding: 10px; }
+.rule_737 { color: #0002e1; margin: 737px; padding: 10px; }
+.rule_738 { color: #0002e2; margin: 738px; padding: 10px; }
+.rule_739 { color: #0002e3; margin: 739px; padding: 10px; }
+.rule_740 { color: #0002e4; margin: 740px; padding: 10px; }
+.rule_741 { color: #0002e5; margin: 741px; padding: 10px; }
+.rule_742 { color: #0002e6; margin: 742px; padding: 10px; }
+.rule_743 { color: #0002e7; margin: 743px; padding: 10px; }
+.rule_744 { color: #0002e8; margin: 744px; padding: 10px; }
+.rule_745 { color: #0002e9; margin: 745px; padding: 10px; }
+.rule_746 { color: #0002ea; margin: 746px; padding: 10px; }
+.rule_747 { color: #0002eb; margin: 747px; padding: 10px; }
+.rule_748 { color: #0002ec; margin: 748px; padding: 10px; }
+.rule_749 { color: #0002ed; margin: 749px; padding: 10px; }
+.rule_750 { color: #0002ee; margin: 750px; padding: 10px; }
+.rule_751 { color: #0002ef; margin: 751px; padding: 10px; }
+.rule_752 { color: #0002f0; margin: 752px; padding: 10px; }
+.rule_753 { color: #0002f1; margin: 753px; padding: 10px; }
+.rule_754 { color: #0002f2; margin: 754px; padding: 10px; }
+.rule_755 { color: #0002f3; margin: 755px; padding: 10px; }
+.rule_756 { color: #0002f4; margin: 756px; padding: 10px; }
+.rule_757 { color: #0002f5; margin: 757px; padding: 10px; }
+.rule_758 { color: #0002f6; margin: 758px; padding: 10px; }
+.rule_759 { color: #0002f7; margin: 759px; padding: 10px; }
+.rule_760 { color: #0002f8; margin: 760px; padding: 10px; }
+.rule_761 { color: #0002f9; margin: 761px; padding: 10px; }
+.rule_762 { color: #0002fa; margin: 762px; padding: 10px; }
+.rule_763 { color: #0002fb; margin: 763px; padding: 10px; }
+.rule_764 { color: #0002fc; margin: 764px; padding: 10px; }
+.rule_765 { color: #0002fd; margin: 765px; padding: 10px; }
+.rule_766 { color: #0002fe; margin: 766px; padding: 10px; }
+.rule_767 { color: #0002ff; margin: 767px; padding: 10px; }
+.rule_768 { color: #000300; margin: 768px; padding: 10px; }
+.rule_769 { color: #000301; margin: 769px; padding: 10px; }
+.rule_770 { color: #000302; margin: 770px; padding: 10px; }
+.rule_771 { color: #000303; margin: 771px; padding: 10px; }
+.rule_772 { color: #000304; margin: 772px; padding: 10px; }
+.rule_773 { color: #000305; margin: 773px; padding: 10px; }
+.rule_774 { color: #000306; margin: 774px; padding: 10px; }
+.rule_775 { color: #000307; margin: 775px; padding: 10px; }
+.rule_776 { color: #000308; margin: 776px; padding: 10px; }
+.rule_777 { color: #000309; margin: 777px; padding: 10px; }
+.rule_778 { color: #00030a; margin: 778px; padding: 10px; }
+.rule_779 { color: #00030b; margin: 779px; padding: 10px; }
+.rule_780 { color: #00030c; margin: 780px; padding: 10px; }
+.rule_781 { color: #00030d; margin: 781px; padding: 10px; }
+.rule_782 { color: #00030e; margin: 782px; padding: 10px; }
+.rule_783 { color: #00030f; margin: 783px; padding: 10px; }
+.rule_784 { color: #000310; margin: 784px; padding: 10px; }
+.rule_785 { color: #000311; margin: 785px; padding: 10px; }
+.rule_786 { color: #000312; margin: 786px; padding: 10px; }
+.rule_787 { color: #000313; margin: 787px; padding: 10px; }
+.rule_788 { color: #000314; margin: 788px; padding: 10px; }
+.rule_789 { color: #000315; margin: 789px; padding: 10px; }
+.rule_790 { color: #000316; margin: 790px; padding: 10px; }
+.rule_791 { color: #000317; margin: 791px; padding: 10px; }
+.rule_792 { color: #000318; margin: 792px; padding: 10px; }
+.rule_793 { color: #000319; margin: 793px; padding: 10px; }
+.rule_794 { color: #00031a; margin: 794px; padding: 10px; }
+.rule_795 { color: #00031b; margin: 795px; padding: 10px; }
+.rule_796 { color: #00031c; margin: 796px; padding: 10px; }
+.rule_797 { color: #00031d; margin: 797px; padding: 10px; }
+.rule_798 { color: #00031e; margin: 798px; padding: 10px; }
+.rule_799 { color: #00031f; margin: 799px; padding: 10px; }
+.rule_800 { color: #000320; margin: 800px; padding: 10px; }
+.rule_801 { color: #000321; margin: 801px; padding: 10px; }
+.rule_802 { color: #000322; margin: 802px; padding: 10px; }
+.rule_803 { color: #000323; margin: 803px; padding: 10px; }
+.rule_804 { color: #000324; margin: 804px; padding: 10px; }
+.rule_805 { color: #000325; margin: 805px; padding: 10px; }
+.rule_806 { color: #000326; margin: 806px; padding: 10px; }
+.rule_807 { color: #000327; margin: 807px; padding: 10px; }
+.rule_808 { color: #000328; margin: 808px; padding: 10px; }
+.rule_809 { color: #000329; margin: 809px; padding: 10px; }
+.rule_810 { color: #00032a; margin: 810px; padding: 10px; }
+.rule_811 { color: #00032b; margin: 811px; padding: 10px; }
+.rule_812 { color: #00032c; margin: 812px; padding: 10px; }
+.rule_813 { color: #00032d; margin: 813px; padding: 10px; }
+.rule_814 { color: #00032e; margin: 814px; padding: 10px; }
+.rule_815 { color: #00032f; margin: 815px; padding: 10px; }
+.rule_816 { color: #000330; margin: 816px; padding: 10px; }
+.rule_817 { color: #000331; margin: 817px; padding: 10px; }
+.rule_818 { color: #000332; margin: 818px; padding: 10px; }
+.rule_819 { color: #000333; margin: 819px; padding: 10px; }
+.rule_820 { color: #000334; margin: 820px; padding: 10px; }
+.rule_821 { color: #000335; margin: 821px; padding: 10px; }
+.rule_822 { color: #000336; margin: 822px; padding: 10px; }
+.rule_823 { color: #000337; margin: 823px; padding: 10px; }
+.rule_824 { color: #000338; margin: 824px; padding: 10px; }
+.rule_825 { color: #000339; margin: 825px; padding: 10px; }
+.rule_826 { color: #00033a; margin: 826px; padding: 10px; }
+.rule_827 { color: #00033b; margin: 827px; padding: 10px; }
+.rule_828 { color: #00033c; margin: 828px; padding: 10px; }
+.rule_829 { color: #00033d; margin: 829px; padding: 10px; }
+.rule_830 { color: #00033e; margin: 830px; padding: 10px; }
+.rule_831 { color: #00033f; margin: 831px; padding: 10px; }
+.rule_832 { color: #000340; margin: 832px; padding: 10px; }
+.rule_833 { color: #000341; margin: 833px; padding: 10px; }
+.rule_834 { color: #000342; margin: 834px; padding: 10px; }
+.rule_835 { color: #000343; margin: 835px; padding: 10px; }
+.rule_836 { color: #000344; margin: 836px; padding: 10px; }
+.rule_837 { color: #000345; margin: 837px; padding: 10px; }
+.rule_838 { color: #000346; margin: 838px; padding: 10px; }
+.rule_839 { color: #000347; margin: 839px; padding: 10px; }
+.rule_840 { color: #000348; margin: 840px; padding: 10px; }
+.rule_841 { color: #000349; margin: 841px; padding: 10px; }
+.rule_842 { color: #00034a; margin: 842px; padding: 10px; }
+.rule_843 { color: #00034b; margin: 843px; padding: 10px; }
+.rule_844 { color: #00034c; margin: 844px; padding: 10px; }
+.rule_845 { color: #00034d; margin: 845px; padding: 10px; }
+.rule_846 { color: #00034e; margin: 846px; padding: 10px; }
+.rule_847 { color: #00034f; margin: 847px; padding: 10px; }
+.rule_848 { color: #000350; margin: 848px; padding: 10px; }
+.rule_849 { color: #000351; margin: 849px; padding: 10px; }
+.rule_850 { color: #000352; margin: 850px; padding: 10px; }
+.rule_851 { color: #000353; margin: 851px; padding: 10px; }
+.rule_852 { color: #000354; margin: 852px; padding: 10px; }
+.rule_853 { color: #000355; margin: 853px; padding: 10px; }
+.rule_854 { color: #000356; margin: 854px; padding: 10px; }
+.rule_855 { color: #000357; margin: 855px; padding: 10px; }
+.rule_856 { color: #000358; margin: 856px; padding: 10px; }
+.rule_857 { color: #000359; margin: 857px; padding: 10px; }
+.rule_858 { color: #00035a; margin: 858px; padding: 10px; }
+.rule_859 { color: #00035b; margin: 859px; padding: 10px; }
+.rule_860 { color: #00035c; margin: 860px; padding: 10px; }
+.rule_861 { color: #00035d; margin: 861px; padding: 10px; }
+.rule_862 { color: #00035e; margin: 862px; padding: 10px; }
+.rule_863 { color: #00035f; margin: 863px; padding: 10px; }
+.rule_864 { color: #000360; margin: 864px; padding: 10px; }
+.rule_865 { color: #000361; margin: 865px; padding: 10px; }
+.rule_866 { color: #000362; margin: 866px; padding: 10px; }
+.rule_867 { color: #000363; margin: 867px; padding: 10px; }
+.rule_868 { color: #000364; margin: 868px; padding: 10px; }
+.rule_869 { color: #000365; margin: 869px; padding: 10px; }
+.rule_870 { color: #000366; margin: 870px; padding: 10px; }
+.rule_871 { color: #000367; margin: 871px; padding: 10px; }
+.rule_872 { color: #000368; margin: 872px; padding: 10px; }
+.rule_873 { color: #000369; margin: 873px; padding: 10px; }
+.rule_874 { color: #00036a; margin: 874px; padding: 10px; }
+.rule_875 { color: #00036b; margin: 875px; padding: 10px; }
+.rule_876 { color: #00036c; margin: 876px; padding: 10px; }
+.rule_877 { color: #00036d; margin: 877px; padding: 10px; }
+.rule_878 { color: #00036e; margin: 878px; padding: 10px; }
+.rule_879 { color: #00036f; margin: 879px; padding: 10px; }
+.rule_880 { color: #000370; margin: 880px; padding: 10px; }
+.rule_881 { color: #000371; margin: 881px; padding: 10px; }
+.rule_882 { color: #000372; margin: 882px; padding: 10px; }
+.rule_883 { color: #000373; margin: 883px; padding: 10px; }
+.rule_884 { color: #000374; margin: 884px; padding: 10px; }
+.rule_885 { color: #000375; margin: 885px; padding: 10px; }
+.rule_886 { color: #000376; margin: 886px; padding: 10px; }
+.rule_887 { color: #000377; margin: 887px; padding: 10px; }
+.rule_888 { color: #000378; margin: 888px; padding: 10px; }
+.rule_889 { color: #000379; margin: 889px; padding: 10px; }
+.rule_890 { color: #00037a; margin: 890px; padding: 10px; }
+.rule_891 { color: #00037b; margin: 891px; padding: 10px; }
+.rule_892 { color: #00037c; margin: 892px; padding: 10px; }
+.rule_893 { color: #00037d; margin: 893px; padding: 10px; }
+.rule_894 { color: #00037e; margin: 894px; padding: 10px; }
+.rule_895 { color: #00037f; margin: 895px; padding: 10px; }
+.rule_896 { color: #000380; margin: 896px; padding: 10px; }
+.rule_897 { color: #000381; margin: 897px; padding: 10px; }
+.rule_898 { color: #000382; margin: 898px; padding: 10px; }
+.rule_899 { color: #000383; margin: 899px; padding: 10px; }
+.rule_900 { color: #000384; margin: 900px; padding: 10px; }
+.rule_901 { color: #000385; margin: 901px; padding: 10px; }
+.rule_902 { color: #000386; margin: 902px; padding: 10px; }
+.rule_903 { color: #000387; margin: 903px; padding: 10px; }
+.rule_904 { color: #000388; margin: 904px; padding: 10px; }
+.rule_905 { color: #000389; margin: 905px; padding: 10px; }
+.rule_906 { color: #00038a; margin: 906px; padding: 10px; }
+.rule_907 { color: #00038b; margin: 907px; padding: 10px; }
+.rule_908 { color: #00038c; margin: 908px; padding: 10px; }
+.rule_909 { color: #00038d; margin: 909px; padding: 10px; }
+.rule_910 { color: #00038e; margin: 910px; padding: 10px; }
+.rule_911 { color: #00038f; margin: 911px; padding: 10px; }
+.rule_912 { color: #000390; margin: 912px; padding: 10px; }
+.rule_913 { color: #000391; margin: 913px; padding: 10px; }
+.rule_914 { color: #000392; margin: 914px; padding: 10px; }
+.rule_915 { color: #000393; margin: 915px; padding: 10px; }
+.rule_916 { color: #000394; margin: 916px; padding: 10px; }
+.rule_917 { color: #000395; margin: 917px; padding: 10px; }
+.rule_918 { color: #000396; margin: 918px; padding: 10px; }
+.rule_919 { color: #000397; margin: 919px; padding: 10px; }
+.rule_920 { color: #000398; margin: 920px; padding: 10px; }
+.rule_921 { color: #000399; margin: 921px; padding: 10px; }
+.rule_922 { color: #00039a; margin: 922px; padding: 10px; }
+.rule_923 { color: #00039b; margin: 923px; padding: 10px; }
+.rule_924 { color: #00039c; margin: 924px; padding: 10px; }
+.rule_925 { color: #00039d; margin: 925px; padding: 10px; }
+.rule_926 { color: #00039e; margin: 926px; padding: 10px; }
+.rule_927 { color: #00039f; margin: 927px; padding: 10px; }
+.rule_928 { color: #0003a0; margin: 928px; padding: 10px; }
+.rule_929 { color: #0003a1; margin: 929px; padding: 10px; }
+.rule_930 { color: #0003a2; margin: 930px; padding: 10px; }
+.rule_931 { color: #0003a3; margin: 931px; padding: 10px; }
+.rule_932 { color: #0003a4; margin: 932px; padding: 10px; }
+.rule_933 { color: #0003a5; margin: 933px; padding: 10px; }
+.rule_934 { color: #0003a6; margin: 934px; padding: 10px; }
+.rule_935 { color: #0003a7; margin: 935px; padding: 10px; }
+.rule_936 { color: #0003a8; margin: 936px; padding: 10px; }
+.rule_937 { color: #0003a9; margin: 937px; padding: 10px; }
+.rule_938 { color: #0003aa; margin: 938px; padding: 10px; }
+.rule_939 { color: #0003ab; margin: 939px; padding: 10px; }
+.rule_940 { color: #0003ac; margin: 940px; padding: 10px; }
+.rule_941 { color: #0003ad; margin: 941px; padding: 10px; }
+.rule_942 { color: #0003ae; margin: 942px; padding: 10px; }
+.rule_943 { color: #0003af; margin: 943px; padding: 10px; }
+.rule_944 { color: #0003b0; margin: 944px; padding: 10px; }
+.rule_945 { color: #0003b1; margin: 945px; padding: 10px; }
+.rule_946 { color: #0003b2; margin: 946px; padding: 10px; }
+.rule_947 { color: #0003b3; margin: 947px; padding: 10px; }
+.rule_948 { color: #0003b4; margin: 948px; padding: 10px; }
+.rule_949 { color: #0003b5; margin: 949px; padding: 10px; }
+.rule_950 { color: #0003b6; margin: 950px; padding: 10px; }
+.rule_951 { color: #0003b7; margin: 951px; padding: 10px; }
+.rule_952 { color: #0003b8; margin: 952px; padding: 10px; }
+.rule_953 { color: #0003b9; margin: 953px; padding: 10px; }
+.rule_954 { color: #0003ba; margin: 954px; padding: 10px; }
+.rule_955 { color: #0003bb; margin: 955px; padding: 10px; }
+.rule_956 { color: #0003bc; margin: 956px; padding: 10px; }
+.rule_957 { color: #0003bd; margin: 957px; padding: 10px; }
+.rule_958 { color: #0003be; margin: 958px; padding: 10px; }
+.rule_959 { color: #0003bf; margin: 959px; padding: 10px; }
+.rule_960 { color: #0003c0; margin: 960px; padding: 10px; }
+.rule_961 { color: #0003c1; margin: 961px; padding: 10px; }
+.rule_962 { color: #0003c2; margin: 962px; padding: 10px; }
+.rule_963 { color: #0003c3; margin: 963px; padding: 10px; }
+.rule_964 { color: #0003c4; margin: 964px; padding: 10px; }
+.rule_965 { color: #0003c5; margin: 965px; padding: 10px; }
+.rule_966 { color: #0003c6; margin: 966px; padding: 10px; }
+.rule_967 { color: #0003c7; margin: 967px; padding: 10px; }
+.rule_968 { color: #0003c8; margin: 968px; padding: 10px; }
+.rule_969 { color: #0003c9; margin: 969px; padding: 10px; }
+.rule_970 { color: #0003ca; margin: 970px; padding: 10px; }
+.rule_971 { color: #0003cb; margin: 971px; padding: 10px; }
+.rule_972 { color: #0003cc; margin: 972px; padding: 10px; }
+.rule_973 { color: #0003cd; margin: 973px; padding: 10px; }
+.rule_974 { color: #0003ce; margin: 974px; padding: 10px; }
+.rule_975 { color: #0003cf; margin: 975px; padding: 10px; }
+.rule_976 { color: #0003d0; margin: 976px; padding: 10px; }
+.rule_977 { color: #0003d1; margin: 977px; padding: 10px; }
+.rule_978 { color: #0003d2; margin: 978px; padding: 10px; }
+.rule_979 { color: #0003d3; margin: 979px; padding: 10px; }
+.rule_980 { color: #0003d4; margin: 980px; padding: 10px; }
+.rule_981 { color: #0003d5; margin: 981px; padding: 10px; }
+.rule_982 { color: #0003d6; margin: 982px; padding: 10px; }
+.rule_983 { color: #0003d7; margin: 983px; padding: 10px; }
+.rule_984 { color: #0003d8; margin: 984px; padding: 10px; }
+.rule_985 { color: #0003d9; margin: 985px; padding: 10px; }
+.rule_986 { color: #0003da; margin: 986px; padding: 10px; }
+.rule_987 { color: #0003db; margin: 987px; padding: 10px; }
+.rule_988 { color: #0003dc; margin: 988px; padding: 10px; }
+.rule_989 { color: #0003dd; margin: 989px; padding: 10px; }
+.rule_990 { color: #0003de; margin: 990px; padding: 10px; }
+.rule_991 { color: #0003df; margin: 991px; padding: 10px; }
+.rule_992 { color: #0003e0; margin: 992px; padding: 10px; }
+.rule_993 { color: #0003e1; margin: 993px; padding: 10px; }
+.rule_994 { color: #0003e2; margin: 994px; padding: 10px; }
+.rule_995 { color: #0003e3; margin: 995px; padding: 10px; }
+.rule_996 { color: #0003e4; margin: 996px; padding: 10px; }
+.rule_997 { color: #0003e5; margin: 997px; padding: 10px; }
+.rule_998 { color: #0003e6; margin: 998px; padding: 10px; }
+.rule_999 { color: #0003e7; margin: 999px; padding: 10px; }
+.rule_1000 { color: #0003e8; margin: 1000px; padding: 10px; }
+.rule_1001 { color: #0003e9; margin: 1001px; padding: 10px; }
+.rule_1002 { color: #0003ea; margin: 1002px; padding: 10px; }
+.rule_1003 { color: #0003eb; margin: 1003px; padding: 10px; }
+.rule_1004 { color: #0003ec; margin: 1004px; padding: 10px; }
+.rule_1005 { color: #0003ed; margin: 1005px; padding: 10px; }
+.rule_1006 { color: #0003ee; margin: 1006px; padding: 10px; }
+.rule_1007 { color: #0003ef; margin: 1007px; padding: 10px; }
+.rule_1008 { color: #0003f0; margin: 1008px; padding: 10px; }
+.rule_1009 { color: #0003f1; margin: 1009px; padding: 10px; }
+.rule_1010 { color: #0003f2; margin: 1010px; padding: 10px; }
+.rule_1011 { color: #0003f3; margin: 1011px; padding: 10px; }
+.rule_1012 { color: #0003f4; margin: 1012px; padding: 10px; }
+.rule_1013 { color: #0003f5; margin: 1013px; padding: 10px; }
+.rule_1014 { color: #0003f6; margin: 1014px; padding: 10px; }
+.rule_1015 { color: #0003f7; margin: 1015px; padding: 10px; }
+.rule_1016 { color: #0003f8; margin: 1016px; padding: 10px; }
+.rule_1017 { color: #0003f9; margin: 1017px; padding: 10px; }
+.rule_1018 { color: #0003fa; margin: 1018px; padding: 10px; }
+.rule_1019 { color: #0003fb; margin: 1019px; padding: 10px; }
+.rule_1020 { color: #0003fc; margin: 1020px; padding: 10px; }
+.rule_1021 { color: #0003fd; margin: 1021px; padding: 10px; }
+.rule_1022 { color: #0003fe; margin: 1022px; padding: 10px; }
+.rule_1023 { color: #0003ff; margin: 1023px; padding: 10px; }
+.rule_1024 { color: #000400; margin: 1024px; padding: 10px; }
+.rule_1025 { color: #000401; margin: 1025px; padding: 10px; }
+.rule_1026 { color: #000402; margin: 1026px; padding: 10px; }
+.rule_1027 { color: #000403; margin: 1027px; padding: 10px; }
+.rule_1028 { color: #000404; margin: 1028px; padding: 10px; }
+.rule_1029 { color: #000405; margin: 1029px; padding: 10px; }
+.rule_1030 { color: #000406; margin: 1030px; padding: 10px; }
+.rule_1031 { color: #000407; margin: 1031px; padding: 10px; }
+.rule_1032 { color: #000408; margin: 1032px; padding: 10px; }
+.rule_1033 { color: #000409; margin: 1033px; padding: 10px; }
+.rule_1034 { color: #00040a; margin: 1034px; padding: 10px; }
+.rule_1035 { color: #00040b; margin: 1035px; padding: 10px; }
+.rule_1036 { color: #00040c; margin: 1036px; padding: 10px; }
+.rule_1037 { color: #00040d; margin: 1037px; padding: 10px; }
+.rule_1038 { color: #00040e; margin: 1038px; padding: 10px; }
+.rule_1039 { color: #00040f; margin: 1039px; padding: 10px; }
+.rule_1040 { color: #000410; margin: 1040px; padding: 10px; }
+.rule_1041 { color: #000411; margin: 1041px; padding: 10px; }
+.rule_1042 { color: #000412; margin: 1042px; padding: 10px; }
+.rule_1043 { color: #000413; margin: 1043px; padding: 10px; }
+.rule_1044 { color: #000414; margin: 1044px; padding: 10px; }
+.rule_1045 { color: #000415; margin: 1045px; padding: 10px; }
+.rule_1046 { color: #000416; margin: 1046px; padding: 10px; }
+.rule_1047 { color: #000417; margin: 1047px; padding: 10px; }
+.rule_1048 { color: #000418; margin: 1048px; padding: 10px; }
+.rule_1049 { color: #000419; margin: 1049px; padding: 10px; }
+.rule_1050 { color: #00041a; margin: 1050px; padding: 10px; }
+.rule_1051 { color: #00041b; margin: 1051px; padding: 10px; }
+.rule_1052 { color: #00041c; margin: 1052px; padding: 10px; }
+.rule_1053 { color: #00041d; margin: 1053px; padding: 10px; }
+.rule_1054 { color: #00041e; margin: 1054px; padding: 10px; }
+.rule_1055 { color: #00041f; margin: 1055px; padding: 10px; }
+.rule_1056 { color: #000420; margin: 1056px; padding: 10px; }
+.rule_1057 { color: #000421; margin: 1057px; padding: 10px; }
+.rule_1058 { color: #000422; margin: 1058px; padding: 10px; }
+.rule_1059 { color: #000423; margin: 1059px; padding: 10px; }
+.rule_1060 { color: #000424; margin: 1060px; padding: 10px; }
+.rule_1061 { color: #000425; margin: 1061px; padding: 10px; }
+.rule_1062 { color: #000426; margin: 1062px; padding: 10px; }
+.rule_1063 { color: #000427; margin: 1063px; padding: 10px; }
+.rule_1064 { color: #000428; margin: 1064px; padding: 10px; }
+.rule_1065 { color: #000429; margin: 1065px; padding: 10px; }
+.rule_1066 { color: #00042a; margin: 1066px; padding: 10px; }
+.rule_1067 { color: #00042b; margin: 1067px; padding: 10px; }
+.rule_1068 { color: #00042c; margin: 1068px; padding: 10px; }
+.rule_1069 { color: #00042d; margin: 1069px; padding: 10px; }
+.rule_1070 { color: #00042e; margin: 1070px; padding: 10px; }
+.rule_1071 { color: #00042f; margin: 1071px; padding: 10px; }
+.rule_1072 { color: #000430; margin: 1072px; padding: 10px; }
+.rule_1073 { color: #000431; margin: 1073px; padding: 10px; }
+.rule_1074 { color: #000432; margin: 1074px; padding: 10px; }
+.rule_1075 { color: #000433; margin: 1075px; padding: 10px; }
+.rule_1076 { color: #000434; margin: 1076px; padding: 10px; }
+.rule_1077 { color: #000435; margin: 1077px; padding: 10px; }
+.rule_1078 { color: #000436; margin: 1078px; padding: 10px; }
+.rule_1079 { color: #000437; margin: 1079px; padding: 10px; }
+.rule_1080 { color: #000438; margin: 1080px; padding: 10px; }
+.rule_1081 { color: #000439; margin: 1081px; padding: 10px; }
+.rule_1082 { color: #00043a; margin: 1082px; padding: 10px; }
+.rule_1083 { color: #00043b; margin: 1083px; padding: 10px; }
+.rule_1084 { color: #00043c; margin: 1084px; padding: 10px; }
+.rule_1085 { color: #00043d; margin: 1085px; padding: 10px; }
+.rule_1086 { color: #00043e; margin: 1086px; padding: 10px; }
+.rule_1087 { color: #00043f; margin: 1087px; padding: 10px; }
+.rule_1088 { color: #000440; margin: 1088px; padding: 10px; }
+.rule_1089 { color: #000441; margin: 1089px; padding: 10px; }
+.rule_1090 { color: #000442; margin: 1090px; padding: 10px; }
+.rule_1091 { color: #000443; margin: 1091px; padding: 10px; }
+.rule_1092 { color: #000444; margin: 1092px; padding: 10px; }
+.rule_1093 { color: #000445; margin: 1093px; padding: 10px; }
+.rule_1094 { color: #000446; margin: 1094px; padding: 10px; }
+.rule_1095 { color: #000447; margin: 1095px; padding: 10px; }
+.rule_1096 { color: #000448; margin: 1096px; padding: 10px; }
+.rule_1097 { color: #000449; margin: 1097px; padding: 10px; }
+.rule_1098 { color: #00044a; margin: 1098px; padding: 10px; }
+.rule_1099 { color: #00044b; margin: 1099px; padding: 10px; }
+.rule_1100 { color: #00044c; margin: 1100px; padding: 10px; }
+.rule_1101 { color: #00044d; margin: 1101px; padding: 10px; }
+.rule_1102 { color: #00044e; margin: 1102px; padding: 10px; }
+.rule_1103 { color: #00044f; margin: 1103px; padding: 10px; }
+.rule_1104 { color: #000450; margin: 1104px; padding: 10px; }
+.rule_1105 { color: #000451; margin: 1105px; padding: 10px; }
+.rule_1106 { color: #000452; margin: 1106px; padding: 10px; }
+.rule_1107 { color: #000453; margin: 1107px; padding: 10px; }
+.rule_1108 { color: #000454; margin: 1108px; padding: 10px; }
+.rule_1109 { color: #000455; margin: 1109px; padding: 10px; }
+.rule_1110 { color: #000456; margin: 1110px; padding: 10px; }
+.rule_1111 { color: #000457; margin: 1111px; padding: 10px; }
+.rule_1112 { color: #000458; margin: 1112px; padding: 10px; }
+.rule_1113 { color: #000459; margin: 1113px; padding: 10px; }
+.rule_1114 { color: #00045a; margin: 1114px; padding: 10px; }
+.rule_1115 { color: #00045b; margin: 1115px; padding: 10px; }
+.rule_1116 { color: #00045c; margin: 1116px; padding: 10px; }
+.rule_1117 { color: #00045d; margin: 1117px; padding: 10px; }
+.rule_1118 { color: #00045e; margin: 1118px; padding: 10px; }
+.rule_1119 { color: #00045f; margin: 1119px; padding: 10px; }
+.rule_1120 { color: #000460; margin: 1120px; padding: 10px; }
+.rule_1121 { color: #000461; margin: 1121px; padding: 10px; }
+.rule_1122 { color: #000462; margin: 1122px; padding: 10px; }
+.rule_1123 { color: #000463; margin: 1123px; padding: 10px; }
+.rule_1124 { color: #000464; margin: 1124px; padding: 10px; }
+.rule_1125 { color: #000465; margin: 1125px; padding: 10px; }
+.rule_1126 { color: #000466; margin: 1126px; padding: 10px; }
+.rule_1127 { color: #000467; margin: 1127px; padding: 10px; }
+.rule_1128 { color: #000468; margin: 1128px; padding: 10px; }
+.rule_1129 { color: #000469; margin: 1129px; padding: 10px; }
+.rule_1130 { color: #00046a; margin: 1130px; padding: 10px; }
+.rule_1131 { color: #00046b; margin: 1131px; padding: 10px; }
+.rule_1132 { color: #00046c; margin: 1132px; padding: 10px; }
+.rule_1133 { color: #00046d; margin: 1133px; padding: 10px; }
+.rule_1134 { color: #00046e; margin: 1134px; padding: 10px; }
+.rule_1135 { color: #00046f; margin: 1135px; padding: 10px; }
+.rule_1136 { color: #000470; margin: 1136px; padding: 10px; }
+.rule_1137 { color: #000471; margin: 1137px; padding: 10px; }
+.rule_1138 { color: #000472; margin: 1138px; padding: 10px; }
+.rule_1139 { color: #000473; margin: 1139px; padding: 10px; }
+.rule_1140 { color: #000474; margin: 1140px; padding: 10px; }
+.rule_1141 { color: #000475; margin: 1141px; padding: 10px; }
+.rule_1142 { color: #000476; margin: 1142px; padding: 10px; }
+.rule_1143 { color: #000477; margin: 1143px; padding: 10px; }
+.rule_1144 { color: #000478; margin: 1144px; padding: 10px; }
+.rule_1145 { color: #000479; margin: 1145px; padding: 10px; }
+.rule_1146 { color: #00047a; margin: 1146px; padding: 10px; }
+.rule_1147 { color: #00047b; margin: 1147px; padding: 10px; }
+.rule_1148 { color: #00047c; margin: 1148px; padding: 10px; }
+.rule_1149 { color: #00047d; margin: 1149px; padding: 10px; }
+.rule_1150 { color: #00047e; margin: 1150px; padding: 10px; }
+.rule_1151 { color: #00047f; margin: 1151px; padding: 10px; }
+.rule_1152 { color: #000480; margin: 1152px; padding: 10px; }
+.rule_1153 { color: #000481; margin: 1153px; padding: 10px; }
+.rule_1154 { color: #000482; margin: 1154px; padding: 10px; }
+.rule_1155 { color: #000483; margin: 1155px; padding: 10px; }
+.rule_1156 { color: #000484; margin: 1156px; padding: 10px; }
+.rule_1157 { color: #000485; margin: 1157px; padding: 10px; }
+.rule_1158 { color: #000486; margin: 1158px; padding: 10px; }
+.rule_1159 { color: #000487; margin: 1159px; padding: 10px; }
+.rule_1160 { color: #000488; margin: 1160px; padding: 10px; }
+.rule_1161 { color: #000489; margin: 1161px; padding: 10px; }
+.rule_1162 { color: #00048a; margin: 1162px; padding: 10px; }
+.rule_1163 { color: #00048b; margin: 1163px; padding: 10px; }
+.rule_1164 { color: #00048c; margin: 1164px; padding: 10px; }
+.rule_1165 { color: #00048d; margin: 1165px; padding: 10px; }
+.rule_1166 { color: #00048e; margin: 1166px; padding: 10px; }
+.rule_1167 { color: #00048f; margin: 1167px; padding: 10px; }
+.rule_1168 { color: #000490; margin: 1168px; padding: 10px; }
+.rule_1169 { color: #000491; margin: 1169px; padding: 10px; }
+.rule_1170 { color: #000492; margin: 1170px; padding: 10px; }
+.rule_1171 { color: #000493; margin: 1171px; padding: 10px; }
+.rule_1172 { color: #000494; margin: 1172px; padding: 10px; }
+.rule_1173 { color: #000495; margin: 1173px; padding: 10px; }
+.rule_1174 { color: #000496; margin: 1174px; padding: 10px; }
+.rule_1175 { color: #000497; margin: 1175px; padding: 10px; }
+.rule_1176 { color: #000498; margin: 1176px; padding: 10px; }
+.rule_1177 { color: #000499; margin: 1177px; padding: 10px; }
+.rule_1178 { color: #00049a; margin: 1178px; padding: 10px; }
+.rule_1179 { color: #00049b; margin: 1179px; padding: 10px; }
+.rule_1180 { color: #00049c; margin: 1180px; padding: 10px; }
+.rule_1181 { color: #00049d; margin: 1181px; padding: 10px; }
+.rule_1182 { color: #00049e; margin: 1182px; padding: 10px; }
+.rule_1183 { color: #00049f; margin: 1183px; padding: 10px; }
+.rule_1184 { color: #0004a0; margin: 1184px; padding: 10px; }
+.rule_1185 { color: #0004a1; margin: 1185px; padding: 10px; }
+.rule_1186 { color: #0004a2; margin: 1186px; padding: 10px; }
+.rule_1187 { color: #0004a3; margin: 1187px; padding: 10px; }
+.rule_1188 { color: #0004a4; margin: 1188px; padding: 10px; }
+.rule_1189 { color: #0004a5; margin: 1189px; padding: 10px; }
+.rule_1190 { color: #0004a6; margin: 1190px; padding: 10px; }
+.rule_1191 { color: #0004a7; margin: 1191px; padding: 10px; }
+.rule_1192 { color: #0004a8; margin: 1192px; padding: 10px; }
+.rule_1193 { color: #0004a9; margin: 1193px; padding: 10px; }
+.rule_1194 { color: #0004aa; margin: 1194px; padding: 10px; }
+.rule_1195 { color: #0004ab; margin: 1195px; padding: 10px; }
+.rule_1196 { color: #0004ac; margin: 1196px; padding: 10px; }
+.rule_1197 { color: #0004ad; margin: 1197px; padding: 10px; }
+.rule_1198 { color: #0004ae; margin: 1198px; padding: 10px; }
+.rule_1199 { color: #0004af; margin: 1199px; padding: 10px; }
+.rule_1200 { color: #0004b0; margin: 1200px; padding: 10px; }
+.rule_1201 { color: #0004b1; margin: 1201px; padding: 10px; }
+.rule_1202 { color: #0004b2; margin: 1202px; padding: 10px; }
+.rule_1203 { color: #0004b3; margin: 1203px; padding: 10px; }
+.rule_1204 { color: #0004b4; margin: 1204px; padding: 10px; }
+.rule_1205 { color: #0004b5; margin: 1205px; padding: 10px; }
+.rule_1206 { color: #0004b6; margin: 1206px; padding: 10px; }
+.rule_1207 { color: #0004b7; margin: 1207px; padding: 10px; }
+.rule_1208 { color: #0004b8; margin: 1208px; padding: 10px; }
+.rule_1209 { color: #0004b9; margin: 1209px; padding: 10px; }
+.rule_1210 { color: #0004ba; margin: 1210px; padding: 10px; }
+.rule_1211 { color: #0004bb; margin: 1211px; padding: 10px; }
+.rule_1212 { color: #0004bc; margin: 1212px; padding: 10px; }
+.rule_1213 { color: #0004bd; margin: 1213px; padding: 10px; }
+.rule_1214 { color: #0004be; margin: 1214px; padding: 10px; }
+.rule_1215 { color: #0004bf; margin: 1215px; padding: 10px; }
+.rule_1216 { color: #0004c0; margin: 1216px; padding: 10px; }
+.rule_1217 { color: #0004c1; margin: 1217px; padding: 10px; }
+.rule_1218 { color: #0004c2; margin: 1218px; padding: 10px; }
+.rule_1219 { color: #0004c3; margin: 1219px; padding: 10px; }
+.rule_1220 { color: #0004c4; margin: 1220px; padding: 10px; }
+.rule_1221 { color: #0004c5; margin: 1221px; padding: 10px; }
+.rule_1222 { color: #0004c6; margin: 1222px; padding: 10px; }
+.rule_1223 { color: #0004c7; margin: 1223px; padding: 10px; }
+.rule_1224 { color: #0004c8; margin: 1224px; padding: 10px; }
+.rule_1225 { color: #0004c9; margin: 1225px; padding: 10px; }
+.rule_1226 { color: #0004ca; margin: 1226px; padding: 10px; }
+.rule_1227 { color: #0004cb; margin: 1227px; padding: 10px; }
+.rule_1228 { color: #0004cc; margin: 1228px; padding: 10px; }
+.rule_1229 { color: #0004cd; margin: 1229px; padding: 10px; }
+.rule_1230 { color: #0004ce; margin: 1230px; padding: 10px; }
+.rule_1231 { color: #0004cf; margin: 1231px; padding: 10px; }
+.rule_1232 { color: #0004d0; margin: 1232px; padding: 10px; }
+.rule_1233 { color: #0004d1; margin: 1233px; padding: 10px; }
+.rule_1234 { color: #0004d2; margin: 1234px; padding: 10px; }
+.rule_1235 { color: #0004d3; margin: 1235px; padding: 10px; }
+.rule_1236 { color: #0004d4; margin: 1236px; padding: 10px; }
+.rule_1237 { color: #0004d5; margin: 1237px; padding: 10px; }
+.rule_1238 { color: #0004d6; margin: 1238px; padding: 10px; }
+.rule_1239 { color: #0004d7; margin: 1239px; padding: 10px; }
+.rule_1240 { color: #0004d8; margin: 1240px; padding: 10px; }
+.rule_1241 { color: #0004d9; margin: 1241px; padding: 10px; }
+.rule_1242 { color: #0004da; margin: 1242px; padding: 10px; }
+.rule_1243 { color: #0004db; margin: 1243px; padding: 10px; }
+.rule_1244 { color: #0004dc; margin: 1244px; padding: 10px; }
+.rule_1245 { color: #0004dd; margin: 1245px; padding: 10px; }
+.rule_1246 { color: #0004de; margin: 1246px; padding: 10px; }
+.rule_1247 { color: #0004df; margin: 1247px; padding: 10px; }
+.rule_1248 { color: #0004e0; margin: 1248px; padding: 10px; }
+.rule_1249 { color: #0004e1; margin: 1249px; padding: 10px; }
+.rule_1250 { color: #0004e2; margin: 1250px; padding: 10px; }
+.rule_1251 { color: #0004e3; margin: 1251px; padding: 10px; }
+.rule_1252 { color: #0004e4; margin: 1252px; padding: 10px; }
+.rule_1253 { color: #0004e5; margin: 1253px; padding: 10px; }
+.rule_1254 { color: #0004e6; margin: 1254px; padding: 10px; }
+.rule_1255 { color: #0004e7; margin: 1255px; padding: 10px; }
+.rule_1256 { color: #0004e8; margin: 1256px; padding: 10px; }
+.rule_1257 { color: #0004e9; margin: 1257px; padding: 10px; }
+.rule_1258 { color: #0004ea; margin: 1258px; padding: 10px; }
+.rule_1259 { color: #0004eb; margin: 1259px; padding: 10px; }
+.rule_1260 { color: #0004ec; margin: 1260px; padding: 10px; }
+.rule_1261 { color: #0004ed; margin: 1261px; padding: 10px; }
+.rule_1262 { color: #0004ee; margin: 1262px; padding: 10px; }
+.rule_1263 { color: #0004ef; margin: 1263px; padding: 10px; }
+.rule_1264 { color: #0004f0; margin: 1264px; padding: 10px; }
+.rule_1265 { color: #0004f1; margin: 1265px; padding: 10px; }
+.rule_1266 { color: #0004f2; margin: 1266px; padding: 10px; }
+.rule_1267 { color: #0004f3; margin: 1267px; padding: 10px; }
+.rule_1268 { color: #0004f4; margin: 1268px; padding: 10px; }
+.rule_1269 { color: #0004f5; margin: 1269px; padding: 10px; }
+.rule_1270 { color: #0004f6; margin: 1270px; padding: 10px; }
+.rule_1271 { color: #0004f7; margin: 1271px; padding: 10px; }
+.rule_1272 { color: #0004f8; margin: 1272px; padding: 10px; }
+.rule_1273 { color: #0004f9; margin: 1273px; padding: 10px; }
+.rule_1274 { color: #0004fa; margin: 1274px; padding: 10px; }
+.rule_1275 { color: #0004fb; margin: 1275px; padding: 10px; }
+.rule_1276 { color: #0004fc; margin: 1276px; padding: 10px; }
+.rule_1277 { color: #0004fd; margin: 1277px; padding: 10px; }
+.rule_1278 { color: #0004fe; margin: 1278px; padding: 10px; }
+.rule_1279 { color: #0004ff; margin: 1279px; padding: 10px; }
+.rule_1280 { color: #000500; margin: 1280px; padding: 10px; }
+.rule_1281 { color: #000501; margin: 1281px; padding: 10px; }
+.rule_1282 { color: #000502; margin: 1282px; padding: 10px; }
+.rule_1283 { color: #000503; margin: 1283px; padding: 10px; }
+.rule_1284 { color: #000504; margin: 1284px; padding: 10px; }
+.rule_1285 { color: #000505; margin: 1285px; padding: 10px; }
+.rule_1286 { color: #000506; margin: 1286px; padding: 10px; }
+.rule_1287 { color: #000507; margin: 1287px; padding: 10px; }
+.rule_1288 { color: #000508; margin: 1288px; padding: 10px; }
+.rule_1289 { color: #000509; margin: 1289px; padding: 10px; }
+.rule_1290 { color: #00050a; margin: 1290px; padding: 10px; }
+.rule_1291 { color: #00050b; margin: 1291px; padding: 10px; }
+.rule_1292 { color: #00050c; margin: 1292px; padding: 10px; }
+.rule_1293 { color: #00050d; margin: 1293px; padding: 10px; }
+.rule_1294 { color: #00050e; margin: 1294px; padding: 10px; }
+.rule_1295 { color: #00050f; margin: 1295px; padding: 10px; }
+.rule_1296 { color: #000510; margin: 1296px; padding: 10px; }
+.rule_1297 { color: #000511; margin: 1297px; padding: 10px; }
+.rule_1298 { color: #000512; margin: 1298px; padding: 10px; }
+.rule_1299 { color: #000513; margin: 1299px; padding: 10px; }
+.rule_1300 { color: #000514; margin: 1300px; padding: 10px; }
+.rule_1301 { color: #000515; margin: 1301px; padding: 10px; }
+.rule_1302 { color: #000516; margin: 1302px; padding: 10px; }
+.rule_1303 { color: #000517; margin: 1303px; padding: 10px; }
+.rule_1304 { color: #000518; margin: 1304px; padding: 10px; }
+.rule_1305 { color: #000519; margin: 1305px; padding: 10px; }
+.rule_1306 { color: #00051a; margin: 1306px; padding: 10px; }
+.rule_1307 { color: #00051b; margin: 1307px; padding: 10px; }
+.rule_1308 { color: #00051c; margin: 1308px; padding: 10px; }
+.rule_1309 { color: #00051d; margin: 1309px; padding: 10px; }
+.rule_1310 { color: #00051e; margin: 1310px; padding: 10px; }
+.rule_1311 { color: #00051f; margin: 1311px; padding: 10px; }
+.rule_1312 { color: #000520; margin: 1312px; padding: 10px; }
+.rule_1313 { color: #000521; margin: 1313px; padding: 10px; }
+.rule_1314 { color: #000522; margin: 1314px; padding: 10px; }
+.rule_1315 { color: #000523; margin: 1315px; padding: 10px; }
+.rule_1316 { color: #000524; margin: 1316px; padding: 10px; }
+.rule_1317 { color: #000525; margin: 1317px; padding: 10px; }
+.rule_1318 { color: #000526; margin: 1318px; padding: 10px; }
+.rule_1319 { color: #000527; margin: 1319px; padding: 10px; }
+.rule_1320 { color: #000528; margin: 1320px; padding: 10px; }
+.rule_1321 { color: #000529; margin: 1321px; padding: 10px; }
+.rule_1322 { color: #00052a; margin: 1322px; padding: 10px; }
+.rule_1323 { color: #00052b; margin: 1323px; padding: 10px; }
+.rule_1324 { color: #00052c; margin: 1324px; padding: 10px; }
+.rule_1325 { color: #00052d; margin: 1325px; padding: 10px; }
+.rule_1326 { color: #00052e; margin: 1326px; padding: 10px; }
+.rule_1327 { color: #00052f; margin: 1327px; padding: 10px; }
+.rule_1328 { color: #000530; margin: 1328px; padding: 10px; }
+.rule_1329 { color: #000531; margin: 1329px; padding: 10px; }
+.rule_1330 { color: #000532; margin: 1330px; padding: 10px; }
+.rule_1331 { color: #000533; margin: 1331px; padding: 10px; }
+.rule_1332 { color: #000534; margin: 1332px; padding: 10px; }
+.rule_1333 { color: #000535; margin: 1333px; padding: 10px; }
+.rule_1334 { color: #000536; margin: 1334px; padding: 10px; }
+.rule_1335 { color: #000537; margin: 1335px; padding: 10px; }
+.rule_1336 { color: #000538; margin: 1336px; padding: 10px; }
+.rule_1337 { color: #000539; margin: 1337px; padding: 10px; }
+.rule_1338 { color: #00053a; margin: 1338px; padding: 10px; }
+.rule_1339 { color: #00053b; margin: 1339px; padding: 10px; }
+.rule_1340 { color: #00053c; margin: 1340px; padding: 10px; }
+.rule_1341 { color: #00053d; margin: 1341px; padding: 10px; }
+.rule_1342 { color: #00053e; margin: 1342px; padding: 10px; }
+.rule_1343 { color: #00053f; margin: 1343px; padding: 10px; }
+.rule_1344 { color: #000540; margin: 1344px; padding: 10px; }
+.rule_1345 { color: #000541; margin: 1345px; padding: 10px; }
+.rule_1346 { color: #000542; margin: 1346px; padding: 10px; }
+.rule_1347 { color: #000543; margin: 1347px; padding: 10px; }
+.rule_1348 { color: #000544; margin: 1348px; padding: 10px; }
+.rule_1349 { color: #000545; margin: 1349px; padding: 10px; }
+.rule_1350 { color: #000546; margin: 1350px; padding: 10px; }
+.rule_1351 { color: #000547; margin: 1351px; padding: 10px; }
+.rule_1352 { color: #000548; margin: 1352px; padding: 10px; }
+.rule_1353 { color: #000549; margin: 1353px; padding: 10px; }
+.rule_1354 { color: #00054a; margin: 1354px; padding: 10px; }
+.rule_1355 { color: #00054b; margin: 1355px; padding: 10px; }
+.rule_1356 { color: #00054c; margin: 1356px; padding: 10px; }
+.rule_1357 { color: #00054d; margin: 1357px; padding: 10px; }
+.rule_1358 { color: #00054e; margin: 1358px; padding: 10px; }
+.rule_1359 { color: #00054f; margin: 1359px; padding: 10px; }
+.rule_1360 { color: #000550; margin: 1360px; padding: 10px; }
+.rule_1361 { color: #000551; margin: 1361px; padding: 10px; }
+.rule_1362 { color: #000552; margin: 1362px; padding: 10px; }
+.rule_1363 { color: #000553; margin: 1363px; padding: 10px; }
+.rule_1364 { color: #000554; margin: 1364px; padding: 10px; }
+.rule_1365 { color: #000555; margin: 1365px; padding: 10px; }
+.rule_1366 { color: #000556; margin: 1366px; padding: 10px; }
+.rule_1367 { color: #000557; margin: 1367px; padding: 10px; }
+.rule_1368 { color: #000558; margin: 1368px; padding: 10px; }
+.rule_1369 { color: #000559; margin: 1369px; padding: 10px; }
+.rule_1370 { color: #00055a; margin: 1370px; padding: 10px; }
+.rule_1371 { color: #00055b; margin: 1371px; padding: 10px; }
+.rule_1372 { color: #00055c; margin: 1372px; padding: 10px; }
+.rule_1373 { color: #00055d; margin: 1373px; padding: 10px; }
+.rule_1374 { color: #00055e; margin: 1374px; padding: 10px; }
+.rule_1375 { color: #00055f; margin: 1375px; padding: 10px; }
+.rule_1376 { color: #000560; margin: 1376px; padding: 10px; }
+.rule_1377 { color: #000561; margin: 1377px; padding: 10px; }
+.rule_1378 { color: #000562; margin: 1378px; padding: 10px; }
+.rule_1379 { color: #000563; margin: 1379px; padding: 10px; }
+.rule_1380 { color: #000564; margin: 1380px; padding: 10px; }
+.rule_1381 { color: #000565; margin: 1381px; padding: 10px; }
+.rule_1382 { color: #000566; margin: 1382px; padding: 10px; }
+.rule_1383 { color: #000567; margin: 1383px; padding: 10px; }
+.rule_1384 { color: #000568; margin: 1384px; padding: 10px; }
+.rule_1385 { color: #000569; margin: 1385px; padding: 10px; }
+.rule_1386 { color: #00056a; margin: 1386px; padding: 10px; }
+.rule_1387 { color: #00056b; margin: 1387px; padding: 10px; }
+.rule_1388 { color: #00056c; margin: 1388px; padding: 10px; }
+.rule_1389 { color: #00056d; margin: 1389px; padding: 10px; }
+.rule_1390 { color: #00056e; margin: 1390px; padding: 10px; }
+.rule_1391 { color: #00056f; margin: 1391px; padding: 10px; }
+.rule_1392 { color: #000570; margin: 1392px; padding: 10px; }
+.rule_1393 { color: #000571; margin: 1393px; padding: 10px; }
+.rule_1394 { color: #000572; margin: 1394px; padding: 10px; }
+.rule_1395 { color: #000573; margin: 1395px; padding: 10px; }
+.rule_1396 { color: #000574; margin: 1396px; padding: 10px; }
+.rule_1397 { color: #000575; margin: 1397px; padding: 10px; }
+.rule_1398 { color: #000576; margin: 1398px; padding: 10px; }
+.rule_1399 { color: #000577; margin: 1399px; padding: 10px; }
+.rule_1400 { color: #000578; margin: 1400px; padding: 10px; }
+.rule_1401 { color: #000579; margin: 1401px; padding: 10px; }
+.rule_1402 { color: #00057a; margin: 1402px; padding: 10px; }
+.rule_1403 { color: #00057b; margin: 1403px; padding: 10px; }
+.rule_1404 { color: #00057c; margin: 1404px; padding: 10px; }
+.rule_1405 { color: #00057d; margin: 1405px; padding: 10px; }
+.rule_1406 { color: #00057e; margin: 1406px; padding: 10px; }
+.rule_1407 { color: #00057f; margin: 1407px; padding: 10px; }
+.rule_1408 { color: #000580; margin: 1408px; padding: 10px; }
+.rule_1409 { color: #000581; margin: 1409px; padding: 10px; }
+.rule_1410 { color: #000582; margin: 1410px; padding: 10px; }
+.rule_1411 { color: #000583; margin: 1411px; padding: 10px; }
+.rule_1412 { color: #000584; margin: 1412px; padding: 10px; }
+.rule_1413 { color: #000585; margin: 1413px; padding: 10px; }
+.rule_1414 { color: #000586; margin: 1414px; padding: 10px; }
+.rule_1415 { color: #000587; margin: 1415px; padding: 10px; }
+.rule_1416 { color: #000588; margin: 1416px; padding: 10px; }
+.rule_1417 { color: #000589; margin: 1417px; padding: 10px; }
+.rule_1418 { color: #00058a; margin: 1418px; padding: 10px; }
+.rule_1419 { color: #00058b; margin: 1419px; padding: 10px; }
+.rule_1420 { color: #00058c; margin: 1420px; padding: 10px; }
+.rule_1421 { color: #00058d; margin: 1421px; padding: 10px; }
+.rule_1422 { color: #00058e; margin: 1422px; padding: 10px; }
+.rule_1423 { color: #00058f; margin: 1423px; padding: 10px; }
+.rule_1424 { color: #000590; margin: 1424px; padding: 10px; }
+.rule_1425 { color: #000591; margin: 1425px; padding: 10px; }
+.rule_1426 { color: #000592; margin: 1426px; padding: 10px; }
+.rule_1427 { color: #000593; margin: 1427px; padding: 10px; }
+.rule_1428 { color: #000594; margin: 1428px; padding: 10px; }
+.rule_1429 { color: #000595; margin: 1429px; padding: 10px; }
+.rule_1430 { color: #000596; margin: 1430px; padding: 10px; }
+.rule_1431 { color: #000597; margin: 1431px; padding: 10px; }
+.rule_1432 { color: #000598; margin: 1432px; padding: 10px; }
+.rule_1433 { color: #000599; margin: 1433px; padding: 10px; }
+.rule_1434 { color: #00059a; margin: 1434px; padding: 10px; }
+.rule_1435 { color: #00059b; margin: 1435px; padding: 10px; }
+.rule_1436 { color: #00059c; margin: 1436px; padding: 10px; }
+.rule_1437 { color: #00059d; margin: 1437px; padding: 10px; }
+.rule_1438 { color: #00059e; margin: 1438px; padding: 10px; }
+.rule_1439 { color: #00059f; margin: 1439px; padding: 10px; }
+.rule_1440 { color: #0005a0; margin: 1440px; padding: 10px; }
+.rule_1441 { color: #0005a1; margin: 1441px; padding: 10px; }
+.rule_1442 { color: #0005a2; margin: 1442px; padding: 10px; }
+.rule_1443 { color: #0005a3; margin: 1443px; padding: 10px; }
+.rule_1444 { color: #0005a4; margin: 1444px; padding: 10px; }
+.rule_1445 { color: #0005a5; margin: 1445px; padding: 10px; }
+.rule_1446 { color: #0005a6; margin: 1446px; padding: 10px; }
+.rule_1447 { color: #0005a7; margin: 1447px; padding: 10px; }
+.rule_1448 { color: #0005a8; margin: 1448px; padding: 10px; }
+.rule_1449 { color: #0005a9; margin: 1449px; padding: 10px; }
+.rule_1450 { color: #0005aa; margin: 1450px; padding: 10px; }
+.rule_1451 { color: #0005ab; margin: 1451px; padding: 10px; }
+.rule_1452 { color: #0005ac; margin: 1452px; padding: 10px; }
+.rule_1453 { color: #0005ad; margin: 1453px; padding: 10px; }
+.rule_1454 { color: #0005ae; margin: 1454px; padding: 10px; }
+.rule_1455 { color: #0005af; margin: 1455px; padding: 10px; }
+.rule_1456 { color: #0005b0; margin: 1456px; padding: 10px; }
+.rule_1457 { color: #0005b1; margin: 1457px; padding: 10px; }
+.rule_1458 { color: #0005b2; margin: 1458px; padding: 10px; }
+.rule_1459 { color: #0005b3; margin: 1459px; padding: 10px; }
+.rule_1460 { color: #0005b4; margin: 1460px; padding: 10px; }
+.rule_1461 { color: #0005b5; margin: 1461px; padding: 10px; }
+.rule_1462 { color: #0005b6; margin: 1462px; padding: 10px; }
+.rule_1463 { color: #0005b7; margin: 1463px; padding: 10px; }
+.rule_1464 { color: #0005b8; margin: 1464px; padding: 10px; }
+.rule_1465 { color: #0005b9; margin: 1465px; padding: 10px; }
+.rule_1466 { color: #0005ba; margin: 1466px; padding: 10px; }
+.rule_1467 { color: #0005bb; margin: 1467px; padding: 10px; }
+.rule_1468 { color: #0005bc; margin: 1468px; padding: 10px; }
+.rule_1469 { color: #0005bd; margin: 1469px; padding: 10px; }
+.rule_1470 { color: #0005be; margin: 1470px; padding: 10px; }
+.rule_1471 { color: #0005bf; margin: 1471px; padding: 10px; }
+.rule_1472 { color: #0005c0; margin: 1472px; padding: 10px; }
+.rule_1473 { color: #0005c1; margin: 1473px; padding: 10px; }
+.rule_1474 { color: #0005c2; margin: 1474px; padding: 10px; }
+.rule_1475 { color: #0005c3; margin: 1475px; padding: 10px; }
+.rule_1476 { color: #0005c4; margin: 1476px; padding: 10px; }
+.rule_1477 { color: #0005c5; margin: 1477px; padding: 10px; }
+.rule_1478 { color: #0005c6; margin: 1478px; padding: 10px; }
+.rule_1479 { color: #0005c7; margin: 1479px; padding: 10px; }
+.rule_1480 { color: #0005c8; margin: 1480px; padding: 10px; }
+.rule_1481 { color: #0005c9; margin: 1481px; padding: 10px; }
+.rule_1482 { color: #0005ca; margin: 1482px; padding: 10px; }
+.rule_1483 { color: #0005cb; margin: 1483px; padding: 10px; }
+.rule_1484 { color: #0005cc; margin: 1484px; padding: 10px; }
+.rule_1485 { color: #0005cd; margin: 1485px; padding: 10px; }
+.rule_1486 { color: #0005ce; margin: 1486px; padding: 10px; }
+.rule_1487 { color: #0005cf; margin: 1487px; padding: 10px; }
+.rule_1488 { color: #0005d0; margin: 1488px; padding: 10px; }
+.rule_1489 { color: #0005d1; margin: 1489px; padding: 10px; }
+.rule_1490 { color: #0005d2; margin: 1490px; padding: 10px; }
+.rule_1491 { color: #0005d3; margin: 1491px; padding: 10px; }
+.rule_1492 { color: #0005d4; margin: 1492px; padding: 10px; }
+.rule_1493 { color: #0005d5; margin: 1493px; padding: 10px; }
+.rule_1494 { color: #0005d6; margin: 1494px; padding: 10px; }
+.rule_1495 { color: #0005d7; margin: 1495px; padding: 10px; }
+.rule_1496 { color: #0005d8; margin: 1496px; padding: 10px; }
+.rule_1497 { color: #0005d9; margin: 1497px; padding: 10px; }
+.rule_1498 { color: #0005da; margin: 1498px; padding: 10px; }
+.rule_1499 { color: #0005db; margin: 1499px; padding: 10px; }
+.rule_1500 { color: #0005dc; margin: 1500px; padding: 10px; }
+.rule_1501 { color: #0005dd; margin: 1501px; padding: 10px; }
+.rule_1502 { color: #0005de; margin: 1502px; padding: 10px; }
+.rule_1503 { color: #0005df; margin: 1503px; padding: 10px; }
+.rule_1504 { color: #0005e0; margin: 1504px; padding: 10px; }
+.rule_1505 { color: #0005e1; margin: 1505px; padding: 10px; }
+.rule_1506 { color: #0005e2; margin: 1506px; padding: 10px; }
+.rule_1507 { color: #0005e3; margin: 1507px; padding: 10px; }
+.rule_1508 { color: #0005e4; margin: 1508px; padding: 10px; }
+.rule_1509 { color: #0005e5; margin: 1509px; padding: 10px; }
+.rule_1510 { color: #0005e6; margin: 1510px; padding: 10px; }
+.rule_1511 { color: #0005e7; margin: 1511px; padding: 10px; }
+.rule_1512 { color: #0005e8; margin: 1512px; padding: 10px; }
+.rule_1513 { color: #0005e9; margin: 1513px; padding: 10px; }
+.rule_1514 { color: #0005ea; margin: 1514px; padding: 10px; }
+.rule_1515 { color: #0005eb; margin: 1515px; padding: 10px; }
+.rule_1516 { color: #0005ec; margin: 1516px; padding: 10px; }
+.rule_1517 { color: #0005ed; margin: 1517px; padding: 10px; }
+.rule_1518 { color: #0005ee; margin: 1518px; padding: 10px; }
+.rule_1519 { color: #0005ef; margin: 1519px; padding: 10px; }
+.rule_1520 { color: #0005f0; margin: 1520px; padding: 10px; }
+.rule_1521 { color: #0005f1; margin: 1521px; padding: 10px; }
+.rule_1522 { color: #0005f2; margin: 1522px; padding: 10px; }
+.rule_1523 { color: #0005f3; margin: 1523px; padding: 10px; }
+.rule_1524 { color: #0005f4; margin: 1524px; padding: 10px; }
+.rule_1525 { color: #0005f5; margin: 1525px; padding: 10px; }
+.rule_1526 { color: #0005f6; margin: 1526px; padding: 10px; }
+.rule_1527 { color: #0005f7; margin: 1527px; padding: 10px; }
+.rule_1528 { color: #0005f8; margin: 1528px; padding: 10px; }
+.rule_1529 { color: #0005f9; margin: 1529px; padding: 10px; }
+.rule_1530 { color: #0005fa; margin: 1530px; padding: 10px; }
+.rule_1531 { color: #0005fb; margin: 1531px; padding: 10px; }
+.rule_1532 { color: #0005fc; margin: 1532px; padding: 10px; }
+.rule_1533 { color: #0005fd; margin: 1533px; padding: 10px; }
+.rule_1534 { color: #0005fe; margin: 1534px; padding: 10px; }
+.rule_1535 { color: #0005ff; margin: 1535px; padding: 10px; }
+.rule_1536 { color: #000600; margin: 1536px; padding: 10px; }
+.rule_1537 { color: #000601; margin: 1537px; padding: 10px; }
+.rule_1538 { color: #000602; margin: 1538px; padding: 10px; }
+.rule_1539 { color: #000603; margin: 1539px; padding: 10px; }
+.rule_1540 { color: #000604; margin: 1540px; padding: 10px; }
+.rule_1541 { color: #000605; margin: 1541px; padding: 10px; }
+.rule_1542 { color: #000606; margin: 1542px; padding: 10px; }
+.rule_1543 { color: #000607; margin: 1543px; padding: 10px; }
+.rule_1544 { color: #000608; margin: 1544px; padding: 10px; }
+.rule_1545 { color: #000609; margin: 1545px; padding: 10px; }
+.rule_1546 { color: #00060a; margin: 1546px; padding: 10px; }
+.rule_1547 { color: #00060b; margin: 1547px; padding: 10px; }
+.rule_1548 { color: #00060c; margin: 1548px; padding: 10px; }
+.rule_1549 { color: #00060d; margin: 1549px; padding: 10px; }
+.rule_1550 { color: #00060e; margin: 1550px; padding: 10px; }
+.rule_1551 { color: #00060f; margin: 1551px; padding: 10px; }
+.rule_1552 { color: #000610; margin: 1552px; padding: 10px; }
+.rule_1553 { color: #000611; margin: 1553px; padding: 10px; }
+.rule_1554 { color: #000612; margin: 1554px; padding: 10px; }
+.rule_1555 { color: #000613; margin: 1555px; padding: 10px; }
+.rule_1556 { color: #000614; margin: 1556px; padding: 10px; }
+.rule_1557 { color: #000615; margin: 1557px; padding: 10px; }
+.rule_1558 { color: #000616; margin: 1558px; padding: 10px; }
+.rule_1559 { color: #000617; margin: 1559px; padding: 10px; }
+.rule_1560 { color: #000618; margin: 1560px; padding: 10px; }
+.rule_1561 { color: #000619; margin: 1561px; padding: 10px; }
+.rule_1562 { color: #00061a; margin: 1562px; padding: 10px; }
+.rule_1563 { color: #00061b; margin: 1563px; padding: 10px; }
+.rule_1564 { color: #00061c; margin: 1564px; padding: 10px; }
+.rule_1565 { color: #00061d; margin: 1565px; padding: 10px; }
+.rule_1566 { color: #00061e; margin: 1566px; padding: 10px; }
+.rule_1567 { color: #00061f; margin: 1567px; padding: 10px; }
+.rule_1568 { color: #000620; margin: 1568px; padding: 10px; }
+.rule_1569 { color: #000621; margin: 1569px; padding: 10px; }
+.rule_1570 { color: #000622; margin: 1570px; padding: 10px; }
+.rule_1571 { color: #000623; margin: 1571px; padding: 10px; }
+.rule_1572 { color: #000624; margin: 1572px; padding: 10px; }
+.rule_1573 { color: #000625; margin: 1573px; padding: 10px; }
+.rule_1574 { color: #000626; margin: 1574px; padding: 10px; }
+.rule_1575 { color: #000627; margin: 1575px; padding: 10px; }
+.rule_1576 { color: #000628; margin: 1576px; padding: 10px; }
+.rule_1577 { color: #000629; margin: 1577px; padding: 10px; }
+.rule_1578 { color: #00062a; margin: 1578px; padding: 10px; }
+.rule_1579 { color: #00062b; margin: 1579px; padding: 10px; }
+.rule_1580 { color: #00062c; margin: 1580px; padding: 10px; }
+.rule_1581 { color: #00062d; margin: 1581px; padding: 10px; }
+.rule_1582 { color: #00062e; margin: 1582px; padding: 10px; }
+.rule_1583 { color: #00062f; margin: 1583px; padding: 10px; }
+.rule_1584 { color: #000630; margin: 1584px; padding: 10px; }
+.rule_1585 { color: #000631; margin: 1585px; padding: 10px; }
+.rule_1586 { color: #000632; margin: 1586px; padding: 10px; }
+.rule_1587 { color: #000633; margin: 1587px; padding: 10px; }
+.rule_1588 { color: #000634; margin: 1588px; padding: 10px; }
+.rule_1589 { color: #000635; margin: 1589px; padding: 10px; }
+.rule_1590 { color: #000636; margin: 1590px; padding: 10px; }
+.rule_1591 { color: #000637; margin: 1591px; padding: 10px; }
+.rule_1592 { color: #000638; margin: 1592px; padding: 10px; }
+.rule_1593 { color: #000639; margin: 1593px; padding: 10px; }
+.rule_1594 { color: #00063a; margin: 1594px; padding: 10px; }
+.rule_1595 { color: #00063b; margin: 1595px; padding: 10px; }
+.rule_1596 { color: #00063c; margin: 1596px; padding: 10px; }
+.rule_1597 { color: #00063d; margin: 1597px; padding: 10px; }
+.rule_1598 { color: #00063e; margin: 1598px; padding: 10px; }
+.rule_1599 { color: #00063f; margin: 1599px; padding: 10px; }
+.rule_1600 { color: #000640; margin: 1600px; padding: 10px; }
+.rule_1601 { color: #000641; margin: 1601px; padding: 10px; }
+.rule_1602 { color: #000642; margin: 1602px; padding: 10px; }
+.rule_1603 { color: #000643; margin: 1603px; padding: 10px; }
+.rule_1604 { color: #000644; margin: 1604px; padding: 10px; }
+.rule_1605 { color: #000645; margin: 1605px; padding: 10px; }
+.rule_1606 { color: #000646; margin: 1606px; padding: 10px; }
+.rule_1607 { color: #000647; margin: 1607px; padding: 10px; }
+.rule_1608 { color: #000648; margin: 1608px; padding: 10px; }
+.rule_1609 { color: #000649; margin: 1609px; padding: 10px; }
+.rule_1610 { color: #00064a; margin: 1610px; padding: 10px; }
+.rule_1611 { color: #00064b; margin: 1611px; padding: 10px; }
+.rule_1612 { color: #00064c; margin: 1612px; padding: 10px; }
+.rule_1613 { color: #00064d; margin: 1613px; padding: 10px; }
+.rule_1614 { color: #00064e; margin: 1614px; padding: 10px; }
+.rule_1615 { color: #00064f; margin: 1615px; padding: 10px; }
+.rule_1616 { color: #000650; margin: 1616px; padding: 10px; }
+.rule_1617 { color: #000651; margin: 1617px; padding: 10px; }
+.rule_1618 { color: #000652; margin: 1618px; padding: 10px; }
+.rule_1619 { color: #000653; margin: 1619px; padding: 10px; }
+.rule_1620 { color: #000654; margin: 1620px; padding: 10px; }
+.rule_1621 { color: #000655; margin: 1621px; padding: 10px; }
+.rule_1622 { color: #000656; margin: 1622px; padding: 10px; }
+.rule_1623 { color: #000657; margin: 1623px; padding: 10px; }
+.rule_1624 { color: #000658; margin: 1624px; padding: 10px; }
+.rule_1625 { color: #000659; margin: 1625px; padding: 10px; }
+.rule_1626 { color: #00065a; margin: 1626px; padding: 10px; }
+.rule_1627 { color: #00065b; margin: 1627px; padding: 10px; }
+.rule_1628 { color: #00065c; margin: 1628px; padding: 10px; }
+.rule_1629 { color: #00065d; margin: 1629px; padding: 10px; }
+.rule_1630 { color: #00065e; margin: 1630px; padding: 10px; }
+.rule_1631 { color: #00065f; margin: 1631px; padding: 10px; }
+.rule_1632 { color: #000660; margin: 1632px; padding: 10px; }
+.rule_1633 { color: #000661; margin: 1633px; padding: 10px; }
+.rule_1634 { color: #000662; margin: 1634px; padding: 10px; }
+.rule_1635 { color: #000663; margin: 1635px; padding: 10px; }
+.rule_1636 { color: #000664; margin: 1636px; padding: 10px; }
+.rule_1637 { color: #000665; margin: 1637px; padding: 10px; }
+.rule_1638 { color: #000666; margin: 1638px; padding: 10px; }
+.rule_1639 { color: #000667; margin: 1639px; padding: 10px; }
+.rule_1640 { color: #000668; margin: 1640px; padding: 10px; }
+.rule_1641 { color: #000669; margin: 1641px; padding: 10px; }
+.rule_1642 { color: #00066a; margin: 1642px; padding: 10px; }
+.rule_1643 { color: #00066b; margin: 1643px; padding: 10px; }
+.rule_1644 { color: #00066c; margin: 1644px; padding: 10px; }
+.rule_1645 { color: #00066d; margin: 1645px; padding: 10px; }
+.rule_1646 { color: #00066e; margin: 1646px; padding: 10px; }
+.rule_1647 { color: #00066f; margin: 1647px; padding: 10px; }
+.rule_1648 { color: #000670; margin: 1648px; padding: 10px; }
+.rule_1649 { color: #000671; margin: 1649px; padding: 10px; }
+.rule_1650 { color: #000672; margin: 1650px; padding: 10px; }
+.rule_1651 { color: #000673; margin: 1651px; padding: 10px; }
+.rule_1652 { color: #000674; margin: 1652px; padding: 10px; }
+.rule_1653 { color: #000675; margin: 1653px; padding: 10px; }
+.rule_1654 { color: #000676; margin: 1654px; padding: 10px; }
+.rule_1655 { color: #000677; margin: 1655px; padding: 10px; }
+.rule_1656 { color: #000678; margin: 1656px; padding: 10px; }
+.rule_1657 { color: #000679; margin: 1657px; padding: 10px; }
+.rule_1658 { color: #00067a; margin: 1658px; padding: 10px; }
+.rule_1659 { color: #00067b; margin: 1659px; padding: 10px; }
+.rule_1660 { color: #00067c; margin: 1660px; padding: 10px; }
+.rule_1661 { color: #00067d; margin: 1661px; padding: 10px; }
+.rule_1662 { color: #00067e; margin: 1662px; padding: 10px; }
+.rule_1663 { color: #00067f; margin: 1663px; padding: 10px; }
+.rule_1664 { color: #000680; margin: 1664px; padding: 10px; }
+.rule_1665 { color: #000681; margin: 1665px; padding: 10px; }
+.rule_1666 { color: #000682; margin: 1666px; padding: 10px; }
+.rule_1667 { color: #000683; margin: 1667px; padding: 10px; }
+.rule_1668 { color: #000684; margin: 1668px; padding: 10px; }
+.rule_1669 { color: #000685; margin: 1669px; padding: 10px; }
+.rule_1670 { color: #000686; margin: 1670px; padding: 10px; }
+.rule_1671 { color: #000687; margin: 1671px; padding: 10px; }
+.rule_1672 { color: #000688; margin: 1672px; padding: 10px; }
+.rule_1673 { color: #000689; margin: 1673px; padding: 10px; }
+.rule_1674 { color: #00068a; margin: 1674px; padding: 10px; }
+.rule_1675 { color: #00068b; margin: 1675px; padding: 10px; }
+.rule_1676 { color: #00068c; margin: 1676px; padding: 10px; }
+.rule_1677 { color: #00068d; margin: 1677px; padding: 10px; }
+.rule_1678 { color: #00068e; margin: 1678px; padding: 10px; }
+.rule_1679 { color: #00068f; margin: 1679px; padding: 10px; }
+.rule_1680 { color: #000690; margin: 1680px; padding: 10px; }
+.rule_1681 { color: #000691; margin: 1681px; padding: 10px; }
+.rule_1682 { color: #000692; margin: 1682px; padding: 10px; }
+.rule_1683 { color: #000693; margin: 1683px; padding: 10px; }
+.rule_1684 { color: #000694; margin: 1684px; padding: 10px; }
+.rule_1685 { color: #000695; margin: 1685px; padding: 10px; }
+.rule_1686 { color: #000696; margin: 1686px; padding: 10px; }
+.rule_1687 { color: #000697; margin: 1687px; padding: 10px; }
+.rule_1688 { color: #000698; margin: 1688px; padding: 10px; }
+.rule_1689 { color: #000699; margin: 1689px; padding: 10px; }
+.rule_1690 { color: #00069a; margin: 1690px; padding: 10px; }
+.rule_1691 { color: #00069b; margin: 1691px; padding: 10px; }
+.rule_1692 { color: #00069c; margin: 1692px; padding: 10px; }
+.rule_1693 { color: #00069d; margin: 1693px; padding: 10px; }
+.rule_1694 { color: #00069e; margin: 1694px; padding: 10px; }
+.rule_1695 { color: #00069f; margin: 1695px; padding: 10px; }
+.rule_1696 { color: #0006a0; margin: 1696px; padding: 10px; }
+.rule_1697 { color: #0006a1; margin: 1697px; padding: 10px; }
+.rule_1698 { color: #0006a2; margin: 1698px; padding: 10px; }
+.rule_1699 { color: #0006a3; margin: 1699px; padding: 10px; }
+.rule_1700 { color: #0006a4; margin: 1700px; padding: 10px; }
+.rule_1701 { color: #0006a5; margin: 1701px; padding: 10px; }
+.rule_1702 { color: #0006a6; margin: 1702px; padding: 10px; }
+.rule_1703 { color: #0006a7; margin: 1703px; padding: 10px; }
+.rule_1704 { color: #0006a8; margin: 1704px; padding: 10px; }
+.rule_1705 { color: #0006a9; margin: 1705px; padding: 10px; }
+.rule_1706 { color: #0006aa; margin: 1706px; padding: 10px; }
+.rule_1707 { color: #0006ab; margin: 1707px; padding: 10px; }
+.rule_1708 { color: #0006ac; margin: 1708px; padding: 10px; }
+.rule_1709 { color: #0006ad; margin: 1709px; padding: 10px; }
+.rule_1710 { color: #0006ae; margin: 1710px; padding: 10px; }
+.rule_1711 { color: #0006af; margin: 1711px; padding: 10px; }
+.rule_1712 { color: #0006b0; margin: 1712px; padding: 10px; }
+.rule_1713 { color: #0006b1; margin: 1713px; padding: 10px; }
+.rule_1714 { color: #0006b2; margin: 1714px; padding: 10px; }
+.rule_1715 { color: #0006b3; margin: 1715px; padding: 10px; }
+.rule_1716 { color: #0006b4; margin: 1716px; padding: 10px; }
+.rule_1717 { color: #0006b5; margin: 1717px; padding: 10px; }
+.rule_1718 { color: #0006b6; margin: 1718px; padding: 10px; }
+.rule_1719 { color: #0006b7; margin: 1719px; padding: 10px; }
+.rule_1720 { color: #0006b8; margin: 1720px; padding: 10px; }
+.rule_1721 { color: #0006b9; margin: 1721px; padding: 10px; }
+.rule_1722 { color: #0006ba; margin: 1722px; padding: 10px; }
+.rule_1723 { color: #0006bb; margin: 1723px; padding: 10px; }
+.rule_1724 { color: #0006bc; margin: 1724px; padding: 10px; }
+.rule_1725 { color: #0006bd; margin: 1725px; padding: 10px; }
+.rule_1726 { color: #0006be; margin: 1726px; padding: 10px; }
+.rule_1727 { color: #0006bf; margin: 1727px; padding: 10px; }
+.rule_1728 { color: #0006c0; margin: 1728px; padding: 10px; }
+.rule_1729 { color: #0006c1; margin: 1729px; padding: 10px; }
+.rule_1730 { color: #0006c2; margin: 1730px; padding: 10px; }
+.rule_1731 { color: #0006c3; margin: 1731px; padding: 10px; }
+.rule_1732 { color: #0006c4; margin: 1732px; padding: 10px; }
+.rule_1733 { color: #0006c5; margin: 1733px; padding: 10px; }
+.rule_1734 { color: #0006c6; margin: 1734px; padding: 10px; }
+.rule_1735 { color: #0006c7; margin: 1735px; padding: 10px; }
+.rule_1736 { color: #0006c8; margin: 1736px; padding: 10px; }
+.rule_1737 { color: #0006c9; margin: 1737px; padding: 10px; }
+.rule_1738 { color: #0006ca; margin: 1738px; padding: 10px; }
+.rule_1739 { color: #0006cb; margin: 1739px; padding: 10px; }
+.rule_1740 { color: #0006cc; margin: 1740px; padding: 10px; }
+.rule_1741 { color: #0006cd; margin: 1741px; padding: 10px; }
+.rule_1742 { color: #0006ce; margin: 1742px; padding: 10px; }
+.rule_1743 { color: #0006cf; margin: 1743px; padding: 10px; }
+.rule_1744 { color: #0006d0; margin: 1744px; padding: 10px; }
+.rule_1745 { color: #0006d1; margin: 1745px; padding: 10px; }
+.rule_1746 { color: #0006d2; margin: 1746px; padding: 10px; }
+.rule_1747 { color: #0006d3; margin: 1747px; padding: 10px; }
+.rule_1748 { color: #0006d4; margin: 1748px; padding: 10px; }
+.rule_1749 { color: #0006d5; margin: 1749px; padding: 10px; }
+.rule_1750 { color: #0006d6; margin: 1750px; padding: 10px; }
+.rule_1751 { color: #0006d7; margin: 1751px; padding: 10px; }
+.rule_1752 { color: #0006d8; margin: 1752px; padding: 10px; }
+.rule_1753 { color: #0006d9; margin: 1753px; padding: 10px; }
+.rule_1754 { color: #0006da; margin: 1754px; padding: 10px; }
+.rule_1755 { color: #0006db; margin: 1755px; padding: 10px; }
+.rule_1756 { color: #0006dc; margin: 1756px; padding: 10px; }
+.rule_1757 { color: #0006dd; margin: 1757px; padding: 10px; }
+.rule_1758 { color: #0006de; margin: 1758px; padding: 10px; }
+.rule_1759 { color: #0006df; margin: 1759px; padding: 10px; }
+.rule_1760 { color: #0006e0; margin: 1760px; padding: 10px; }
+.rule_1761 { color: #0006e1; margin: 1761px; padding: 10px; }
+.rule_1762 { color: #0006e2; margin: 1762px; padding: 10px; }
+.rule_1763 { color: #0006e3; margin: 1763px; padding: 10px; }
+.rule_1764 { color: #0006e4; margin: 1764px; padding: 10px; }
+.rule_1765 { color: #0006e5; margin: 1765px; padding: 10px; }
+.rule_1766 { color: #0006e6; margin: 1766px; padding: 10px; }
+.rule_1767 { color: #0006e7; margin: 1767px; padding: 10px; }
+.rule_1768 { color: #0006e8; margin: 1768px; padding: 10px; }
+.rule_1769 { color: #0006e9; margin: 1769px; padding: 10px; }
+.rule_1770 { color: #0006ea; margin: 1770px; padding: 10px; }
+.rule_1771 { color: #0006eb; margin: 1771px; padding: 10px; }
+.rule_1772 { color: #0006ec; margin: 1772px; padding: 10px; }
+.rule_1773 { color: #0006ed; margin: 1773px; padding: 10px; }
+.rule_1774 { color: #0006ee; margin: 1774px; padding: 10px; }
+.rule_1775 { color: #0006ef; margin: 1775px; padding: 10px; }
+.rule_1776 { color: #0006f0; margin: 1776px; padding: 10px; }
+.rule_1777 { color: #0006f1; margin: 1777px; padding: 10px; }
+.rule_1778 { color: #0006f2; margin: 1778px; padding: 10px; }
+.rule_1779 { color: #0006f3; margin: 1779px; padding: 10px; }
+.rule_1780 { color: #0006f4; margin: 1780px; padding: 10px; }
+.rule_1781 { color: #0006f5; margin: 1781px; padding: 10px; }
+.rule_1782 { color: #0006f6; margin: 1782px; padding: 10px; }
+.rule_1783 { color: #0006f7; margin: 1783px; padding: 10px; }
+.rule_1784 { color: #0006f8; margin: 1784px; padding: 10px; }
+.rule_1785 { color: #0006f9; margin: 1785px; padding: 10px; }
+.rule_1786 { color: #0006fa; margin: 1786px; padding: 10px; }
+.rule_1787 { color: #0006fb; margin: 1787px; padding: 10px; }
+.rule_1788 { color: #0006fc; margin: 1788px; padding: 10px; }
+.rule_1789 { color: #0006fd; margin: 1789px; padding: 10px; }
+.rule_1790 { color: #0006fe; margin: 1790px; padding: 10px; }
+.rule_1791 { color: #0006ff; margin: 1791px; padding: 10px; }
+.rule_1792 { color: #000700; margin: 1792px; padding: 10px; }
+.rule_1793 { color: #000701; margin: 1793px; padding: 10px; }
+.rule_1794 { color: #000702; margin: 1794px; padding: 10px; }
+.rule_1795 { color: #000703; margin: 1795px; padding: 10px; }
+.rule_1796 { color: #000704; margin: 1796px; padding: 10px; }
+.rule_1797 { color: #000705; margin: 1797px; padding: 10px; }
+.rule_1798 { color: #000706; margin: 1798px; padding: 10px; }
+.rule_1799 { color: #000707; margin: 1799px; padding: 10px; }
+.rule_1800 { color: #000708; margin: 1800px; padding: 10px; }
+.rule_1801 { color: #000709; margin: 1801px; padding: 10px; }
+.rule_1802 { color: #00070a; margin: 1802px; padding: 10px; }
+.rule_1803 { color: #00070b; margin: 1803px; padding: 10px; }
+.rule_1804 { color: #00070c; margin: 1804px; padding: 10px; }
+.rule_1805 { color: #00070d; margin: 1805px; padding: 10px; }
+.rule_1806 { color: #00070e; margin: 1806px; padding: 10px; }
+.rule_1807 { color: #00070f; margin: 1807px; padding: 10px; }
+.rule_1808 { color: #000710; margin: 1808px; padding: 10px; }
+.rule_1809 { color: #000711; margin: 1809px; padding: 10px; }
+.rule_1810 { color: #000712; margin: 1810px; padding: 10px; }
+.rule_1811 { color: #000713; margin: 1811px; padding: 10px; }
+.rule_1812 { color: #000714; margin: 1812px; padding: 10px; }
+.rule_1813 { color: #000715; margin: 1813px; padding: 10px; }
+.rule_1814 { color: #000716; margin: 1814px; padding: 10px; }
+.rule_1815 { color: #000717; margin: 1815px; padding: 10px; }
+.rule_1816 { color: #000718; margin: 1816px; padding: 10px; }
+.rule_1817 { color: #000719; margin: 1817px; padding: 10px; }
+.rule_1818 { color: #00071a; margin: 1818px; padding: 10px; }
+.rule_1819 { color: #00071b; margin: 1819px; padding: 10px; }
+.rule_1820 { color: #00071c; margin: 1820px; padding: 10px; }
+.rule_1821 { color: #00071d; margin: 1821px; padding: 10px; }
+.rule_1822 { color: #00071e; margin: 1822px; padding: 10px; }
+.rule_1823 { color: #00071f; margin: 1823px; padding: 10px; }
+.rule_1824 { color: #000720; margin: 1824px; padding: 10px; }
+.rule_1825 { color: #000721; margin: 1825px; padding: 10px; }
+.rule_1826 { color: #000722; margin: 1826px; padding: 10px; }
+.rule_1827 { color: #000723; margin: 1827px; padding: 10px; }
+.rule_1828 { color: #000724; margin: 1828px; padding: 10px; }
+.rule_1829 { color: #000725; margin: 1829px; padding: 10px; }
+.rule_1830 { color: #000726; margin: 1830px; padding: 10px; }
+.rule_1831 { color: #000727; margin: 1831px; padding: 10px; }
+.rule_1832 { color: #000728; margin: 1832px; padding: 10px; }
+.rule_1833 { color: #000729; margin: 1833px; padding: 10px; }
+.rule_1834 { color: #00072a; margin: 1834px; padding: 10px; }
+.rule_1835 { color: #00072b; margin: 1835px; padding: 10px; }
+.rule_1836 { color: #00072c; margin: 1836px; padding: 10px; }
+.rule_1837 { color: #00072d; margin: 1837px; padding: 10px; }
+.rule_1838 { color: #00072e; margin: 1838px; padding: 10px; }
+.rule_1839 { color: #00072f; margin: 1839px; padding: 10px; }
+.rule_1840 { color: #000730; margin: 1840px; padding: 10px; }
+.rule_1841 { color: #000731; margin: 1841px; padding: 10px; }
+.rule_1842 { color: #000732; margin: 1842px; padding: 10px; }
+.rule_1843 { color: #000733; margin: 1843px; padding: 10px; }
+.rule_1844 { color: #000734; margin: 1844px; padding: 10px; }
+.rule_1845 { color: #000735; margin: 1845px; padding: 10px; }
+.rule_1846 { color: #000736; margin: 1846px; padding: 10px; }
+.rule_1847 { color: #000737; margin: 1847px; padding: 10px; }
+.rule_1848 { color: #000738; margin: 1848px; padding: 10px; }
+.rule_1849 { color: #000739; margin: 1849px; padding: 10px; }
+.rule_1850 { color: #00073a; margin: 1850px; padding: 10px; }
+.rule_1851 { color: #00073b; margin: 1851px; padding: 10px; }
+.rule_1852 { color: #00073c; margin: 1852px; padding: 10px; }
+.rule_1853 { color: #00073d; margin: 1853px; padding: 10px; }
+.rule_1854 { color: #00073e; margin: 1854px; padding: 10px; }
+.rule_1855 { color: #00073f; margin: 1855px; padding: 10px; }
+.rule_1856 { color: #000740; margin: 1856px; padding: 10px; }
+.rule_1857 { color: #000741; margin: 1857px; padding: 10px; }
+.rule_1858 { color: #000742; margin: 1858px; padding: 10px; }
+.rule_1859 { color: #000743; margin: 1859px; padding: 10px; }
+.rule_1860 { color: #000744; margin: 1860px; padding: 10px; }
+.rule_1861 { color: #000745; margin: 1861px; padding: 10px; }
+.rule_1862 { color: #000746; margin: 1862px; padding: 10px; }
+.rule_1863 { color: #000747; margin: 1863px; padding: 10px; }
+.rule_1864 { color: #000748; margin: 1864px; padding: 10px; }
+.rule_1865 { color: #000749; margin: 1865px; padding: 10px; }
+.rule_1866 { color: #00074a; margin: 1866px; padding: 10px; }
+.rule_1867 { color: #00074b; margin: 1867px; padding: 10px; }
+.rule_1868 { color: #00074c; margin: 1868px; padding: 10px; }
+.rule_1869 { color: #00074d; margin: 1869px; padding: 10px; }
+.rule_1870 { color: #00074e; margin: 1870px; padding: 10px; }
+.rule_1871 { color: #00074f; margin: 1871px; padding: 10px; }
+.rule_1872 { color: #000750; margin: 1872px; padding: 10px; }
+.rule_1873 { color: #000751; margin: 1873px; padding: 10px; }
+.rule_1874 { color: #000752; margin: 1874px; padding: 10px; }
+.rule_1875 { color: #000753; margin: 1875px; padding: 10px; }
+.rule_1876 { color: #000754; margin: 1876px; padding: 10px; }
+.rule_1877 { color: #000755; margin: 1877px; padding: 10px; }
+.rule_1878 { color: #000756; margin: 1878px; padding: 10px; }
+.rule_1879 { color: #000757; margin: 1879px; padding: 10px; }
+.rule_1880 { color: #000758; margin: 1880px; padding: 10px; }
+.rule_1881 { color: #000759; margin: 1881px; padding: 10px; }
+.rule_1882 { color: #00075a; margin: 1882px; padding: 10px; }
+.rule_1883 { color: #00075b; margin: 1883px; padding: 10px; }
+.rule_1884 { color: #00075c; margin: 1884px; padding: 10px; }
+.rule_1885 { color: #00075d; margin: 1885px; padding: 10px; }
+.rule_1886 { color: #00075e; margin: 1886px; padding: 10px; }
+.rule_1887 { color: #00075f; margin: 1887px; padding: 10px; }
+.rule_1888 { color: #000760; margin: 1888px; padding: 10px; }
+.rule_1889 { color: #000761; margin: 1889px; padding: 10px; }
+.rule_1890 { color: #000762; margin: 1890px; padding: 10px; }
+.rule_1891 { color: #000763; margin: 1891px; padding: 10px; }
+.rule_1892 { color: #000764; margin: 1892px; padding: 10px; }
+.rule_1893 { color: #000765; margin: 1893px; padding: 10px; }
+.rule_1894 { color: #000766; margin: 1894px; padding: 10px; }
+.rule_1895 { color: #000767; margin: 1895px; padding: 10px; }
+.rule_1896 { color: #000768; margin: 1896px; padding: 10px; }
+.rule_1897 { color: #000769; margin: 1897px; padding: 10px; }
+.rule_1898 { color: #00076a; margin: 1898px; padding: 10px; }
+.rule_1899 { color: #00076b; margin: 1899px; padding: 10px; }
+.rule_1900 { color: #00076c; margin: 1900px; padding: 10px; }
+.rule_1901 { color: #00076d; margin: 1901px; padding: 10px; }
+.rule_1902 { color: #00076e; margin: 1902px; padding: 10px; }
+.rule_1903 { color: #00076f; margin: 1903px; padding: 10px; }
+.rule_1904 { color: #000770; margin: 1904px; padding: 10px; }
+.rule_1905 { color: #000771; margin: 1905px; padding: 10px; }
+.rule_1906 { color: #000772; margin: 1906px; padding: 10px; }
+.rule_1907 { color: #000773; margin: 1907px; padding: 10px; }
+.rule_1908 { color: #000774; margin: 1908px; padding: 10px; }
+.rule_1909 { color: #000775; margin: 1909px; padding: 10px; }
+.rule_1910 { color: #000776; margin: 1910px; padding: 10px; }
+.rule_1911 { color: #000777; margin: 1911px; padding: 10px; }
+.rule_1912 { color: #000778; margin: 1912px; padding: 10px; }
+.rule_1913 { color: #000779; margin: 1913px; padding: 10px; }
+.rule_1914 { color: #00077a; margin: 1914px; padding: 10px; }
+.rule_1915 { color: #00077b; margin: 1915px; padding: 10px; }
+.rule_1916 { color: #00077c; margin: 1916px; padding: 10px; }
+.rule_1917 { color: #00077d; margin: 1917px; padding: 10px; }
+.rule_1918 { color: #00077e; margin: 1918px; padding: 10px; }
+.rule_1919 { color: #00077f; margin: 1919px; padding: 10px; }
+.rule_1920 { color: #000780; margin: 1920px; padding: 10px; }
+.rule_1921 { color: #000781; margin: 1921px; padding: 10px; }
+.rule_1922 { color: #000782; margin: 1922px; padding: 10px; }
+.rule_1923 { color: #000783; margin: 1923px; padding: 10px; }
+.rule_1924 { color: #000784; margin: 1924px; padding: 10px; }
+.rule_1925 { color: #000785; margin: 1925px; padding: 10px; }
+.rule_1926 { color: #000786; margin: 1926px; padding: 10px; }
+.rule_1927 { color: #000787; margin: 1927px; padding: 10px; }
+.rule_1928 { color: #000788; margin: 1928px; padding: 10px; }
+.rule_1929 { color: #000789; margin: 1929px; padding: 10px; }
+.rule_1930 { color: #00078a; margin: 1930px; padding: 10px; }
+.rule_1931 { color: #00078b; margin: 1931px; padding: 10px; }
+.rule_1932 { color: #00078c; margin: 1932px; padding: 10px; }
+.rule_1933 { color: #00078d; margin: 1933px; padding: 10px; }
+.rule_1934 { color: #00078e; margin: 1934px; padding: 10px; }
+.rule_1935 { color: #00078f; margin: 1935px; padding: 10px; }
+.rule_1936 { color: #000790; margin: 1936px; padding: 10px; }
+.rule_1937 { color: #000791; margin: 1937px; padding: 10px; }
+.rule_1938 { color: #000792; margin: 1938px; padding: 10px; }
+.rule_1939 { color: #000793; margin: 1939px; padding: 10px; }
+.rule_1940 { color: #000794; margin: 1940px; padding: 10px; }
+.rule_1941 { color: #000795; margin: 1941px; padding: 10px; }
+.rule_1942 { color: #000796; margin: 1942px; padding: 10px; }
+.rule_1943 { color: #000797; margin: 1943px; padding: 10px; }
+.rule_1944 { color: #000798; margin: 1944px; padding: 10px; }
+.rule_1945 { color: #000799; margin: 1945px; padding: 10px; }
+.rule_1946 { color: #00079a; margin: 1946px; padding: 10px; }
+.rule_1947 { color: #00079b; margin: 1947px; padding: 10px; }
+.rule_1948 { color: #00079c; margin: 1948px; padding: 10px; }
+.rule_1949 { color: #00079d; margin: 1949px; padding: 10px; }
+.rule_1950 { color: #00079e; margin: 1950px; padding: 10px; }
+.rule_1951 { color: #00079f; margin: 1951px; padding: 10px; }
+.rule_1952 { color: #0007a0; margin: 1952px; padding: 10px; }
+.rule_1953 { color: #0007a1; margin: 1953px; padding: 10px; }
+.rule_1954 { color: #0007a2; margin: 1954px; padding: 10px; }
+.rule_1955 { color: #0007a3; margin: 1955px; padding: 10px; }
+.rule_1956 { color: #0007a4; margin: 1956px; padding: 10px; }
+.rule_1957 { color: #0007a5; margin: 1957px; padding: 10px; }
+.rule_1958 { color: #0007a6; margin: 1958px; padding: 10px; }
+.rule_1959 { color: #0007a7; margin: 1959px; padding: 10px; }
+.rule_1960 { color: #0007a8; margin: 1960px; padding: 10px; }
+.rule_1961 { color: #0007a9; margin: 1961px; padding: 10px; }
+.rule_1962 { color: #0007aa; margin: 1962px; padding: 10px; }
+.rule_1963 { color: #0007ab; margin: 1963px; padding: 10px; }
+.rule_1964 { color: #0007ac; margin: 1964px; padding: 10px; }
+.rule_1965 { color: #0007ad; margin: 1965px; padding: 10px; }
+.rule_1966 { color: #0007ae; margin: 1966px; padding: 10px; }
+.rule_1967 { color: #0007af; margin: 1967px; padding: 10px; }
+.rule_1968 { color: #0007b0; margin: 1968px; padding: 10px; }
+.rule_1969 { color: #0007b1; margin: 1969px; padding: 10px; }
+.rule_1970 { color: #0007b2; margin: 1970px; padding: 10px; }
+.rule_1971 { color: #0007b3; margin: 1971px; padding: 10px; }
+.rule_1972 { color: #0007b4; margin: 1972px; padding: 10px; }
+.rule_1973 { color: #0007b5; margin: 1973px; padding: 10px; }
+.rule_1974 { color: #0007b6; margin: 1974px; padding: 10px; }
+.rule_1975 { color: #0007b7; margin: 1975px; padding: 10px; }
+.rule_1976 { color: #0007b8; margin: 1976px; padding: 10px; }
+.rule_1977 { color: #0007b9; margin: 1977px; padding: 10px; }
+.rule_1978 { color: #0007ba; margin: 1978px; padding: 10px; }
+.rule_1979 { color: #0007bb; margin: 1979px; padding: 10px; }
+.rule_1980 { color: #0007bc; margin: 1980px; padding: 10px; }
+.rule_1981 { color: #0007bd; margin: 1981px; padding: 10px; }
+.rule_1982 { color: #0007be; margin: 1982px; padding: 10px; }
+.rule_1983 { color: #0007bf; margin: 1983px; padding: 10px; }
+.rule_1984 { color: #0007c0; margin: 1984px; padding: 10px; }
+.rule_1985 { color: #0007c1; margin: 1985px; padding: 10px; }
+.rule_1986 { color: #0007c2; margin: 1986px; padding: 10px; }
+.rule_1987 { color: #0007c3; margin: 1987px; padding: 10px; }
+.rule_1988 { color: #0007c4; margin: 1988px; padding: 10px; }
+.rule_1989 { color: #0007c5; margin: 1989px; padding: 10px; }
+.rule_1990 { color: #0007c6; margin: 1990px; padding: 10px; }
+.rule_1991 { color: #0007c7; margin: 1991px; padding: 10px; }
+.rule_1992 { color: #0007c8; margin: 1992px; padding: 10px; }
+.rule_1993 { color: #0007c9; margin: 1993px; padding: 10px; }
+.rule_1994 { color: #0007ca; margin: 1994px; padding: 10px; }
+.rule_1995 { color: #0007cb; margin: 1995px; padding: 10px; }
+.rule_1996 { color: #0007cc; margin: 1996px; padding: 10px; }
+.rule_1997 { color: #0007cd; margin: 1997px; padding: 10px; }
+.rule_1998 { color: #0007ce; margin: 1998px; padding: 10px; }
+.rule_1999 { color: #0007cf; margin: 1999px; padding: 10px; }
+.rule_2000 { color: #0007d0; margin: 2000px; padding: 10px; }
+.rule_2001 { color: #0007d1; margin: 2001px; padding: 10px; }
+.rule_2002 { color: #0007d2; margin: 2002px; padding: 10px; }
+.rule_2003 { color: #0007d3; margin: 2003px; padding: 10px; }
+.rule_2004 { color: #0007d4; margin: 2004px; padding: 10px; }
+.rule_2005 { color: #0007d5; margin: 2005px; padding: 10px; }
+.rule_2006 { color: #0007d6; margin: 2006px; padding: 10px; }
+.rule_2007 { color: #0007d7; margin: 2007px; padding: 10px; }
+.rule_2008 { color: #0007d8; margin: 2008px; padding: 10px; }
+.rule_2009 { color: #0007d9; margin: 2009px; padding: 10px; }
+.rule_2010 { color: #0007da; margin: 2010px; padding: 10px; }
+.rule_2011 { color: #0007db; margin: 2011px; padding: 10px; }
+.rule_2012 { color: #0007dc; margin: 2012px; padding: 10px; }
+.rule_2013 { color: #0007dd; margin: 2013px; padding: 10px; }
+.rule_2014 { color: #0007de; margin: 2014px; padding: 10px; }
+.rule_2015 { color: #0007df; margin: 2015px; padding: 10px; }
+.rule_2016 { color: #0007e0; margin: 2016px; padding: 10px; }
+.rule_2017 { color: #0007e1; margin: 2017px; padding: 10px; }
+.rule_2018 { color: #0007e2; margin: 2018px; padding: 10px; }
+.rule_2019 { color: #0007e3; margin: 2019px; padding: 10px; }
+.rule_2020 { color: #0007e4; margin: 2020px; padding: 10px; }
+.rule_2021 { color: #0007e5; margin: 2021px; padding: 10px; }
+.rule_2022 { color: #0007e6; margin: 2022px; padding: 10px; }
+.rule_2023 { color: #0007e7; margin: 2023px; padding: 10px; }
+.rule_2024 { color: #0007e8; margin: 2024px; padding: 10px; }
+.rule_2025 { color: #0007e9; margin: 2025px; padding: 10px; }
+.rule_2026 { color: #0007ea; margin: 2026px; padding: 10px; }
+.rule_2027 { color: #0007eb; margin: 2027px; padding: 10px; }
+.rule_2028 { color: #0007ec; margin: 2028px; padding: 10px; }
+.rule_2029 { color: #0007ed; margin: 2029px; padding: 10px; }
+.rule_2030 { color: #0007ee; margin: 2030px; padding: 10px; }
+.rule_2031 { color: #0007ef; margin: 2031px; padding: 10px; }
+.rule_2032 { color: #0007f0; margin: 2032px; padding: 10px; }
+.rule_2033 { color: #0007f1; margin: 2033px; padding: 10px; }
+.rule_2034 { color: #0007f2; margin: 2034px; padding: 10px; }
+.rule_2035 { color: #0007f3; margin: 2035px; padding: 10px; }
+.rule_2036 { color: #0007f4; margin: 2036px; padding: 10px; }
+.rule_2037 { color: #0007f5; margin: 2037px; padding: 10px; }
+.rule_2038 { color: #0007f6; margin: 2038px; padding: 10px; }
+.rule_2039 { color: #0007f7; margin: 2039px; padding: 10px; }
+.rule_2040 { color: #0007f8; margin: 2040px; padding: 10px; }
+.rule_2041 { color: #0007f9; margin: 2041px; padding: 10px; }
+.rule_2042 { color: #0007fa; margin: 2042px; padding: 10px; }
+.rule_2043 { color: #0007fb; margin: 2043px; padding: 10px; }
+.rule_2044 { color: #0007fc; margin: 2044px; padding: 10px; }
+.rule_2045 { color: #0007fd; margin: 2045px; padding: 10px; }
+.rule_2046 { color: #0007fe; margin: 2046px; padding: 10px; }
+.rule_2047 { color: #0007ff; margin: 2047px; padding: 10px; }
+.rule_2048 { color: #000800; margin: 2048px; padding: 10px; }
+.rule_2049 { color: #000801; margin: 2049px; padding: 10px; }
+.rule_2050 { color: #000802; margin: 2050px; padding: 10px; }
+.rule_2051 { color: #000803; margin: 2051px; padding: 10px; }
+.rule_2052 { color: #000804; margin: 2052px; padding: 10px; }
+.rule_2053 { color: #000805; margin: 2053px; padding: 10px; }
+.rule_2054 { color: #000806; margin: 2054px; padding: 10px; }
+.rule_2055 { color: #000807; margin: 2055px; padding: 10px; }
+.rule_2056 { color: #000808; margin: 2056px; padding: 10px; }
+.rule_2057 { color: #000809; margin: 2057px; padding: 10px; }
+.rule_2058 { color: #00080a; margin: 2058px; padding: 10px; }
+.rule_2059 { color: #00080b; margin: 2059px; padding: 10px; }
+.rule_2060 { color: #00080c; margin: 2060px; padding: 10px; }
+.rule_2061 { color: #00080d; margin: 2061px; padding: 10px; }
+.rule_2062 { color: #00080e; margin: 2062px; padding: 10px; }
+.rule_2063 { color: #00080f; margin: 2063px; padding: 10px; }
+.rule_2064 { color: #000810; margin: 2064px; padding: 10px; }
+.rule_2065 { color: #000811; margin: 2065px; padding: 10px; }
+.rule_2066 { color: #000812; margin: 2066px; padding: 10px; }
+.rule_2067 { color: #000813; margin: 2067px; padding: 10px; }
+.rule_2068 { color: #000814; margin: 2068px; padding: 10px; }
+.rule_2069 { color: #000815; margin: 2069px; padding: 10px; }
+.rule_2070 { color: #000816; margin: 2070px; padding: 10px; }
+.rule_2071 { color: #000817; margin: 2071px; padding: 10px; }
+.rule_2072 { color: #000818; margin: 2072px; padding: 10px; }
+.rule_2073 { color: #000819; margin: 2073px; padding: 10px; }
+.rule_2074 { color: #00081a; margin: 2074px; padding: 10px; }
+.rule_2075 { color: #00081b; margin: 2075px; padding: 10px; }
+.rule_2076 { color: #00081c; margin: 2076px; padding: 10px; }
+.rule_2077 { color: #00081d; margin: 2077px; padding: 10px; }
+.rule_2078 { color: #00081e; margin: 2078px; padding: 10px; }
+.rule_2079 { color: #00081f; margin: 2079px; padding: 10px; }
+.rule_2080 { color: #000820; margin: 2080px; padding: 10px; }
+.rule_2081 { color: #000821; margin: 2081px; padding: 10px; }
+.rule_2082 { color: #000822; margin: 2082px; padding: 10px; }
+.rule_2083 { color: #000823; margin: 2083px; padding: 10px; }
+.rule_2084 { color: #000824; margin: 2084px; padding: 10px; }
+.rule_2085 { color: #000825; margin: 2085px; padding: 10px; }
+.rule_2086 { color: #000826; margin: 2086px; padding: 10px; }
+.rule_2087 { color: #000827; margin: 2087px; padding: 10px; }
+.rule_2088 { color: #000828; margin: 2088px; padding: 10px; }
+.rule_2089 { color: #000829; margin: 2089px; padding: 10px; }
+.rule_2090 { color: #00082a; margin: 2090px; padding: 10px; }
+.rule_2091 { color: #00082b; margin: 2091px; padding: 10px; }
+.rule_2092 { color: #00082c; margin: 2092px; padding: 10px; }
+.rule_2093 { color: #00082d; margin: 2093px; padding: 10px; }
+.rule_2094 { color: #00082e; margin: 2094px; padding: 10px; }
+.rule_2095 { color: #00082f; margin: 2095px; padding: 10px; }
+.rule_2096 { color: #000830; margin: 2096px; padding: 10px; }
+.rule_2097 { color: #000831; margin: 2097px; padding: 10px; }
+.rule_2098 { color: #000832; margin: 2098px; padding: 10px; }
+.rule_2099 { color: #000833; margin: 2099px; padding: 10px; }
+.rule_2100 { color: #000834; margin: 2100px; padding: 10px; }
+.rule_2101 { color: #000835; margin: 2101px; padding: 10px; }
+.rule_2102 { color: #000836; margin: 2102px; padding: 10px; }
+.rule_2103 { color: #000837; margin: 2103px; padding: 10px; }
+.rule_2104 { color: #000838; margin: 2104px; padding: 10px; }
+.rule_2105 { color: #000839; margin: 2105px; padding: 10px; }
+.rule_2106 { color: #00083a; margin: 2106px; padding: 10px; }
+.rule_2107 { color: #00083b; margin: 2107px; padding: 10px; }
+.rule_2108 { color: #00083c; margin: 2108px; padding: 10px; }
+.rule_2109 { color: #00083d; margin: 2109px; padding: 10px; }
+.rule_2110 { color: #00083e; margin: 2110px; padding: 10px; }
+.rule_2111 { color: #00083f; margin: 2111px; padding: 10px; }
+.rule_2112 { color: #000840; margin: 2112px; padding: 10px; }
+.rule_2113 { color: #000841; margin: 2113px; padding: 10px; }
+.rule_2114 { color: #000842; margin: 2114px; padding: 10px; }
+.rule_2115 { color: #000843; margin: 2115px; padding: 10px; }
+.rule_2116 { color: #000844; margin: 2116px; padding: 10px; }
+.rule_2117 { color: #000845; margin: 2117px; padding: 10px; }
+.rule_2118 { color: #000846; margin: 2118px; padding: 10px; }
+.rule_2119 { color: #000847; margin: 2119px; padding: 10px; }
+.rule_2120 { color: #000848; margin: 2120px; padding: 10px; }
+.rule_2121 { color: #000849; margin: 2121px; padding: 10px; }
+.rule_2122 { color: #00084a; margin: 2122px; padding: 10px; }
+.rule_2123 { color: #00084b; margin: 2123px; padding: 10px; }
+.rule_2124 { color: #00084c; margin: 2124px; padding: 10px; }
+.rule_2125 { color: #00084d; margin: 2125px; padding: 10px; }
+.rule_2126 { color: #00084e; margin: 2126px; padding: 10px; }
+.rule_2127 { color: #00084f; margin: 2127px; padding: 10px; }
+.rule_2128 { color: #000850; margin: 2128px; padding: 10px; }
+.rule_2129 { color: #000851; margin: 2129px; padding: 10px; }
+.rule_2130 { color: #000852; margin: 2130px; padding: 10px; }
+.rule_2131 { color: #000853; margin: 2131px; padding: 10px; }
+.rule_2132 { color: #000854; margin: 2132px; padding: 10px; }
+.rule_2133 { color: #000855; margin: 2133px; padding: 10px; }
+.rule_2134 { color: #000856; margin: 2134px; padding: 10px; }
+.rule_2135 { color: #000857; margin: 2135px; padding: 10px; }
+.rule_2136 { color: #000858; margin: 2136px; padding: 10px; }
+.rule_2137 { color: #000859; margin: 2137px; padding: 10px; }
+.rule_2138 { color: #00085a; margin: 2138px; padding: 10px; }
+.rule_2139 { color: #00085b; margin: 2139px; padding: 10px; }
+.rule_2140 { color: #00085c; margin: 2140px; padding: 10px; }
+.rule_2141 { color: #00085d; margin: 2141px; padding: 10px; }
+.rule_2142 { color: #00085e; margin: 2142px; padding: 10px; }
+.rule_2143 { color: #00085f; margin: 2143px; padding: 10px; }
+.rule_2144 { color: #000860; margin: 2144px; padding: 10px; }
+.rule_2145 { color: #000861; margin: 2145px; padding: 10px; }
+.rule_2146 { color: #000862; margin: 2146px; padding: 10px; }
+.rule_2147 { color: #000863; margin: 2147px; padding: 10px; }
+.rule_2148 { color: #000864; margin: 2148px; padding: 10px; }
+.rule_2149 { color: #000865; margin: 2149px; padding: 10px; }
+.rule_2150 { color: #000866; margin: 2150px; padding: 10px; }
+.rule_2151 { color: #000867; margin: 2151px; padding: 10px; }
+.rule_2152 { color: #000868; margin: 2152px; padding: 10px; }
+.rule_2153 { color: #000869; margin: 2153px; padding: 10px; }
+.rule_2154 { color: #00086a; margin: 2154px; padding: 10px; }
+.rule_2155 { color: #00086b; margin: 2155px; padding: 10px; }
+.rule_2156 { color: #00086c; margin: 2156px; padding: 10px; }
+.rule_2157 { color: #00086d; margin: 2157px; padding: 10px; }
+.rule_2158 { color: #00086e; margin: 2158px; padding: 10px; }
+.rule_2159 { color: #00086f; margin: 2159px; padding: 10px; }
+.rule_2160 { color: #000870; margin: 2160px; padding: 10px; }
+.rule_2161 { color: #000871; margin: 2161px; padding: 10px; }
+.rule_2162 { color: #000872; margin: 2162px; padding: 10px; }
+.rule_2163 { color: #000873; margin: 2163px; padding: 10px; }
+.rule_2164 { color: #000874; margin: 2164px; padding: 10px; }
+.rule_2165 { color: #000875; margin: 2165px; padding: 10px; }
+.rule_2166 { color: #000876; margin: 2166px; padding: 10px; }
+.rule_2167 { color: #000877; margin: 2167px; padding: 10px; }
+.rule_2168 { color: #000878; margin: 2168px; padding: 10px; }
+.rule_2169 { color: #000879; margin: 2169px; padding: 10px; }
+.rule_2170 { color: #00087a; margin: 2170px; padding: 10px; }
+.rule_2171 { color: #00087b; margin: 2171px; padding: 10px; }
+.rule_2172 { color: #00087c; margin: 2172px; padding: 10px; }
+.rule_2173 { color: #00087d; margin: 2173px; padding: 10px; }
+.rule_2174 { color: #00087e; margin: 2174px; padding: 10px; }
+.rule_2175 { color: #00087f; margin: 2175px; padding: 10px; }
+.rule_2176 { color: #000880; margin: 2176px; padding: 10px; }
+.rule_2177 { color: #000881; margin: 2177px; padding: 10px; }
+.rule_2178 { color: #000882; margin: 2178px; padding: 10px; }
+.rule_2179 { color: #000883; margin: 2179px; padding: 10px; }
+.rule_2180 { color: #000884; margin: 2180px; padding: 10px; }
+.rule_2181 { color: #000885; margin: 2181px; padding: 10px; }
+.rule_2182 { color: #000886; margin: 2182px; padding: 10px; }
+.rule_2183 { color: #000887; margin: 2183px; padding: 10px; }
+.rule_2184 { color: #000888; margin: 2184px; padding: 10px; }
+.rule_2185 { color: #000889; margin: 2185px; padding: 10px; }
+.rule_2186 { color: #00088a; margin: 2186px; padding: 10px; }
+.rule_2187 { color: #00088b; margin: 2187px; padding: 10px; }
+.rule_2188 { color: #00088c; margin: 2188px; padding: 10px; }
+.rule_2189 { color: #00088d; margin: 2189px; padding: 10px; }
+.rule_2190 { color: #00088e; margin: 2190px; padding: 10px; }
+.rule_2191 { color: #00088f; margin: 2191px; padding: 10px; }
+.rule_2192 { color: #000890; margin: 2192px; padding: 10px; }
+.rule_2193 { color: #000891; margin: 2193px; padding: 10px; }
+.rule_2194 { color: #000892; margin: 2194px; padding: 10px; }
+.rule_2195 { color: #000893; margin: 2195px; padding: 10px; }
+.rule_2196 { color: #000894; margin: 2196px; padding: 10px; }
+.rule_2197 { color: #000895; margin: 2197px; padding: 10px; }
+.rule_2198 { color: #000896; margin: 2198px; padding: 10px; }
+.rule_2199 { color: #000897; margin: 2199px; padding: 10px; }
+.rule_2200 { color: #000898; margin: 2200px; padding: 10px; }
+.rule_2201 { color: #000899; margin: 2201px; padding: 10px; }
+.rule_2202 { color: #00089a; margin: 2202px; padding: 10px; }
+.rule_2203 { color: #00089b; margin: 2203px; padding: 10px; }
+.rule_2204 { color: #00089c; margin: 2204px; padding: 10px; }
+.rule_2205 { color: #00089d; margin: 2205px; padding: 10px; }
+.rule_2206 { color: #00089e; margin: 2206px; padding: 10px; }
+.rule_2207 { color: #00089f; margin: 2207px; padding: 10px; }
+.rule_2208 { color: #0008a0; margin: 2208px; padding: 10px; }
+.rule_2209 { color: #0008a1; margin: 2209px; padding: 10px; }
+.rule_2210 { color: #0008a2; margin: 2210px; padding: 10px; }
+.rule_2211 { color: #0008a3; margin: 2211px; padding: 10px; }
+.rule_2212 { color: #0008a4; margin: 2212px; padding: 10px; }
+.rule_2213 { color: #0008a5; margin: 2213px; padding: 10px; }
+.rule_2214 { color: #0008a6; margin: 2214px; padding: 10px; }
+.rule_2215 { color: #0008a7; margin: 2215px; padding: 10px; }
+.rule_2216 { color: #0008a8; margin: 2216px; padding: 10px; }
+.rule_2217 { color: #0008a9; margin: 2217px; padding: 10px; }
+.rule_2218 { color: #0008aa; margin: 2218px; padding: 10px; }
+.rule_2219 { color: #0008ab; margin: 2219px; padding: 10px; }
+.rule_2220 { color: #0008ac; margin: 2220px; padding: 10px; }
+.rule_2221 { color: #0008ad; margin: 2221px; padding: 10px; }
+.rule_2222 { color: #0008ae; margin: 2222px; padding: 10px; }
+.rule_2223 { color: #0008af; margin: 2223px; padding: 10px; }
+.rule_2224 { color: #0008b0; margin: 2224px; padding: 10px; }
+.rule_2225 { color: #0008b1; margin: 2225px; padding: 10px; }
+.rule_2226 { color: #0008b2; margin: 2226px; padding: 10px; }
+.rule_2227 { color: #0008b3; margin: 2227px; padding: 10px; }
+.rule_2228 { color: #0008b4; margin: 2228px; padding: 10px; }
+.rule_2229 { color: #0008b5; margin: 2229px; padding: 10px; }
+.rule_2230 { color: #0008b6; margin: 2230px; padding: 10px; }
+.rule_2231 { color: #0008b7; margin: 2231px; padding: 10px; }
+.rule_2232 { color: #0008b8; margin: 2232px; padding: 10px; }
+.rule_2233 { color: #0008b9; margin: 2233px; padding: 10px; }
+.rule_2234 { color: #0008ba; margin: 2234px; padding: 10px; }
+.rule_2235 { color: #0008bb; margin: 2235px; padding: 10px; }
+.rule_2236 { color: #0008bc; margin: 2236px; padding: 10px; }
+.rule_2237 { color: #0008bd; margin: 2237px; padding: 10px; }
+.rule_2238 { color: #0008be; margin: 2238px; padding: 10px; }
+.rule_2239 { color: #0008bf; margin: 2239px; padding: 10px; }
+.rule_2240 { color: #0008c0; margin: 2240px; padding: 10px; }
+.rule_2241 { color: #0008c1; margin: 2241px; padding: 10px; }
+.rule_2242 { color: #0008c2; margin: 2242px; padding: 10px; }
+.rule_2243 { color: #0008c3; margin: 2243px; padding: 10px; }
+.rule_2244 { color: #0008c4; margin: 2244px; padding: 10px; }
+.rule_2245 { color: #0008c5; margin: 2245px; padding: 10px; }
+.rule_2246 { color: #0008c6; margin: 2246px; padding: 10px; }
+.rule_2247 { color: #0008c7; margin: 2247px; padding: 10px; }
+.rule_2248 { color: #0008c8; margin: 2248px; padding: 10px; }
+.rule_2249 { color: #0008c9; margin: 2249px; padding: 10px; }
+.rule_2250 { color: #0008ca; margin: 2250px; padding: 10px; }
+.rule_2251 { color: #0008cb; margin: 2251px; padding: 10px; }
+.rule_2252 { color: #0008cc; margin: 2252px; padding: 10px; }
+.rule_2253 { color: #0008cd; margin: 2253px; padding: 10px; }
+.rule_2254 { color: #0008ce; margin: 2254px; padding: 10px; }
+.rule_2255 { color: #0008cf; margin: 2255px; padding: 10px; }
+.rule_2256 { color: #0008d0; margin: 2256px; padding: 10px; }
+.rule_2257 { color: #0008d1; margin: 2257px; padding: 10px; }
+.rule_2258 { color: #0008d2; margin: 2258px; padding: 10px; }
+.rule_2259 { color: #0008d3; margin: 2259px; padding: 10px; }
+.rule_2260 { color: #0008d4; margin: 2260px; padding: 10px; }
+.rule_2261 { color: #0008d5; margin: 2261px; padding: 10px; }
+.rule_2262 { color: #0008d6; margin: 2262px; padding: 10px; }
+.rule_2263 { color: #0008d7; margin: 2263px; padding: 10px; }
+.rule_2264 { color: #0008d8; margin: 2264px; padding: 10px; }
+.rule_2265 { color: #0008d9; margin: 2265px; padding: 10px; }
+.rule_2266 { color: #0008da; margin: 2266px; padding: 10px; }
+.rule_2267 { color: #0008db; margin: 2267px; padding: 10px; }
+.rule_2268 { color: #0008dc; margin: 2268px; padding: 10px; }
+.rule_2269 { color: #0008dd; margin: 2269px; padding: 10px; }
+.rule_2270 { color: #0008de; margin: 2270px; padding: 10px; }
+.rule_2271 { color: #0008df; margin: 2271px; padding: 10px; }
+.rule_2272 { color: #0008e0; margin: 2272px; padding: 10px; }
+.rule_2273 { color: #0008e1; margin: 2273px; padding: 10px; }
+.rule_2274 { color: #0008e2; margin: 2274px; padding: 10px; }
+.rule_2275 { color: #0008e3; margin: 2275px; padding: 10px; }
+.rule_2276 { color: #0008e4; margin: 2276px; padding: 10px; }
+.rule_2277 { color: #0008e5; margin: 2277px; padding: 10px; }
+.rule_2278 { color: #0008e6; margin: 2278px; padding: 10px; }
+.rule_2279 { color: #0008e7; margin: 2279px; padding: 10px; }
+.rule_2280 { color: #0008e8; margin: 2280px; padding: 10px; }
+.rule_2281 { color: #0008e9; margin: 2281px; padding: 10px; }
+.rule_2282 { color: #0008ea; margin: 2282px; padding: 10px; }
+.rule_2283 { color: #0008eb; margin: 2283px; padding: 10px; }
+.rule_2284 { color: #0008ec; margin: 2284px; padding: 10px; }
+.rule_2285 { color: #0008ed; margin: 2285px; padding: 10px; }
+.rule_2286 { color: #0008ee; margin: 2286px; padding: 10px; }
+.rule_2287 { color: #0008ef; margin: 2287px; padding: 10px; }
+.rule_2288 { color: #0008f0; margin: 2288px; padding: 10px; }
+.rule_2289 { color: #0008f1; margin: 2289px; padding: 10px; }
+.rule_2290 { color: #0008f2; margin: 2290px; padding: 10px; }
+.rule_2291 { color: #0008f3; margin: 2291px; padding: 10px; }
+.rule_2292 { color: #0008f4; margin: 2292px; padding: 10px; }
+.rule_2293 { color: #0008f5; margin: 2293px; padding: 10px; }
+.rule_2294 { color: #0008f6; margin: 2294px; padding: 10px; }
+.rule_2295 { color: #0008f7; margin: 2295px; padding: 10px; }
+.rule_2296 { color: #0008f8; margin: 2296px; padding: 10px; }
+.rule_2297 { color: #0008f9; margin: 2297px; padding: 10px; }
+.rule_2298 { color: #0008fa; margin: 2298px; padding: 10px; }
+.rule_2299 { color: #0008fb; margin: 2299px; padding: 10px; }
+.rule_2300 { color: #0008fc; margin: 2300px; padding: 10px; }
+.rule_2301 { color: #0008fd; margin: 2301px; padding: 10px; }
+.rule_2302 { color: #0008fe; margin: 2302px; padding: 10px; }
+.rule_2303 { color: #0008ff; margin: 2303px; padding: 10px; }
+.rule_2304 { color: #000900; margin: 2304px; padding: 10px; }
+.rule_2305 { color: #000901; margin: 2305px; padding: 10px; }
+.rule_2306 { color: #000902; margin: 2306px; padding: 10px; }
+.rule_2307 { color: #000903; margin: 2307px; padding: 10px; }
+.rule_2308 { color: #000904; margin: 2308px; padding: 10px; }
+.rule_2309 { color: #000905; margin: 2309px; padding: 10px; }
+.rule_2310 { color: #000906; margin: 2310px; padding: 10px; }
+.rule_2311 { color: #000907; margin: 2311px; padding: 10px; }
+.rule_2312 { color: #000908; margin: 2312px; padding: 10px; }
+.rule_2313 { color: #000909; margin: 2313px; padding: 10px; }
+.rule_2314 { color: #00090a; margin: 2314px; padding: 10px; }
+.rule_2315 { color: #00090b; margin: 2315px; padding: 10px; }
+.rule_2316 { color: #00090c; margin: 2316px; padding: 10px; }
+.rule_2317 { color: #00090d; margin: 2317px; padding: 10px; }
+.rule_2318 { color: #00090e; margin: 2318px; padding: 10px; }
+.rule_2319 { color: #00090f; margin: 2319px; padding: 10px; }
+.rule_2320 { color: #000910; margin: 2320px; padding: 10px; }
+.rule_2321 { color: #000911; margin: 2321px; padding: 10px; }
+.rule_2322 { color: #000912; margin: 2322px; padding: 10px; }
+.rule_2323 { color: #000913; margin: 2323px; padding: 10px; }
+.rule_2324 { color: #000914; margin: 2324px; padding: 10px; }
+.rule_2325 { color: #000915; margin: 2325px; padding: 10px; }
+.rule_2326 { color: #000916; margin: 2326px; padding: 10px; }
+.rule_2327 { color: #000917; margin: 2327px; padding: 10px; }
+.rule_2328 { color: #000918; margin: 2328px; padding: 10px; }
+.rule_2329 { color: #000919; margin: 2329px; padding: 10px; }
+.rule_2330 { color: #00091a; margin: 2330px; padding: 10px; }
+.rule_2331 { color: #00091b; margin: 2331px; padding: 10px; }
+.rule_2332 { color: #00091c; margin: 2332px; padding: 10px; }
+.rule_2333 { color: #00091d; margin: 2333px; padding: 10px; }
+.rule_2334 { color: #00091e; margin: 2334px; padding: 10px; }
+.rule_2335 { color: #00091f; margin: 2335px; padding: 10px; }
+.rule_2336 { color: #000920; margin: 2336px; padding: 10px; }
+.rule_2337 { color: #000921; margin: 2337px; padding: 10px; }
+.rule_2338 { color: #000922; margin: 2338px; padding: 10px; }
+.rule_2339 { color: #000923; margin: 2339px; padding: 10px; }
+.rule_2340 { color: #000924; margin: 2340px; padding: 10px; }
+.rule_2341 { color: #000925; margin: 2341px; padding: 10px; }
+.rule_2342 { color: #000926; margin: 2342px; padding: 10px; }
+.rule_2343 { color: #000927; margin: 2343px; padding: 10px; }
+.rule_2344 { color: #000928; margin: 2344px; padding: 10px; }
+.rule_2345 { color: #000929; margin: 2345px; padding: 10px; }
+.rule_2346 { color: #00092a; margin: 2346px; padding: 10px; }
+.rule_2347 { color: #00092b; margin: 2347px; padding: 10px; }
+.rule_2348 { color: #00092c; margin: 2348px; padding: 10px; }
+.rule_2349 { color: #00092d; margin: 2349px; padding: 10px; }
+.rule_2350 { color: #00092e; margin: 2350px; padding: 10px; }
+.rule_2351 { color: #00092f; margin: 2351px; padding: 10px; }
+.rule_2352 { color: #000930; margin: 2352px; padding: 10px; }
+.rule_2353 { color: #000931; margin: 2353px; padding: 10px; }
+.rule_2354 { color: #000932; margin: 2354px; padding: 10px; }
+.rule_2355 { color: #000933; margin: 2355px; padding: 10px; }
+.rule_2356 { color: #000934; margin: 2356px; padding: 10px; }
+.rule_2357 { color: #000935; margin: 2357px; padding: 10px; }
+.rule_2358 { color: #000936; margin: 2358px; padding: 10px; }
+.rule_2359 { color: #000937; margin: 2359px; padding: 10px; }
+.rule_2360 { color: #000938; margin: 2360px; padding: 10px; }
+.rule_2361 { color: #000939; margin: 2361px; padding: 10px; }
+.rule_2362 { color: #00093a; margin: 2362px; padding: 10px; }
+.rule_2363 { color: #00093b; margin: 2363px; padding: 10px; }
+.rule_2364 { color: #00093c; margin: 2364px; padding: 10px; }
+.rule_2365 { color: #00093d; margin: 2365px; padding: 10px; }
+.rule_2366 { color: #00093e; margin: 2366px; padding: 10px; }
+.rule_2367 { color: #00093f; margin: 2367px; padding: 10px; }
+.rule_2368 { color: #000940; margin: 2368px; padding: 10px; }
+.rule_2369 { color: #000941; margin: 2369px; padding: 10px; }
+.rule_2370 { color: #000942; margin: 2370px; padding: 10px; }
+.rule_2371 { color: #000943; margin: 2371px; padding: 10px; }
+.rule_2372 { color: #000944; margin: 2372px; padding: 10px; }
+.rule_2373 { color: #000945; margin: 2373px; padding: 10px; }
+.rule_2374 { color: #000946; margin: 2374px; padding: 10px; }
+.rule_2375 { color: #000947; margin: 2375px; padding: 10px; }
+.rule_2376 { color: #000948; margin: 2376px; padding: 10px; }
+.rule_2377 { color: #000949; margin: 2377px; padding: 10px; }
+.rule_2378 { color: #00094a; margin: 2378px; padding: 10px; }
+.rule_2379 { color: #00094b; margin: 2379px; padding: 10px; }
+.rule_2380 { color: #00094c; margin: 2380px; padding: 10px; }
+.rule_2381 { color: #00094d; margin: 2381px; padding: 10px; }
+.rule_2382 { color: #00094e; margin: 2382px; padding: 10px; }
+.rule_2383 { color: #00094f; margin: 2383px; padding: 10px; }
+.rule_2384 { color: #000950; margin: 2384px; padding: 10px; }
+.rule_2385 { color: #000951; margin: 2385px; padding: 10px; }
+.rule_2386 { color: #000952; margin: 2386px; padding: 10px; }
+.rule_2387 { color: #000953; margin: 2387px; padding: 10px; }
+.rule_2388 { color: #000954; margin: 2388px; padding: 10px; }
+.rule_2389 { color: #000955; margin: 2389px; padding: 10px; }
+.rule_2390 { color: #000956; margin: 2390px; padding: 10px; }
+.rule_2391 { color: #000957; margin: 2391px; padding: 10px; }
+.rule_2392 { color: #000958; margin: 2392px; padding: 10px; }
+.rule_2393 { color: #000959; margin: 2393px; padding: 10px; }
+.rule_2394 { color: #00095a; margin: 2394px; padding: 10px; }
+.rule_2395 { color: #00095b; margin: 2395px; padding: 10px; }
+.rule_2396 { color: #00095c; margin: 2396px; padding: 10px; }
+.rule_2397 { color: #00095d; margin: 2397px; padding: 10px; }
+.rule_2398 { color: #00095e; margin: 2398px; padding: 10px; }
+.rule_2399 { color: #00095f; margin: 2399px; padding: 10px; }
+.rule_2400 { color: #000960; margin: 2400px; padding: 10px; }
+.rule_2401 { color: #000961; margin: 2401px; padding: 10px; }
+.rule_2402 { color: #000962; margin: 2402px; padding: 10px; }
+.rule_2403 { color: #000963; margin: 2403px; padding: 10px; }
+.rule_2404 { color: #000964; margin: 2404px; padding: 10px; }
+.rule_2405 { color: #000965; margin: 2405px; padding: 10px; }
+.rule_2406 { color: #000966; margin: 2406px; padding: 10px; }
+.rule_2407 { color: #000967; margin: 2407px; padding: 10px; }
+.rule_2408 { color: #000968; margin: 2408px; padding: 10px; }
+.rule_2409 { color: #000969; margin: 2409px; padding: 10px; }
+.rule_2410 { color: #00096a; margin: 2410px; padding: 10px; }
+.rule_2411 { color: #00096b; margin: 2411px; padding: 10px; }
+.rule_2412 { color: #00096c; margin: 2412px; padding: 10px; }
+.rule_2413 { color: #00096d; margin: 2413px; padding: 10px; }
+.rule_2414 { color: #00096e; margin: 2414px; padding: 10px; }
+.rule_2415 { color: #00096f; margin: 2415px; padding: 10px; }
+.rule_2416 { color: #000970; margin: 2416px; padding: 10px; }
+.rule_2417 { color: #000971; margin: 2417px; padding: 10px; }
+.rule_2418 { color: #000972; margin: 2418px; padding: 10px; }
+.rule_2419 { color: #000973; margin: 2419px; padding: 10px; }
+.rule_2420 { color: #000974; margin: 2420px; padding: 10px; }
+.rule_2421 { color: #000975; margin: 2421px; padding: 10px; }
+.rule_2422 { color: #000976; margin: 2422px; padding: 10px; }
+.rule_2423 { color: #000977; margin: 2423px; padding: 10px; }
+.rule_2424 { color: #000978; margin: 2424px; padding: 10px; }
+.rule_2425 { color: #000979; margin: 2425px; padding: 10px; }
+.rule_2426 { color: #00097a; margin: 2426px; padding: 10px; }
+.rule_2427 { color: #00097b; margin: 2427px; padding: 10px; }
+.rule_2428 { color: #00097c; margin: 2428px; padding: 10px; }
+.rule_2429 { color: #00097d; margin: 2429px; padding: 10px; }
+.rule_2430 { color: #00097e; margin: 2430px; padding: 10px; }
+.rule_2431 { color: #00097f; margin: 2431px; padding: 10px; }
+.rule_2432 { color: #000980; margin: 2432px; padding: 10px; }
+.rule_2433 { color: #000981; margin: 2433px; padding: 10px; }
+.rule_2434 { color: #000982; margin: 2434px; padding: 10px; }
+.rule_2435 { color: #000983; margin: 2435px; padding: 10px; }
+.rule_2436 { color: #000984; margin: 2436px; padding: 10px; }
+.rule_2437 { color: #000985; margin: 2437px; padding: 10px; }
+.rule_2438 { color: #000986; margin: 2438px; padding: 10px; }
+.rule_2439 { color: #000987; margin: 2439px; padding: 10px; }
+.rule_2440 { color: #000988; margin: 2440px; padding: 10px; }
+.rule_2441 { color: #000989; margin: 2441px; padding: 10px; }
+.rule_2442 { color: #00098a; margin: 2442px; padding: 10px; }
+.rule_2443 { color: #00098b; margin: 2443px; padding: 10px; }
+.rule_2444 { color: #00098c; margin: 2444px; padding: 10px; }
+.rule_2445 { color: #00098d; margin: 2445px; padding: 10px; }
+.rule_2446 { color: #00098e; margin: 2446px; padding: 10px; }
+.rule_2447 { color: #00098f; margin: 2447px; padding: 10px; }
+.rule_2448 { color: #000990; margin: 2448px; padding: 10px; }
+.rule_2449 { color: #000991; margin: 2449px; padding: 10px; }
+.rule_2450 { color: #000992; margin: 2450px; padding: 10px; }
+.rule_2451 { color: #000993; margin: 2451px; padding: 10px; }
+.rule_2452 { color: #000994; margin: 2452px; padding: 10px; }
+.rule_2453 { color: #000995; margin: 2453px; padding: 10px; }
+.rule_2454 { color: #000996; margin: 2454px; padding: 10px; }
+.rule_2455 { color: #000997; margin: 2455px; padding: 10px; }
+.rule_2456 { color: #000998; margin: 2456px; padding: 10px; }
+.rule_2457 { color: #000999; margin: 2457px; padding: 10px; }
+.rule_2458 { color: #00099a; margin: 2458px; padding: 10px; }
+.rule_2459 { color: #00099b; margin: 2459px; padding: 10px; }
+.rule_2460 { color: #00099c; margin: 2460px; padding: 10px; }
+.rule_2461 { color: #00099d; margin: 2461px; padding: 10px; }
+.rule_2462 { color: #00099e; margin: 2462px; padding: 10px; }
+.rule_2463 { color: #00099f; margin: 2463px; padding: 10px; }
+.rule_2464 { color: #0009a0; margin: 2464px; padding: 10px; }
+.rule_2465 { color: #0009a1; margin: 2465px; padding: 10px; }
+.rule_2466 { color: #0009a2; margin: 2466px; padding: 10px; }
+.rule_2467 { color: #0009a3; margin: 2467px; padding: 10px; }
+.rule_2468 { color: #0009a4; margin: 2468px; padding: 10px; }
+.rule_2469 { color: #0009a5; margin: 2469px; padding: 10px; }
+.rule_2470 { color: #0009a6; margin: 2470px; padding: 10px; }
+.rule_2471 { color: #0009a7; margin: 2471px; padding: 10px; }
+.rule_2472 { color: #0009a8; margin: 2472px; padding: 10px; }
+.rule_2473 { color: #0009a9; margin: 2473px; padding: 10px; }
+.rule_2474 { color: #0009aa; margin: 2474px; padding: 10px; }
+.rule_2475 { color: #0009ab; margin: 2475px; padding: 10px; }
+.rule_2476 { color: #0009ac; margin: 2476px; padding: 10px; }
+.rule_2477 { color: #0009ad; margin: 2477px; padding: 10px; }
+.rule_2478 { color: #0009ae; margin: 2478px; padding: 10px; }
+.rule_2479 { color: #0009af; margin: 2479px; padding: 10px; }
+.rule_2480 { color: #0009b0; margin: 2480px; padding: 10px; }
+.rule_2481 { color: #0009b1; margin: 2481px; padding: 10px; }
+.rule_2482 { color: #0009b2; margin: 2482px; padding: 10px; }
+.rule_2483 { color: #0009b3; margin: 2483px; padding: 10px; }
+.rule_2484 { color: #0009b4; margin: 2484px; padding: 10px; }
+.rule_2485 { color: #0009b5; margin: 2485px; padding: 10px; }
+.rule_2486 { color: #0009b6; margin: 2486px; padding: 10px; }
+.rule_2487 { color: #0009b7; margin: 2487px; padding: 10px; }
+.rule_2488 { color: #0009b8; margin: 2488px; padding: 10px; }
+.rule_2489 { color: #0009b9; margin: 2489px; padding: 10px; }
+.rule_2490 { color: #0009ba; margin: 2490px; padding: 10px; }
+.rule_2491 { color: #0009bb; margin: 2491px; padding: 10px; }
+.rule_2492 { color: #0009bc; margin: 2492px; padding: 10px; }
+.rule_2493 { color: #0009bd; margin: 2493px; padding: 10px; }
+.rule_2494 { color: #0009be; margin: 2494px; padding: 10px; }
+.rule_2495 { color: #0009bf; margin: 2495px; padding: 10px; }
+.rule_2496 { color: #0009c0; margin: 2496px; padding: 10px; }
+.rule_2497 { color: #0009c1; margin: 2497px; padding: 10px; }
+.rule_2498 { color: #0009c2; margin: 2498px; padding: 10px; }
+.rule_2499 { color: #0009c3; margin: 2499px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Severely Degraded Anti-Pattern Webpage</h1>
+    <p>This fixture contains active mixed content, excessive DOM elements, vulnerable legacy dependencies, and unencrypted form endpoints.</p>
+    <form action="http://insecure-endpoint.com/login" method="POST">
+        <input type="text" name="user">
+        <input type="password" name="pass">
+        <button type="submit">Submit Insecurely</button>
+    </form>
+    <img src="http://cdn.insecure.com/insecure-img.png" alt="Insecure Mixed Content Image">
+    <img src="https://images.example.com/huge-uncompressed-photo.jpg" alt="Uncompressed image">
+    <img src="https://images.example.com/banner-no-dims.jpg" alt="No dimensions banner">
+    <div id="dom-heavy-container">
+<div class="box rule_0"><span>Item 0</span><b>Detail 0</b><i>Note 0</i><u>Status 0</u></div>
+<div class="box rule_1"><span>Item 1</span><b>Detail 1</b><i>Note 1</i><u>Status 1</u></div>
+<div class="box rule_2"><span>Item 2</span><b>Detail 2</b><i>Note 2</i><u>Status 2</u></div>
+<div class="box rule_3"><span>Item 3</span><b>Detail 3</b><i>Note 3</i><u>Status 3</u></div>
+<div class="box rule_4"><span>Item 4</span><b>Detail 4</b><i>Note 4</i><u>Status 4</u></div>
+<div class="box rule_5"><span>Item 5</span><b>Detail 5</b><i>Note 5</i><u>Status 5</u></div>
+<div class="box rule_6"><span>Item 6</span><b>Detail 6</b><i>Note 6</i><u>Status 6</u></div>
+<div class="box rule_7"><span>Item 7</span><b>Detail 7</b><i>Note 7</i><u>Status 7</u></div>
+<div class="box rule_8"><span>Item 8</span><b>Detail 8</b><i>Note 8</i><u>Status 8</u></div>
+<div class="box rule_9"><span>Item 9</span><b>Detail 9</b><i>Note 9</i><u>Status 9</u></div>
+<div class="box rule_10"><span>Item 10</span><b>Detail 10</b><i>Note 10</i><u>Status 10</u></div>
+<div class="box rule_11"><span>Item 11</span><b>Detail 11</b><i>Note 11</i><u>Status 11</u></div>
+<div class="box rule_12"><span>Item 12</span><b>Detail 12</b><i>Note 12</i><u>Status 12</u></div>
+<div class="box rule_13"><span>Item 13</span><b>Detail 13</b><i>Note 13</i><u>Status 13</u></div>
+<div class="box rule_14"><span>Item 14</span><b>Detail 14</b><i>Note 14</i><u>Status 14</u></div>
+<div class="box rule_15"><span>Item 15</span><b>Detail 15</b><i>Note 15</i><u>Status 15</u></div>
+<div class="box rule_16"><span>Item 16</span><b>Detail 16</b><i>Note 16</i><u>Status 16</u></div>
+<div class="box rule_17"><span>Item 17</span><b>Detail 17</b><i>Note 17</i><u>Status 17</u></div>
+<div class="box rule_18"><span>Item 18</span><b>Detail 18</b><i>Note 18</i><u>Status 18</u></div>
+<div class="box rule_19"><span>Item 19</span><b>Detail 19</b><i>Note 19</i><u>Status 19</u></div>
+<div class="box rule_20"><span>Item 20</span><b>Detail 20</b><i>Note 20</i><u>Status 20</u></div>
+<div class="box rule_21"><span>Item 21</span><b>Detail 21</b><i>Note 21</i><u>Status 21</u></div>
+<div class="box rule_22"><span>Item 22</span><b>Detail 22</b><i>Note 22</i><u>Status 22</u></div>
+<div class="box rule_23"><span>Item 23</span><b>Detail 23</b><i>Note 23</i><u>Status 23</u></div>
+<div class="box rule_24"><span>Item 24</span><b>Detail 24</b><i>Note 24</i><u>Status 24</u></div>
+<div class="box rule_25"><span>Item 25</span><b>Detail 25</b><i>Note 25</i><u>Status 25</u></div>
+<div class="box rule_26"><span>Item 26</span><b>Detail 26</b><i>Note 26</i><u>Status 26</u></div>
+<div class="box rule_27"><span>Item 27</span><b>Detail 27</b><i>Note 27</i><u>Status 27</u></div>
+<div class="box rule_28"><span>Item 28</span><b>Detail 28</b><i>Note 28</i><u>Status 28</u></div>
+<div class="box rule_29"><span>Item 29</span><b>Detail 29</b><i>Note 29</i><u>Status 29</u></div>
+<div class="box rule_30"><span>Item 30</span><b>Detail 30</b><i>Note 30</i><u>Status 30</u></div>
+<div class="box rule_31"><span>Item 31</span><b>Detail 31</b><i>Note 31</i><u>Status 31</u></div>
+<div class="box rule_32"><span>Item 32</span><b>Detail 32</b><i>Note 32</i><u>Status 32</u></div>
+<div class="box rule_33"><span>Item 33</span><b>Detail 33</b><i>Note 33</i><u>Status 33</u></div>
+<div class="box rule_34"><span>Item 34</span><b>Detail 34</b><i>Note 34</i><u>Status 34</u></div>
+<div class="box rule_35"><span>Item 35</span><b>Detail 35</b><i>Note 35</i><u>Status 35</u></div>
+<div class="box rule_36"><span>Item 36</span><b>Detail 36</b><i>Note 36</i><u>Status 36</u></div>
+<div class="box rule_37"><span>Item 37</span><b>Detail 37</b><i>Note 37</i><u>Status 37</u></div>
+<div class="box rule_38"><span>Item 38</span><b>Detail 38</b><i>Note 38</i><u>Status 38</u></div>
+<div class="box rule_39"><span>Item 39</span><b>Detail 39</b><i>Note 39</i><u>Status 39</u></div>
+<div class="box rule_40"><span>Item 40</span><b>Detail 40</b><i>Note 40</i><u>Status 40</u></div>
+<div class="box rule_41"><span>Item 41</span><b>Detail 41</b><i>Note 41</i><u>Status 41</u></div>
+<div class="box rule_42"><span>Item 42</span><b>Detail 42</b><i>Note 42</i><u>Status 42</u></div>
+<div class="box rule_43"><span>Item 43</span><b>Detail 43</b><i>Note 43</i><u>Status 43</u></div>
+<div class="box rule_44"><span>Item 44</span><b>Detail 44</b><i>Note 44</i><u>Status 44</u></div>
+<div class="box rule_45"><span>Item 45</span><b>Detail 45</b><i>Note 45</i><u>Status 45</u></div>
+<div class="box rule_46"><span>Item 46</span><b>Detail 46</b><i>Note 46</i><u>Status 46</u></div>
+<div class="box rule_47"><span>Item 47</span><b>Detail 47</b><i>Note 47</i><u>Status 47</u></div>
+<div class="box rule_48"><span>Item 48</span><b>Detail 48</b><i>Note 48</i><u>Status 48</u></div>
+<div class="box rule_49"><span>Item 49</span><b>Detail 49</b><i>Note 49</i><u>Status 49</u></div>
+<div class="box rule_50"><span>Item 50</span><b>Detail 50</b><i>Note 50</i><u>Status 50</u></div>
+<div class="box rule_51"><span>Item 51</span><b>Detail 51</b><i>Note 51</i><u>Status 51</u></div>
+<div class="box rule_52"><span>Item 52</span><b>Detail 52</b><i>Note 52</i><u>Status 52</u></div>
+<div class="box rule_53"><span>Item 53</span><b>Detail 53</b><i>Note 53</i><u>Status 53</u></div>
+<div class="box rule_54"><span>Item 54</span><b>Detail 54</b><i>Note 54</i><u>Status 54</u></div>
+<div class="box rule_55"><span>Item 55</span><b>Detail 55</b><i>Note 55</i><u>Status 55</u></div>
+<div class="box rule_56"><span>Item 56</span><b>Detail 56</b><i>Note 56</i><u>Status 56</u></div>
+<div class="box rule_57"><span>Item 57</span><b>Detail 57</b><i>Note 57</i><u>Status 57</u></div>
+<div class="box rule_58"><span>Item 58</span><b>Detail 58</b><i>Note 58</i><u>Status 58</u></div>
+<div class="box rule_59"><span>Item 59</span><b>Detail 59</b><i>Note 59</i><u>Status 59</u></div>
+<div class="box rule_60"><span>Item 60</span><b>Detail 60</b><i>Note 60</i><u>Status 60</u></div>
+<div class="box rule_61"><span>Item 61</span><b>Detail 61</b><i>Note 61</i><u>Status 61</u></div>
+<div class="box rule_62"><span>Item 62</span><b>Detail 62</b><i>Note 62</i><u>Status 62</u></div>
+<div class="box rule_63"><span>Item 63</span><b>Detail 63</b><i>Note 63</i><u>Status 63</u></div>
+<div class="box rule_64"><span>Item 64</span><b>Detail 64</b><i>Note 64</i><u>Status 64</u></div>
+<div class="box rule_65"><span>Item 65</span><b>Detail 65</b><i>Note 65</i><u>Status 65</u></div>
+<div class="box rule_66"><span>Item 66</span><b>Detail 66</b><i>Note 66</i><u>Status 66</u></div>
+<div class="box rule_67"><span>Item 67</span><b>Detail 67</b><i>Note 67</i><u>Status 67</u></div>
+<div class="box rule_68"><span>Item 68</span><b>Detail 68</b><i>Note 68</i><u>Status 68</u></div>
+<div class="box rule_69"><span>Item 69</span><b>Detail 69</b><i>Note 69</i><u>Status 69</u></div>
+<div class="box rule_70"><span>Item 70</span><b>Detail 70</b><i>Note 70</i><u>Status 70</u></div>
+<div class="box rule_71"><span>Item 71</span><b>Detail 71</b><i>Note 71</i><u>Status 71</u></div>
+<div class="box rule_72"><span>Item 72</span><b>Detail 72</b><i>Note 72</i><u>Status 72</u></div>
+<div class="box rule_73"><span>Item 73</span><b>Detail 73</b><i>Note 73</i><u>Status 73</u></div>
+<div class="box rule_74"><span>Item 74</span><b>Detail 74</b><i>Note 74</i><u>Status 74</u></div>
+<div class="box rule_75"><span>Item 75</span><b>Detail 75</b><i>Note 75</i><u>Status 75</u></div>
+<div class="box rule_76"><span>Item 76</span><b>Detail 76</b><i>Note 76</i><u>Status 76</u></div>
+<div class="box rule_77"><span>Item 77</span><b>Detail 77</b><i>Note 77</i><u>Status 77</u></div>
+<div class="box rule_78"><span>Item 78</span><b>Detail 78</b><i>Note 78</i><u>Status 78</u></div>
+<div class="box rule_79"><span>Item 79</span><b>Detail 79</b><i>Note 79</i><u>Status 79</u></div>
+<div class="box rule_80"><span>Item 80</span><b>Detail 80</b><i>Note 80</i><u>Status 80</u></div>
+<div class="box rule_81"><span>Item 81</span><b>Detail 81</b><i>Note 81</i><u>Status 81</u></div>
+<div class="box rule_82"><span>Item 82</span><b>Detail 82</b><i>Note 82</i><u>Status 82</u></div>
+<div class="box rule_83"><span>Item 83</span><b>Detail 83</b><i>Note 83</i><u>Status 83</u></div>
+<div class="box rule_84"><span>Item 84</span><b>Detail 84</b><i>Note 84</i><u>Status 84</u></div>
+<div class="box rule_85"><span>Item 85</span><b>Detail 85</b><i>Note 85</i><u>Status 85</u></div>
+<div class="box rule_86"><span>Item 86</span><b>Detail 86</b><i>Note 86</i><u>Status 86</u></div>
+<div class="box rule_87"><span>Item 87</span><b>Detail 87</b><i>Note 87</i><u>Status 87</u></div>
+<div class="box rule_88"><span>Item 88</span><b>Detail 88</b><i>Note 88</i><u>Status 88</u></div>
+<div class="box rule_89"><span>Item 89</span><b>Detail 89</b><i>Note 89</i><u>Status 89</u></div>
+<div class="box rule_90"><span>Item 90</span><b>Detail 90</b><i>Note 90</i><u>Status 90</u></div>
+<div class="box rule_91"><span>Item 91</span><b>Detail 91</b><i>Note 91</i><u>Status 91</u></div>
+<div class="box rule_92"><span>Item 92</span><b>Detail 92</b><i>Note 92</i><u>Status 92</u></div>
+<div class="box rule_93"><span>Item 93</span><b>Detail 93</b><i>Note 93</i><u>Status 93</u></div>
+<div class="box rule_94"><span>Item 94</span><b>Detail 94</b><i>Note 94</i><u>Status 94</u></div>
+<div class="box rule_95"><span>Item 95</span><b>Detail 95</b><i>Note 95</i><u>Status 95</u></div>
+<div class="box rule_96"><span>Item 96</span><b>Detail 96</b><i>Note 96</i><u>Status 96</u></div>
+<div class="box rule_97"><span>Item 97</span><b>Detail 97</b><i>Note 97</i><u>Status 97</u></div>
+<div class="box rule_98"><span>Item 98</span><b>Detail 98</b><i>Note 98</i><u>Status 98</u></div>
+<div class="box rule_99"><span>Item 99</span><b>Detail 99</b><i>Note 99</i><u>Status 99</u></div>
+<div class="box rule_100"><span>Item 100</span><b>Detail 100</b><i>Note 100</i><u>Status 100</u></div>
+<div class="box rule_101"><span>Item 101</span><b>Detail 101</b><i>Note 101</i><u>Status 101</u></div>
+<div class="box rule_102"><span>Item 102</span><b>Detail 102</b><i>Note 102</i><u>Status 102</u></div>
+<div class="box rule_103"><span>Item 103</span><b>Detail 103</b><i>Note 103</i><u>Status 103</u></div>
+<div class="box rule_104"><span>Item 104</span><b>Detail 104</b><i>Note 104</i><u>Status 104</u></div>
+<div class="box rule_105"><span>Item 105</span><b>Detail 105</b><i>Note 105</i><u>Status 105</u></div>
+<div class="box rule_106"><span>Item 106</span><b>Detail 106</b><i>Note 106</i><u>Status 106</u></div>
+<div class="box rule_107"><span>Item 107</span><b>Detail 107</b><i>Note 107</i><u>Status 107</u></div>
+<div class="box rule_108"><span>Item 108</span><b>Detail 108</b><i>Note 108</i><u>Status 108</u></div>
+<div class="box rule_109"><span>Item 109</span><b>Detail 109</b><i>Note 109</i><u>Status 109</u></div>
+<div class="box rule_110"><span>Item 110</span><b>Detail 110</b><i>Note 110</i><u>Status 110</u></div>
+<div class="box rule_111"><span>Item 111</span><b>Detail 111</b><i>Note 111</i><u>Status 111</u></div>
+<div class="box rule_112"><span>Item 112</span><b>Detail 112</b><i>Note 112</i><u>Status 112</u></div>
+<div class="box rule_113"><span>Item 113</span><b>Detail 113</b><i>Note 113</i><u>Status 113</u></div>
+<div class="box rule_114"><span>Item 114</span><b>Detail 114</b><i>Note 114</i><u>Status 114</u></div>
+<div class="box rule_115"><span>Item 115</span><b>Detail 115</b><i>Note 115</i><u>Status 115</u></div>
+<div class="box rule_116"><span>Item 116</span><b>Detail 116</b><i>Note 116</i><u>Status 116</u></div>
+<div class="box rule_117"><span>Item 117</span><b>Detail 117</b><i>Note 117</i><u>Status 117</u></div>
+<div class="box rule_118"><span>Item 118</span><b>Detail 118</b><i>Note 118</i><u>Status 118</u></div>
+<div class="box rule_119"><span>Item 119</span><b>Detail 119</b><i>Note 119</i><u>Status 119</u></div>
+<div class="box rule_120"><span>Item 120</span><b>Detail 120</b><i>Note 120</i><u>Status 120</u></div>
+<div class="box rule_121"><span>Item 121</span><b>Detail 121</b><i>Note 121</i><u>Status 121</u></div>
+<div class="box rule_122"><span>Item 122</span><b>Detail 122</b><i>Note 122</i><u>Status 122</u></div>
+<div class="box rule_123"><span>Item 123</span><b>Detail 123</b><i>Note 123</i><u>Status 123</u></div>
+<div class="box rule_124"><span>Item 124</span><b>Detail 124</b><i>Note 124</i><u>Status 124</u></div>
+<div class="box rule_125"><span>Item 125</span><b>Detail 125</b><i>Note 125</i><u>Status 125</u></div>
+<div class="box rule_126"><span>Item 126</span><b>Detail 126</b><i>Note 126</i><u>Status 126</u></div>
+<div class="box rule_127"><span>Item 127</span><b>Detail 127</b><i>Note 127</i><u>Status 127</u></div>
+<div class="box rule_128"><span>Item 128</span><b>Detail 128</b><i>Note 128</i><u>Status 128</u></div>
+<div class="box rule_129"><span>Item 129</span><b>Detail 129</b><i>Note 129</i><u>Status 129</u></div>
+<div class="box rule_130"><span>Item 130</span><b>Detail 130</b><i>Note 130</i><u>Status 130</u></div>
+<div class="box rule_131"><span>Item 131</span><b>Detail 131</b><i>Note 131</i><u>Status 131</u></div>
+<div class="box rule_132"><span>Item 132</span><b>Detail 132</b><i>Note 132</i><u>Status 132</u></div>
+<div class="box rule_133"><span>Item 133</span><b>Detail 133</b><i>Note 133</i><u>Status 133</u></div>
+<div class="box rule_134"><span>Item 134</span><b>Detail 134</b><i>Note 134</i><u>Status 134</u></div>
+<div class="box rule_135"><span>Item 135</span><b>Detail 135</b><i>Note 135</i><u>Status 135</u></div>
+<div class="box rule_136"><span>Item 136</span><b>Detail 136</b><i>Note 136</i><u>Status 136</u></div>
+<div class="box rule_137"><span>Item 137</span><b>Detail 137</b><i>Note 137</i><u>Status 137</u></div>
+<div class="box rule_138"><span>Item 138</span><b>Detail 138</b><i>Note 138</i><u>Status 138</u></div>
+<div class="box rule_139"><span>Item 139</span><b>Detail 139</b><i>Note 139</i><u>Status 139</u></div>
+<div class="box rule_140"><span>Item 140</span><b>Detail 140</b><i>Note 140</i><u>Status 140</u></div>
+<div class="box rule_141"><span>Item 141</span><b>Detail 141</b><i>Note 141</i><u>Status 141</u></div>
+<div class="box rule_142"><span>Item 142</span><b>Detail 142</b><i>Note 142</i><u>Status 142</u></div>
+<div class="box rule_143"><span>Item 143</span><b>Detail 143</b><i>Note 143</i><u>Status 143</u></div>
+<div class="box rule_144"><span>Item 144</span><b>Detail 144</b><i>Note 144</i><u>Status 144</u></div>
+<div class="box rule_145"><span>Item 145</span><b>Detail 145</b><i>Note 145</i><u>Status 145</u></div>
+<div class="box rule_146"><span>Item 146</span><b>Detail 146</b><i>Note 146</i><u>Status 146</u></div>
+<div class="box rule_147"><span>Item 147</span><b>Detail 147</b><i>Note 147</i><u>Status 147</u></div>
+<div class="box rule_148"><span>Item 148</span><b>Detail 148</b><i>Note 148</i><u>Status 148</u></div>
+<div class="box rule_149"><span>Item 149</span><b>Detail 149</b><i>Note 149</i><u>Status 149</u></div>
+<div class="box rule_150"><span>Item 150</span><b>Detail 150</b><i>Note 150</i><u>Status 150</u></div>
+<div class="box rule_151"><span>Item 151</span><b>Detail 151</b><i>Note 151</i><u>Status 151</u></div>
+<div class="box rule_152"><span>Item 152</span><b>Detail 152</b><i>Note 152</i><u>Status 152</u></div>
+<div class="box rule_153"><span>Item 153</span><b>Detail 153</b><i>Note 153</i><u>Status 153</u></div>
+<div class="box rule_154"><span>Item 154</span><b>Detail 154</b><i>Note 154</i><u>Status 154</u></div>
+<div class="box rule_155"><span>Item 155</span><b>Detail 155</b><i>Note 155</i><u>Status 155</u></div>
+<div class="box rule_156"><span>Item 156</span><b>Detail 156</b><i>Note 156</i><u>Status 156</u></div>
+<div class="box rule_157"><span>Item 157</span><b>Detail 157</b><i>Note 157</i><u>Status 157</u></div>
+<div class="box rule_158"><span>Item 158</span><b>Detail 158</b><i>Note 158</i><u>Status 158</u></div>
+<div class="box rule_159"><span>Item 159</span><b>Detail 159</b><i>Note 159</i><u>Status 159</u></div>
+<div class="box rule_160"><span>Item 160</span><b>Detail 160</b><i>Note 160</i><u>Status 160</u></div>
+<div class="box rule_161"><span>Item 161</span><b>Detail 161</b><i>Note 161</i><u>Status 161</u></div>
+<div class="box rule_162"><span>Item 162</span><b>Detail 162</b><i>Note 162</i><u>Status 162</u></div>
+<div class="box rule_163"><span>Item 163</span><b>Detail 163</b><i>Note 163</i><u>Status 163</u></div>
+<div class="box rule_164"><span>Item 164</span><b>Detail 164</b><i>Note 164</i><u>Status 164</u></div>
+<div class="box rule_165"><span>Item 165</span><b>Detail 165</b><i>Note 165</i><u>Status 165</u></div>
+<div class="box rule_166"><span>Item 166</span><b>Detail 166</b><i>Note 166</i><u>Status 166</u></div>
+<div class="box rule_167"><span>Item 167</span><b>Detail 167</b><i>Note 167</i><u>Status 167</u></div>
+<div class="box rule_168"><span>Item 168</span><b>Detail 168</b><i>Note 168</i><u>Status 168</u></div>
+<div class="box rule_169"><span>Item 169</span><b>Detail 169</b><i>Note 169</i><u>Status 169</u></div>
+<div class="box rule_170"><span>Item 170</span><b>Detail 170</b><i>Note 170</i><u>Status 170</u></div>
+<div class="box rule_171"><span>Item 171</span><b>Detail 171</b><i>Note 171</i><u>Status 171</u></div>
+<div class="box rule_172"><span>Item 172</span><b>Detail 172</b><i>Note 172</i><u>Status 172</u></div>
+<div class="box rule_173"><span>Item 173</span><b>Detail 173</b><i>Note 173</i><u>Status 173</u></div>
+<div class="box rule_174"><span>Item 174</span><b>Detail 174</b><i>Note 174</i><u>Status 174</u></div>
+<div class="box rule_175"><span>Item 175</span><b>Detail 175</b><i>Note 175</i><u>Status 175</u></div>
+<div class="box rule_176"><span>Item 176</span><b>Detail 176</b><i>Note 176</i><u>Status 176</u></div>
+<div class="box rule_177"><span>Item 177</span><b>Detail 177</b><i>Note 177</i><u>Status 177</u></div>
+<div class="box rule_178"><span>Item 178</span><b>Detail 178</b><i>Note 178</i><u>Status 178</u></div>
+<div class="box rule_179"><span>Item 179</span><b>Detail 179</b><i>Note 179</i><u>Status 179</u></div>
+<div class="box rule_180"><span>Item 180</span><b>Detail 180</b><i>Note 180</i><u>Status 180</u></div>
+<div class="box rule_181"><span>Item 181</span><b>Detail 181</b><i>Note 181</i><u>Status 181</u></div>
+<div class="box rule_182"><span>Item 182</span><b>Detail 182</b><i>Note 182</i><u>Status 182</u></div>
+<div class="box rule_183"><span>Item 183</span><b>Detail 183</b><i>Note 183</i><u>Status 183</u></div>
+<div class="box rule_184"><span>Item 184</span><b>Detail 184</b><i>Note 184</i><u>Status 184</u></div>
+<div class="box rule_185"><span>Item 185</span><b>Detail 185</b><i>Note 185</i><u>Status 185</u></div>
+<div class="box rule_186"><span>Item 186</span><b>Detail 186</b><i>Note 186</i><u>Status 186</u></div>
+<div class="box rule_187"><span>Item 187</span><b>Detail 187</b><i>Note 187</i><u>Status 187</u></div>
+<div class="box rule_188"><span>Item 188</span><b>Detail 188</b><i>Note 188</i><u>Status 188</u></div>
+<div class="box rule_189"><span>Item 189</span><b>Detail 189</b><i>Note 189</i><u>Status 189</u></div>
+<div class="box rule_190"><span>Item 190</span><b>Detail 190</b><i>Note 190</i><u>Status 190</u></div>
+<div class="box rule_191"><span>Item 191</span><b>Detail 191</b><i>Note 191</i><u>Status 191</u></div>
+<div class="box rule_192"><span>Item 192</span><b>Detail 192</b><i>Note 192</i><u>Status 192</u></div>
+<div class="box rule_193"><span>Item 193</span><b>Detail 193</b><i>Note 193</i><u>Status 193</u></div>
+<div class="box rule_194"><span>Item 194</span><b>Detail 194</b><i>Note 194</i><u>Status 194</u></div>
+<div class="box rule_195"><span>Item 195</span><b>Detail 195</b><i>Note 195</i><u>Status 195</u></div>
+<div class="box rule_196"><span>Item 196</span><b>Detail 196</b><i>Note 196</i><u>Status 196</u></div>
+<div class="box rule_197"><span>Item 197</span><b>Detail 197</b><i>Note 197</i><u>Status 197</u></div>
+<div class="box rule_198"><span>Item 198</span><b>Detail 198</b><i>Note 198</i><u>Status 198</u></div>
+<div class="box rule_199"><span>Item 199</span><b>Detail 199</b><i>Note 199</i><u>Status 199</u></div>
+<div class="box rule_200"><span>Item 200</span><b>Detail 200</b><i>Note 200</i><u>Status 200</u></div>
+<div class="box rule_201"><span>Item 201</span><b>Detail 201</b><i>Note 201</i><u>Status 201</u></div>
+<div class="box rule_202"><span>Item 202</span><b>Detail 202</b><i>Note 202</i><u>Status 202</u></div>
+<div class="box rule_203"><span>Item 203</span><b>Detail 203</b><i>Note 203</i><u>Status 203</u></div>
+<div class="box rule_204"><span>Item 204</span><b>Detail 204</b><i>Note 204</i><u>Status 204</u></div>
+<div class="box rule_205"><span>Item 205</span><b>Detail 205</b><i>Note 205</i><u>Status 205</u></div>
+<div class="box rule_206"><span>Item 206</span><b>Detail 206</b><i>Note 206</i><u>Status 206</u></div>
+<div class="box rule_207"><span>Item 207</span><b>Detail 207</b><i>Note 207</i><u>Status 207</u></div>
+<div class="box rule_208"><span>Item 208</span><b>Detail 208</b><i>Note 208</i><u>Status 208</u></div>
+<div class="box rule_209"><span>Item 209</span><b>Detail 209</b><i>Note 209</i><u>Status 209</u></div>
+<div class="box rule_210"><span>Item 210</span><b>Detail 210</b><i>Note 210</i><u>Status 210</u></div>
+<div class="box rule_211"><span>Item 211</span><b>Detail 211</b><i>Note 211</i><u>Status 211</u></div>
+<div class="box rule_212"><span>Item 212</span><b>Detail 212</b><i>Note 212</i><u>Status 212</u></div>
+<div class="box rule_213"><span>Item 213</span><b>Detail 213</b><i>Note 213</i><u>Status 213</u></div>
+<div class="box rule_214"><span>Item 214</span><b>Detail 214</b><i>Note 214</i><u>Status 214</u></div>
+<div class="box rule_215"><span>Item 215</span><b>Detail 215</b><i>Note 215</i><u>Status 215</u></div>
+<div class="box rule_216"><span>Item 216</span><b>Detail 216</b><i>Note 216</i><u>Status 216</u></div>
+<div class="box rule_217"><span>Item 217</span><b>Detail 217</b><i>Note 217</i><u>Status 217</u></div>
+<div class="box rule_218"><span>Item 218</span><b>Detail 218</b><i>Note 218</i><u>Status 218</u></div>
+<div class="box rule_219"><span>Item 219</span><b>Detail 219</b><i>Note 219</i><u>Status 219</u></div>
+<div class="box rule_220"><span>Item 220</span><b>Detail 220</b><i>Note 220</i><u>Status 220</u></div>
+<div class="box rule_221"><span>Item 221</span><b>Detail 221</b><i>Note 221</i><u>Status 221</u></div>
+<div class="box rule_222"><span>Item 222</span><b>Detail 222</b><i>Note 222</i><u>Status 222</u></div>
+<div class="box rule_223"><span>Item 223</span><b>Detail 223</b><i>Note 223</i><u>Status 223</u></div>
+<div class="box rule_224"><span>Item 224</span><b>Detail 224</b><i>Note 224</i><u>Status 224</u></div>
+<div class="box rule_225"><span>Item 225</span><b>Detail 225</b><i>Note 225</i><u>Status 225</u></div>
+<div class="box rule_226"><span>Item 226</span><b>Detail 226</b><i>Note 226</i><u>Status 226</u></div>
+<div class="box rule_227"><span>Item 227</span><b>Detail 227</b><i>Note 227</i><u>Status 227</u></div>
+<div class="box rule_228"><span>Item 228</span><b>Detail 228</b><i>Note 228</i><u>Status 228</u></div>
+<div class="box rule_229"><span>Item 229</span><b>Detail 229</b><i>Note 229</i><u>Status 229</u></div>
+<div class="box rule_230"><span>Item 230</span><b>Detail 230</b><i>Note 230</i><u>Status 230</u></div>
+<div class="box rule_231"><span>Item 231</span><b>Detail 231</b><i>Note 231</i><u>Status 231</u></div>
+<div class="box rule_232"><span>Item 232</span><b>Detail 232</b><i>Note 232</i><u>Status 232</u></div>
+<div class="box rule_233"><span>Item 233</span><b>Detail 233</b><i>Note 233</i><u>Status 233</u></div>
+<div class="box rule_234"><span>Item 234</span><b>Detail 234</b><i>Note 234</i><u>Status 234</u></div>
+<div class="box rule_235"><span>Item 235</span><b>Detail 235</b><i>Note 235</i><u>Status 235</u></div>
+<div class="box rule_236"><span>Item 236</span><b>Detail 236</b><i>Note 236</i><u>Status 236</u></div>
+<div class="box rule_237"><span>Item 237</span><b>Detail 237</b><i>Note 237</i><u>Status 237</u></div>
+<div class="box rule_238"><span>Item 238</span><b>Detail 238</b><i>Note 238</i><u>Status 238</u></div>
+<div class="box rule_239"><span>Item 239</span><b>Detail 239</b><i>Note 239</i><u>Status 239</u></div>
+<div class="box rule_240"><span>Item 240</span><b>Detail 240</b><i>Note 240</i><u>Status 240</u></div>
+<div class="box rule_241"><span>Item 241</span><b>Detail 241</b><i>Note 241</i><u>Status 241</u></div>
+<div class="box rule_242"><span>Item 242</span><b>Detail 242</b><i>Note 242</i><u>Status 242</u></div>
+<div class="box rule_243"><span>Item 243</span><b>Detail 243</b><i>Note 243</i><u>Status 243</u></div>
+<div class="box rule_244"><span>Item 244</span><b>Detail 244</b><i>Note 244</i><u>Status 244</u></div>
+<div class="box rule_245"><span>Item 245</span><b>Detail 245</b><i>Note 245</i><u>Status 245</u></div>
+<div class="box rule_246"><span>Item 246</span><b>Detail 246</b><i>Note 246</i><u>Status 246</u></div>
+<div class="box rule_247"><span>Item 247</span><b>Detail 247</b><i>Note 247</i><u>Status 247</u></div>
+<div class="box rule_248"><span>Item 248</span><b>Detail 248</b><i>Note 248</i><u>Status 248</u></div>
+<div class="box rule_249"><span>Item 249</span><b>Detail 249</b><i>Note 249</i><u>Status 249</u></div>
+<div class="box rule_250"><span>Item 250</span><b>Detail 250</b><i>Note 250</i><u>Status 250</u></div>
+<div class="box rule_251"><span>Item 251</span><b>Detail 251</b><i>Note 251</i><u>Status 251</u></div>
+<div class="box rule_252"><span>Item 252</span><b>Detail 252</b><i>Note 252</i><u>Status 252</u></div>
+<div class="box rule_253"><span>Item 253</span><b>Detail 253</b><i>Note 253</i><u>Status 253</u></div>
+<div class="box rule_254"><span>Item 254</span><b>Detail 254</b><i>Note 254</i><u>Status 254</u></div>
+<div class="box rule_255"><span>Item 255</span><b>Detail 255</b><i>Note 255</i><u>Status 255</u></div>
+<div class="box rule_256"><span>Item 256</span><b>Detail 256</b><i>Note 256</i><u>Status 256</u></div>
+<div class="box rule_257"><span>Item 257</span><b>Detail 257</b><i>Note 257</i><u>Status 257</u></div>
+<div class="box rule_258"><span>Item 258</span><b>Detail 258</b><i>Note 258</i><u>Status 258</u></div>
+<div class="box rule_259"><span>Item 259</span><b>Detail 259</b><i>Note 259</i><u>Status 259</u></div>
+<div class="box rule_260"><span>Item 260</span><b>Detail 260</b><i>Note 260</i><u>Status 260</u></div>
+<div class="box rule_261"><span>Item 261</span><b>Detail 261</b><i>Note 261</i><u>Status 261</u></div>
+<div class="box rule_262"><span>Item 262</span><b>Detail 262</b><i>Note 262</i><u>Status 262</u></div>
+<div class="box rule_263"><span>Item 263</span><b>Detail 263</b><i>Note 263</i><u>Status 263</u></div>
+<div class="box rule_264"><span>Item 264</span><b>Detail 264</b><i>Note 264</i><u>Status 264</u></div>
+<div class="box rule_265"><span>Item 265</span><b>Detail 265</b><i>Note 265</i><u>Status 265</u></div>
+<div class="box rule_266"><span>Item 266</span><b>Detail 266</b><i>Note 266</i><u>Status 266</u></div>
+<div class="box rule_267"><span>Item 267</span><b>Detail 267</b><i>Note 267</i><u>Status 267</u></div>
+<div class="box rule_268"><span>Item 268</span><b>Detail 268</b><i>Note 268</i><u>Status 268</u></div>
+<div class="box rule_269"><span>Item 269</span><b>Detail 269</b><i>Note 269</i><u>Status 269</u></div>
+<div class="box rule_270"><span>Item 270</span><b>Detail 270</b><i>Note 270</i><u>Status 270</u></div>
+<div class="box rule_271"><span>Item 271</span><b>Detail 271</b><i>Note 271</i><u>Status 271</u></div>
+<div class="box rule_272"><span>Item 272</span><b>Detail 272</b><i>Note 272</i><u>Status 272</u></div>
+<div class="box rule_273"><span>Item 273</span><b>Detail 273</b><i>Note 273</i><u>Status 273</u></div>
+<div class="box rule_274"><span>Item 274</span><b>Detail 274</b><i>Note 274</i><u>Status 274</u></div>
+<div class="box rule_275"><span>Item 275</span><b>Detail 275</b><i>Note 275</i><u>Status 275</u></div>
+<div class="box rule_276"><span>Item 276</span><b>Detail 276</b><i>Note 276</i><u>Status 276</u></div>
+<div class="box rule_277"><span>Item 277</span><b>Detail 277</b><i>Note 277</i><u>Status 277</u></div>
+<div class="box rule_278"><span>Item 278</span><b>Detail 278</b><i>Note 278</i><u>Status 278</u></div>
+<div class="box rule_279"><span>Item 279</span><b>Detail 279</b><i>Note 279</i><u>Status 279</u></div>
+<div class="box rule_280"><span>Item 280</span><b>Detail 280</b><i>Note 280</i><u>Status 280</u></div>
+<div class="box rule_281"><span>Item 281</span><b>Detail 281</b><i>Note 281</i><u>Status 281</u></div>
+<div class="box rule_282"><span>Item 282</span><b>Detail 282</b><i>Note 282</i><u>Status 282</u></div>
+<div class="box rule_283"><span>Item 283</span><b>Detail 283</b><i>Note 283</i><u>Status 283</u></div>
+<div class="box rule_284"><span>Item 284</span><b>Detail 284</b><i>Note 284</i><u>Status 284</u></div>
+<div class="box rule_285"><span>Item 285</span><b>Detail 285</b><i>Note 285</i><u>Status 285</u></div>
+<div class="box rule_286"><span>Item 286</span><b>Detail 286</b><i>Note 286</i><u>Status 286</u></div>
+<div class="box rule_287"><span>Item 287</span><b>Detail 287</b><i>Note 287</i><u>Status 287</u></div>
+<div class="box rule_288"><span>Item 288</span><b>Detail 288</b><i>Note 288</i><u>Status 288</u></div>
+<div class="box rule_289"><span>Item 289</span><b>Detail 289</b><i>Note 289</i><u>Status 289</u></div>
+<div class="box rule_290"><span>Item 290</span><b>Detail 290</b><i>Note 290</i><u>Status 290</u></div>
+<div class="box rule_291"><span>Item 291</span><b>Detail 291</b><i>Note 291</i><u>Status 291</u></div>
+<div class="box rule_292"><span>Item 292</span><b>Detail 292</b><i>Note 292</i><u>Status 292</u></div>
+<div class="box rule_293"><span>Item 293</span><b>Detail 293</b><i>Note 293</i><u>Status 293</u></div>
+<div class="box rule_294"><span>Item 294</span><b>Detail 294</b><i>Note 294</i><u>Status 294</u></div>
+<div class="box rule_295"><span>Item 295</span><b>Detail 295</b><i>Note 295</i><u>Status 295</u></div>
+<div class="box rule_296"><span>Item 296</span><b>Detail 296</b><i>Note 296</i><u>Status 296</u></div>
+<div class="box rule_297"><span>Item 297</span><b>Detail 297</b><i>Note 297</i><u>Status 297</u></div>
+<div class="box rule_298"><span>Item 298</span><b>Detail 298</b><i>Note 298</i><u>Status 298</u></div>
+<div class="box rule_299"><span>Item 299</span><b>Detail 299</b><i>Note 299</i><u>Status 299</u></div>
+<div class="box rule_300"><span>Item 300</span><b>Detail 300</b><i>Note 300</i><u>Status 300</u></div>
+<div class="box rule_301"><span>Item 301</span><b>Detail 301</b><i>Note 301</i><u>Status 301</u></div>
+<div class="box rule_302"><span>Item 302</span><b>Detail 302</b><i>Note 302</i><u>Status 302</u></div>
+<div class="box rule_303"><span>Item 303</span><b>Detail 303</b><i>Note 303</i><u>Status 303</u></div>
+<div class="box rule_304"><span>Item 304</span><b>Detail 304</b><i>Note 304</i><u>Status 304</u></div>
+<div class="box rule_305"><span>Item 305</span><b>Detail 305</b><i>Note 305</i><u>Status 305</u></div>
+<div class="box rule_306"><span>Item 306</span><b>Detail 306</b><i>Note 306</i><u>Status 306</u></div>
+<div class="box rule_307"><span>Item 307</span><b>Detail 307</b><i>Note 307</i><u>Status 307</u></div>
+<div class="box rule_308"><span>Item 308</span><b>Detail 308</b><i>Note 308</i><u>Status 308</u></div>
+<div class="box rule_309"><span>Item 309</span><b>Detail 309</b><i>Note 309</i><u>Status 309</u></div>
+<div class="box rule_310"><span>Item 310</span><b>Detail 310</b><i>Note 310</i><u>Status 310</u></div>
+<div class="box rule_311"><span>Item 311</span><b>Detail 311</b><i>Note 311</i><u>Status 311</u></div>
+<div class="box rule_312"><span>Item 312</span><b>Detail 312</b><i>Note 312</i><u>Status 312</u></div>
+<div class="box rule_313"><span>Item 313</span><b>Detail 313</b><i>Note 313</i><u>Status 313</u></div>
+<div class="box rule_314"><span>Item 314</span><b>Detail 314</b><i>Note 314</i><u>Status 314</u></div>
+<div class="box rule_315"><span>Item 315</span><b>Detail 315</b><i>Note 315</i><u>Status 315</u></div>
+<div class="box rule_316"><span>Item 316</span><b>Detail 316</b><i>Note 316</i><u>Status 316</u></div>
+<div class="box rule_317"><span>Item 317</span><b>Detail 317</b><i>Note 317</i><u>Status 317</u></div>
+<div class="box rule_318"><span>Item 318</span><b>Detail 318</b><i>Note 318</i><u>Status 318</u></div>
+<div class="box rule_319"><span>Item 319</span><b>Detail 319</b><i>Note 319</i><u>Status 319</u></div>
+<div class="box rule_320"><span>Item 320</span><b>Detail 320</b><i>Note 320</i><u>Status 320</u></div>
+<div class="box rule_321"><span>Item 321</span><b>Detail 321</b><i>Note 321</i><u>Status 321</u></div>
+<div class="box rule_322"><span>Item 322</span><b>Detail 322</b><i>Note 322</i><u>Status 322</u></div>
+<div class="box rule_323"><span>Item 323</span><b>Detail 323</b><i>Note 323</i><u>Status 323</u></div>
+<div class="box rule_324"><span>Item 324</span><b>Detail 324</b><i>Note 324</i><u>Status 324</u></div>
+<div class="box rule_325"><span>Item 325</span><b>Detail 325</b><i>Note 325</i><u>Status 325</u></div>
+<div class="box rule_326"><span>Item 326</span><b>Detail 326</b><i>Note 326</i><u>Status 326</u></div>
+<div class="box rule_327"><span>Item 327</span><b>Detail 327</b><i>Note 327</i><u>Status 327</u></div>
+<div class="box rule_328"><span>Item 328</span><b>Detail 328</b><i>Note 328</i><u>Status 328</u></div>
+<div class="box rule_329"><span>Item 329</span><b>Detail 329</b><i>Note 329</i><u>Status 329</u></div>
+<div class="box rule_330"><span>Item 330</span><b>Detail 330</b><i>Note 330</i><u>Status 330</u></div>
+<div class="box rule_331"><span>Item 331</span><b>Detail 331</b><i>Note 331</i><u>Status 331</u></div>
+<div class="box rule_332"><span>Item 332</span><b>Detail 332</b><i>Note 332</i><u>Status 332</u></div>
+<div class="box rule_333"><span>Item 333</span><b>Detail 333</b><i>Note 333</i><u>Status 333</u></div>
+<div class="box rule_334"><span>Item 334</span><b>Detail 334</b><i>Note 334</i><u>Status 334</u></div>
+<div class="box rule_335"><span>Item 335</span><b>Detail 335</b><i>Note 335</i><u>Status 335</u></div>
+<div class="box rule_336"><span>Item 336</span><b>Detail 336</b><i>Note 336</i><u>Status 336</u></div>
+<div class="box rule_337"><span>Item 337</span><b>Detail 337</b><i>Note 337</i><u>Status 337</u></div>
+<div class="box rule_338"><span>Item 338</span><b>Detail 338</b><i>Note 338</i><u>Status 338</u></div>
+<div class="box rule_339"><span>Item 339</span><b>Detail 339</b><i>Note 339</i><u>Status 339</u></div>
+<div class="box rule_340"><span>Item 340</span><b>Detail 340</b><i>Note 340</i><u>Status 340</u></div>
+<div class="box rule_341"><span>Item 341</span><b>Detail 341</b><i>Note 341</i><u>Status 341</u></div>
+<div class="box rule_342"><span>Item 342</span><b>Detail 342</b><i>Note 342</i><u>Status 342</u></div>
+<div class="box rule_343"><span>Item 343</span><b>Detail 343</b><i>Note 343</i><u>Status 343</u></div>
+<div class="box rule_344"><span>Item 344</span><b>Detail 344</b><i>Note 344</i><u>Status 344</u></div>
+<div class="box rule_345"><span>Item 345</span><b>Detail 345</b><i>Note 345</i><u>Status 345</u></div>
+<div class="box rule_346"><span>Item 346</span><b>Detail 346</b><i>Note 346</i><u>Status 346</u></div>
+<div class="box rule_347"><span>Item 347</span><b>Detail 347</b><i>Note 347</i><u>Status 347</u></div>
+<div class="box rule_348"><span>Item 348</span><b>Detail 348</b><i>Note 348</i><u>Status 348</u></div>
+<div class="box rule_349"><span>Item 349</span><b>Detail 349</b><i>Note 349</i><u>Status 349</u></div>
+<div class="box rule_350"><span>Item 350</span><b>Detail 350</b><i>Note 350</i><u>Status 350</u></div>
+<div class="box rule_351"><span>Item 351</span><b>Detail 351</b><i>Note 351</i><u>Status 351</u></div>
+<div class="box rule_352"><span>Item 352</span><b>Detail 352</b><i>Note 352</i><u>Status 352</u></div>
+<div class="box rule_353"><span>Item 353</span><b>Detail 353</b><i>Note 353</i><u>Status 353</u></div>
+<div class="box rule_354"><span>Item 354</span><b>Detail 354</b><i>Note 354</i><u>Status 354</u></div>
+<div class="box rule_355"><span>Item 355</span><b>Detail 355</b><i>Note 355</i><u>Status 355</u></div>
+<div class="box rule_356"><span>Item 356</span><b>Detail 356</b><i>Note 356</i><u>Status 356</u></div>
+<div class="box rule_357"><span>Item 357</span><b>Detail 357</b><i>Note 357</i><u>Status 357</u></div>
+<div class="box rule_358"><span>Item 358</span><b>Detail 358</b><i>Note 358</i><u>Status 358</u></div>
+<div class="box rule_359"><span>Item 359</span><b>Detail 359</b><i>Note 359</i><u>Status 359</u></div>
+<div class="box rule_360"><span>Item 360</span><b>Detail 360</b><i>Note 360</i><u>Status 360</u></div>
+<div class="box rule_361"><span>Item 361</span><b>Detail 361</b><i>Note 361</i><u>Status 361</u></div>
+<div class="box rule_362"><span>Item 362</span><b>Detail 362</b><i>Note 362</i><u>Status 362</u></div>
+<div class="box rule_363"><span>Item 363</span><b>Detail 363</b><i>Note 363</i><u>Status 363</u></div>
+<div class="box rule_364"><span>Item 364</span><b>Detail 364</b><i>Note 364</i><u>Status 364</u></div>
+<div class="box rule_365"><span>Item 365</span><b>Detail 365</b><i>Note 365</i><u>Status 365</u></div>
+<div class="box rule_366"><span>Item 366</span><b>Detail 366</b><i>Note 366</i><u>Status 366</u></div>
+<div class="box rule_367"><span>Item 367</span><b>Detail 367</b><i>Note 367</i><u>Status 367</u></div>
+<div class="box rule_368"><span>Item 368</span><b>Detail 368</b><i>Note 368</i><u>Status 368</u></div>
+<div class="box rule_369"><span>Item 369</span><b>Detail 369</b><i>Note 369</i><u>Status 369</u></div>
+<div class="box rule_370"><span>Item 370</span><b>Detail 370</b><i>Note 370</i><u>Status 370</u></div>
+<div class="box rule_371"><span>Item 371</span><b>Detail 371</b><i>Note 371</i><u>Status 371</u></div>
+<div class="box rule_372"><span>Item 372</span><b>Detail 372</b><i>Note 372</i><u>Status 372</u></div>
+<div class="box rule_373"><span>Item 373</span><b>Detail 373</b><i>Note 373</i><u>Status 373</u></div>
+<div class="box rule_374"><span>Item 374</span><b>Detail 374</b><i>Note 374</i><u>Status 374</u></div>
+<div class="box rule_375"><span>Item 375</span><b>Detail 375</b><i>Note 375</i><u>Status 375</u></div>
+<div class="box rule_376"><span>Item 376</span><b>Detail 376</b><i>Note 376</i><u>Status 376</u></div>
+<div class="box rule_377"><span>Item 377</span><b>Detail 377</b><i>Note 377</i><u>Status 377</u></div>
+<div class="box rule_378"><span>Item 378</span><b>Detail 378</b><i>Note 378</i><u>Status 378</u></div>
+<div class="box rule_379"><span>Item 379</span><b>Detail 379</b><i>Note 379</i><u>Status 379</u></div>
+<div class="box rule_380"><span>Item 380</span><b>Detail 380</b><i>Note 380</i><u>Status 380</u></div>
+<div class="box rule_381"><span>Item 381</span><b>Detail 381</b><i>Note 381</i><u>Status 381</u></div>
+<div class="box rule_382"><span>Item 382</span><b>Detail 382</b><i>Note 382</i><u>Status 382</u></div>
+<div class="box rule_383"><span>Item 383</span><b>Detail 383</b><i>Note 383</i><u>Status 383</u></div>
+<div class="box rule_384"><span>Item 384</span><b>Detail 384</b><i>Note 384</i><u>Status 384</u></div>
+<div class="box rule_385"><span>Item 385</span><b>Detail 385</b><i>Note 385</i><u>Status 385</u></div>
+<div class="box rule_386"><span>Item 386</span><b>Detail 386</b><i>Note 386</i><u>Status 386</u></div>
+<div class="box rule_387"><span>Item 387</span><b>Detail 387</b><i>Note 387</i><u>Status 387</u></div>
+<div class="box rule_388"><span>Item 388</span><b>Detail 388</b><i>Note 388</i><u>Status 388</u></div>
+<div class="box rule_389"><span>Item 389</span><b>Detail 389</b><i>Note 389</i><u>Status 389</u></div>
+<div class="box rule_390"><span>Item 390</span><b>Detail 390</b><i>Note 390</i><u>Status 390</u></div>
+<div class="box rule_391"><span>Item 391</span><b>Detail 391</b><i>Note 391</i><u>Status 391</u></div>
+<div class="box rule_392"><span>Item 392</span><b>Detail 392</b><i>Note 392</i><u>Status 392</u></div>
+<div class="box rule_393"><span>Item 393</span><b>Detail 393</b><i>Note 393</i><u>Status 393</u></div>
+<div class="box rule_394"><span>Item 394</span><b>Detail 394</b><i>Note 394</i><u>Status 394</u></div>
+<div class="box rule_395"><span>Item 395</span><b>Detail 395</b><i>Note 395</i><u>Status 395</u></div>
+<div class="box rule_396"><span>Item 396</span><b>Detail 396</b><i>Note 396</i><u>Status 396</u></div>
+<div class="box rule_397"><span>Item 397</span><b>Detail 397</b><i>Note 397</i><u>Status 397</u></div>
+<div class="box rule_398"><span>Item 398</span><b>Detail 398</b><i>Note 398</i><u>Status 398</u></div>
+<div class="box rule_399"><span>Item 399</span><b>Detail 399</b><i>Note 399</i><u>Status 399</u></div>
+    </div>
+</body>
+</html>

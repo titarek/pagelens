@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Moderate Site with Minor Anti-Patterns - PageLens Fixture</title>
+    <meta name="description" content="A moderate website fixture with minor structural shortcomings.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Render blocking script in head -->
+    <script src="https://cdn.example.com/sync-script.js"></script>
+    <style>
+        /* Unminified CSS rules */
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f7f9fa;
+            color: #222222;
+        }
+        .header-container {
+            padding: 40px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        .main-content {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>Medium Performance Site</h1>
+        <p>Contains minor shortcomings such as a synchronous head script and an image missing dimension attributes.</p>
+    </div>
+    <div class="main-content">
+        <article>
+            <h2>Content Article</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam gravida turpis eu eros laoreet.</p>
+            <!-- Image with dimensions -->
+            <img src="https://images.example.com/optimized.jpg" width="600" height="300" alt="Optimized banner" loading="lazy">
+            <!-- Image missing dimensions and lazy loading -->
+            <img src="https://images.example.com/missing-dims.jpg" alt="Unsized banner">
+        </article>
+        <form action="/contact" method="POST">
+            <input type="text" name="name" placeholder="Name">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>

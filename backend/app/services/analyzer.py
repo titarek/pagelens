@@ -14,7 +14,7 @@ from app.metrics.structural import compute_structural_metrics
 from app.metrics.shortcomings import evaluate_shortcomings
 from app.metrics.scoring import compute_overall_score
 from app.security.audit import run_security_audit
-from app.schemas.report import Report, TimingMetrics, ResourceEntry, ScoreBreakdown
+from app.schemas.report import Report, TimingMetrics, ResourceEntry, ScoreBreakdown, ScrapedSourceData
 
 
 class AnalysisContext:
@@ -126,6 +126,22 @@ class AnalyzerService:
                 fetch_ttfb_ms=fetch_res.ttfb_ms,
             )
 
+            # Prepare aggregated scraped source code
+            combined_css_blocks = []
+            if css_res.inline_css_text:
+                combined_css_blocks.append("/* === Inline <style> Blocks === */\n" + css_res.inline_css_text)
+            for entry in css_res.stylesheet_entries:
+                if not entry.is_inline and entry.content:
+                    combined_css_blocks.append(f"/* === Stylesheet: {entry.href} === */\n" + entry.content)
+            combined_css_str = "\n\n".join(combined_css_blocks)
+
+            scraped_source = ScrapedSourceData(
+                html=fetch_res.text,
+                css=combined_css_str,
+                html_bytes=len(fetch_res.text.encode("utf-8")),
+                css_bytes=len(combined_css_str.encode("utf-8")),
+            )
+
             report = Report(
                 job_id=job_id,
                 url=url,
@@ -140,8 +156,11 @@ class AnalyzerService:
                 shortcomings=shortcomings,
                 security=security_audit,
                 metadata=parser_res.metadata,
+                scraped_source=scraped_source,
+                discovered_options=parser_res.discovered_options,
                 errors=errors,
             )
+
 
             duration_ms = (time.perf_counter() - start_time) * 1000
             log_analysis_audit(url, client_ip, duration_ms, "success", job_id)

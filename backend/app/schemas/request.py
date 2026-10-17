@@ -24,3 +24,14 @@ class HealthResponse(BaseModel):
     version: str
     timestamp: datetime
     environment: str
+
+
+class InteractionRequest(BaseModel):
+    url: str = Field(..., description="Target webpage URL")
+    action_type: Literal["click", "select", "navigate"] = Field(
+        ..., description="Action to perform: 'click' a button/link, 'select' an option, or 'navigate' to a sub-route"
+    )
+    selector: Optional[str] = Field(None, description="CSS selector or element identifier")
+    value: Optional[str] = Field(None, description="Option value or input text to select/fill")
+    target_url: Optional[str] = Field(None, description="Direct target URL for navigation")
+

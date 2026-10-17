@@ -107,3 +107,48 @@ async def test_css_collector_inline():
     assert res.total_css_bytes > 0
     assert res.inline_css_ratio == 1.0
     assert res.data_uri_count == 0
+
+
+def test_html_parser_extracts_discovered_options():
+    html = """<!DOCTYPE html>
+    <html>
+    <head><title>Test Options</title></head>
+    <body>
+        <nav>
+            <a href="/about">About Us</a>
+            <a href="/pricing">Pricing Plans</a>
+            <a href="https://other.com">External</a>
+        </nav>
+        <form id="contact-form" action="/contact" method="POST">
+            <select name="plan" id="plan-select">
+                <option value="basic">Basic Tier</option>
+                <option value="pro">Pro Tier</option>
+            </select>
+            <button type="submit" id="submit-btn">Submit Request</button>
+            <button type="button" class="btn-cancel">Cancel</button>
+        </form>
+    </body>
+    </html>
+    """
+    parser = HTMLParser(html, "https://example.com/home")
+    res = parser.parse()
+
+    assert res.discovered_options is not None
+    opts = res.discovered_options
+    assert opts.total_count >= 5
+
+    # Check internal links
+    link_targets = [l.target for l in opts.internal_links]
+    assert "https://example.com/about" in link_targets
+    assert "https://example.com/pricing" in link_targets
+
+    # Check select options
+    select_values = [s.target for s in opts.select_options]
+    assert "basic" in select_values
+    assert "pro" in select_values
+
+    # Check buttons
+    button_labels = [b.label for b in opts.buttons]
+    assert "Submit Request" in button_labels
+    assert "Cancel" in button_labels
+

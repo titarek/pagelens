@@ -1,13 +1,31 @@
 import asyncio
 import logging
+import sys
 from typing import List, Tuple, Dict, Any, Optional
 from playwright.async_api import async_playwright, Browser, BrowserContext, Page, Error as PlaywrightError
 from app.core.config import settings
 from app.core.security import validate_and_resolve_url, SSRFValidationError
-from app.schemas.report import TimingMetrics, ResourceEntry
+from app.schemas.report import TimingMetrics, ResourceEntry, InteractionResult, NetworkRequestLog
 from app.metrics.timing import aggregate_timing_runs
 
+
 logger = logging.getLogger("pagelens.playwright")
+
+
+def _run_coroutine_with_proactor(coro_factory, *args, **kwargs):
+    """
+    Spawns a new ProactorEventLoop inside a dedicated worker thread.
+    Required on Windows where Uvicorn defaults to WindowsSelectorEventLoopPolicy,
+    which does not support subprocess execution needed by Playwright.
+    """
+    p_loop = asyncio.ProactorEventLoop()
+    asyncio.set_event_loop(p_loop)
+    try:
+        return p_loop.run_until_complete(coro_factory(*args, **kwargs))
+    finally:
+        p_loop.close()
+        asyncio.set_event_loop(None)
+
 
 OBSERVER_SCRIPT = """
 window.__pagelens_metrics = {
@@ -78,6 +96,21 @@ class PlaywrightRunner:
         self.allow_local_for_testing = allow_local_for_testing
 
     async def render_and_measure(
+        self, target_url: str
+    ) -> Tuple[TimingMetrics, List[ResourceEntry]]:
+        if sys.platform == "win32":
+            try:
+                loop = asyncio.get_running_loop()
+                if isinstance(loop, asyncio.ProactorEventLoop):
+                    return await self._render_and_measure_impl(target_url)
+            except RuntimeError:
+                pass
+            return await asyncio.to_thread(
+                _run_coroutine_with_proactor, self._render_and_measure_impl, target_url
+            )
+        return await self._render_and_measure_impl(target_url)
+
+    async def _render_and_measure_impl(
         self, target_url: str
     ) -> Tuple[TimingMetrics, List[ResourceEntry]]:
         """
@@ -246,3 +279,255 @@ class PlaywrightRunner:
             f"Playwright render complete: FCP={aggregated.fcp_ms}ms, LCP={aggregated.lcp_ms}ms, CLS={aggregated.cls}, TBT={aggregated.tbt_ms}ms"
         )
         return aggregated, captured_resources
+
+    async def simulate_interaction(
+        self,
+        target_url: str,
+        action_type: str,
+        selector: Optional[str] = None,
+        value: Optional[str] = None,
+        target_url_override: Optional[str] = None,
+    ) -> InteractionResult:
+        if sys.platform == "win32":
+            try:
+                loop = asyncio.get_running_loop()
+                if isinstance(loop, asyncio.ProactorEventLoop):
+                    return await self._simulate_interaction_impl(
+                        target_url, action_type, selector, value, target_url_override
+                    )
+            except RuntimeError:
+                pass
+            return await asyncio.to_thread(
+                _run_coroutine_with_proactor,
+                self._simulate_interaction_impl,
+                target_url,
+                action_type,
+                selector,
+                value,
+                target_url_override,
+            )
+        return await self._simulate_interaction_impl(
+            target_url, action_type, selector, value, target_url_override
+        )
+
+    async def _simulate_interaction_impl(
+        self,
+        target_url: str,
+        action_type: str,
+        selector: Optional[str] = None,
+        value: Optional[str] = None,
+        target_url_override: Optional[str] = None,
+    ) -> InteractionResult:
+        """
+        Loads the target page in Playwright, sets up network/console watchers,
+        executes the chosen interaction (click, select, or navigate), waits for DOM/network
+        mutations to settle, and computes the complete before-and-after delta.
+        """
+        validate_and_resolve_url(target_url, allow_local_for_testing=self.allow_local_for_testing)
+        if target_url_override:
+            validate_and_resolve_url(target_url_override, allow_local_for_testing=self.allow_local_for_testing)
+
+        import time
+
+        start_time = time.perf_counter()
+        console_logs: List[str] = []
+        triggered_requests: List[NetworkRequestLog] = []
+        is_tracking_post_interaction = False
+
+        async with async_playwright() as p:
+            browser: Browser = await p.chromium.launch(
+                headless=True,
+                args=[
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox",
+                    "--disable-dev-shm-usage",
+                    "--disable-gpu",
+                ],
+            )
+            try:
+                context = await browser.new_context(
+                    viewport={"width": 1280, "height": 800},
+                    user_agent=settings.user_agent,
+                )
+                page = await context.new_page()
+
+                def on_console(msg):
+                    if msg.type in ("warning", "error", "log"):
+                        console_logs.append(f"[{msg.type.upper()}] {msg.text}")
+
+                page.on("console", on_console)
+
+                def on_request_finished(req):
+                    if is_tracking_post_interaction:
+                        try:
+                            resp = req.response()
+                            status = resp.status if resp else 200
+                            headers = resp.headers if resp else {}
+                            cl = headers.get("content-length")
+                            size = int(cl) if cl and cl.isdigit() else 512
+                            timing = req.timing
+                            dur = (timing.get("responseEnd", 0) - timing.get("requestStart", 0)) if timing else 0
+                            triggered_requests.append(
+                                NetworkRequestLog(
+                                    url=req.url,
+                                    method=req.method,
+                                    status=status,
+                                    resource_type=req.resource_type,
+                                    size_bytes=size,
+                                    duration_ms=max(1.0, float(dur)),
+                                )
+                            )
+                        except Exception:
+                            pass
+
+                page.on("requestfinished", on_request_finished)
+
+                # Step 1: Initial navigation
+                try:
+                    await page.goto(target_url, wait_until="domcontentloaded", timeout=20000)
+                    await page.wait_for_timeout(1000)
+                except Exception as e:
+                    logger.warning(f"Initial navigation warning for {target_url}: {e}")
+
+                initial_url = page.url
+                dom_before = await page.evaluate("() => document.querySelectorAll('*').length")
+                html_before = await page.content()
+                html_bytes_before = len(html_before.encode("utf-8"))
+
+                # Step 2: Begin tracking post-interaction activity
+                is_tracking_post_interaction = True
+                action_start = time.perf_counter()
+                action_desc = ""
+
+                try:
+                    if action_type == "navigate":
+                        nav_target = target_url_override or target_url
+                        action_desc = f"Navigated to {nav_target}"
+                        await page.goto(nav_target, wait_until="domcontentloaded", timeout=20000)
+                        await page.wait_for_timeout(1000)
+
+                    elif action_type == "select":
+                        action_desc = f"Selected '{value}' in {selector or 'dropdown'}"
+                        if selector:
+                            await page.select_option(selector, value=value, timeout=5000)
+                        else:
+                            await page.evaluate(
+                                f"""(val) => {{
+                                    const sel = document.querySelector('select');
+                                    if (sel) {{
+                                        sel.value = val;
+                                        sel.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                                    }}
+                                }}""",
+                                value,
+                            )
+                        await page.wait_for_timeout(1500)
+
+                    elif action_type == "click":
+                        action_desc = f"Clicked {selector or 'button'}"
+                        if selector:
+                            try:
+                                await page.click(selector, timeout=5000)
+                            except Exception:
+                                # Fallback evaluation if selector requires scroll or dispatch
+                                await page.evaluate(
+                                    f"""(sel) => {{
+                                        const el = document.querySelector(sel);
+                                        if (el) el.click();
+                                    }}""",
+                                    selector,
+                                )
+                        else:
+                            await page.evaluate("() => { const b = document.querySelector('button'); if (b) b.click(); }")
+                        await page.wait_for_timeout(1500)
+
+                except Exception as act_err:
+                    logger.warning(f"Action execution warning ({action_type}): {act_err}")
+                    action_desc = f"Attempted {action_type} ({act_err})"
+
+                # Settle and read post-interaction state
+                final_url = page.url
+                dom_after = await page.evaluate("() => document.querySelectorAll('*').length")
+                html_after = await page.content()
+                html_bytes_after = len(html_after.encode("utf-8"))
+                dom_delta = dom_after - dom_before
+                html_bytes_delta = html_bytes_after - html_bytes_before
+                action_duration_ms = (time.perf_counter() - action_start) * 1000
+
+                # Extract CSS after interaction
+                css_blocks = await page.evaluate(
+                    """() => {
+                        let out = [];
+                        for (let s of document.styleSheets) {
+                            try {
+                                if (s.cssRules) {
+                                    for (let r of s.cssRules) out.push(r.cssText);
+                                }
+                            } catch (e) {}
+                        }
+                        return out.slice(0, 300).join('\\n');
+                    }"""
+                )
+
+                total_req_bytes = sum(r.size_bytes for r in triggered_requests)
+                url_changed = initial_url != final_url
+
+                summary_parts = []
+                if url_changed:
+                    summary_parts.append(f"URL transitioned to {final_url}")
+                else:
+                    summary_parts.append("Page remained on current route (DOM state mutated)")
+
+                if dom_delta > 0:
+                    summary_parts.append(f"Injected +{dom_delta} new DOM elements")
+                elif dom_delta < 0:
+                    summary_parts.append(f"Removed {abs(dom_delta)} DOM elements")
+                else:
+                    summary_parts.append("DOM element count remained constant")
+
+                if triggered_requests:
+                    summary_parts.append(f"Triggered {len(triggered_requests)} network request(s) ({round(total_req_bytes / 1024, 1)} KB)")
+                else:
+                    summary_parts.append("No additional network requests triggered")
+
+                summary = ". ".join(summary_parts) + "."
+
+                return InteractionResult(
+                    success=True,
+                    action_type=action_type,
+                    target_description=action_desc,
+                    initial_url=initial_url,
+                    final_url=final_url,
+                    duration_ms=round(action_duration_ms, 2),
+                    url_changed=url_changed,
+                    dom_elements_before=dom_before,
+                    dom_elements_after=dom_after,
+                    dom_delta=dom_delta,
+                    html_after=html_after,
+                    html_bytes_after=html_bytes_after,
+                    html_bytes_delta=html_bytes_delta,
+                    css_after=css_blocks,
+                    css_bytes_after=len(css_blocks.encode("utf-8")),
+                    triggered_requests_count=len(triggered_requests),
+                    triggered_requests_bytes=total_req_bytes,
+                    network_requests=triggered_requests,
+                    console_logs=console_logs[:20],
+                    summary=summary,
+                )
+
+            except Exception as e:
+                logger.error(f"Interaction simulation failed for {target_url}: {e}", exc_info=True)
+                return InteractionResult(
+                    success=False,
+                    action_type=action_type,
+                    target_description=f"{action_type} on {target_url}",
+                    initial_url=target_url,
+                    final_url=target_url,
+                    duration_ms=round((time.perf_counter() - start_time) * 1000, 2),
+                    url_changed=False,
+                    summary=f"Interaction simulation failed: {e}",
+                    error=str(e),
+                )
+            finally:
+                await browser.close()
+

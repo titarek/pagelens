@@ -1,6 +1,7 @@
 from datetime import datetime
-from typing import List, Literal, Optional
+from typing import Dict, List, Literal, Optional
 from pydantic import BaseModel, Field
+
 
 
 class ScoreBreakdown(BaseModel):
@@ -96,6 +97,63 @@ class SiteMetadata(BaseModel):
     content_type: Optional[str] = None
 
 
+class ScrapedSourceData(BaseModel):
+    html: str = ""
+    css: str = ""
+    html_bytes: int = 0
+    css_bytes: int = 0
+
+
+class DiscoveredOption(BaseModel):
+    category: Literal["link", "select_option", "button", "form"]
+    label: str
+    target: str  # URL, option value, form action, or button description
+    selector: Optional[str] = None
+    name: Optional[str] = None
+    attributes: Dict[str, str] = {}
+
+
+class DiscoveredOptionsSummary(BaseModel):
+    total_count: int = 0
+    internal_links: List[DiscoveredOption] = []
+    select_options: List[DiscoveredOption] = []
+    buttons: List[DiscoveredOption] = []
+    forms: List[DiscoveredOption] = []
+
+
+class NetworkRequestLog(BaseModel):
+    url: str
+    method: str = "GET"
+    status: int = 200
+    resource_type: str = "other"
+    size_bytes: int = 0
+    duration_ms: float = 0.0
+
+
+class InteractionResult(BaseModel):
+    success: bool
+    action_type: str
+    target_description: str
+    initial_url: str
+    final_url: str
+    duration_ms: float
+    url_changed: bool
+    dom_elements_before: int = 0
+    dom_elements_after: int = 0
+    dom_delta: int = 0
+    html_after: str = ""
+    html_bytes_after: int = 0
+    html_bytes_delta: int = 0
+    css_after: str = ""
+    css_bytes_after: int = 0
+    triggered_requests_count: int = 0
+    triggered_requests_bytes: int = 0
+    network_requests: List[NetworkRequestLog] = []
+    console_logs: List[str] = []
+    summary: str
+    error: Optional[str] = None
+
+
 class Report(BaseModel):
     job_id: str
     url: str
@@ -110,4 +168,7 @@ class Report(BaseModel):
     shortcomings: List[Shortcoming] = []
     security: SecurityAudit
     metadata: SiteMetadata
+    scraped_source: Optional[ScrapedSourceData] = None
+    discovered_options: Optional[DiscoveredOptionsSummary] = None
     errors: List[str] = []
+

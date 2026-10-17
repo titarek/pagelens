@@ -98,3 +98,63 @@ async def export_report(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"Failed to generate PDF report: {e}",
             )
+
+
+@router.get("/report/{job_id}/source")
+async def get_scraped_source(job_id: str):
+    """
+    Returns the raw scraped HTML and collected CSS for inspection.
+    """
+    job_data = storage.get_job(job_id)
+    if not job_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Analysis job '{job_id}' not found.",
+        )
+
+    scraped_source = job_data.get("scraped_source") or {}
+    html_content = scraped_source.get("html") or job_data.get("raw_html") or ""
+    css_content = scraped_source.get("css") or job_data.get("raw_css") or ""
+
+    return {
+        "job_id": job_id,
+        "url": job_data.get("url", ""),
+        "html": html_content,
+        "css": css_content,
+        "html_bytes": len(html_content.encode("utf-8")),
+        "css_bytes": len(css_content.encode("utf-8")),
+    }
+
+
+@router.get("/report/{job_id}/source/download")
+async def download_scraped_source(
+    job_id: str,
+    type: Literal["html", "css"] = Query(default="html", description="Source asset type to download: 'html' or 'css'"),
+):
+    """
+    Downloads the scraped HTML document or aggregated CSS stylesheet as a raw file.
+    """
+    job_data = storage.get_job(job_id)
+    if not job_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Analysis job '{job_id}' not found.",
+        )
+
+    scraped_source = job_data.get("scraped_source") or {}
+
+    if type == "html":
+        content = scraped_source.get("html") or job_data.get("raw_html") or "<!-- No HTML captured -->"
+        headers = {
+            "Content-Disposition": f'attachment; filename="pagelens-scraped-{job_id[:8]}.html"',
+            "Content-Type": "text/html; charset=utf-8",
+        }
+        return Response(content=content.encode("utf-8"), media_type="text/html", headers=headers)
+
+    elif type == "css":
+        content = scraped_source.get("css") or job_data.get("raw_css") or "/* No CSS captured */"
+        headers = {
+            "Content-Disposition": f'attachment; filename="pagelens-scraped-{job_id[:8]}.css"',
+            "Content-Type": "text/css; charset=utf-8",
+        }
+        return Response(content=content.encode("utf-8"), media_type="text/css", headers=headers)

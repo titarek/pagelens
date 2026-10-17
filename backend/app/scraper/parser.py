@@ -9,7 +9,8 @@ from app.scraper.assets import (
     ParsedFont,
     ParsedPreload,
 )
-from app.schemas.report import SiteMetadata
+from app.schemas.report import SiteMetadata, DiscoveredOption, DiscoveredOptionsSummary
+
 
 
 class HTMLParserResult:
@@ -29,6 +30,7 @@ class HTMLParserResult:
         form_actions: List[str],
         external_links: List[str],
         soup: BeautifulSoup,
+        discovered_options: Optional[DiscoveredOptionsSummary] = None,
     ):
         self.metadata = metadata
         self.num_dom_elements = num_dom_elements
@@ -44,6 +46,7 @@ class HTMLParserResult:
         self.form_actions = form_actions
         self.external_links = external_links
         self.soup = soup
+        self.discovered_options = discovered_options
 
 
 class HTMLParser:
@@ -74,6 +77,7 @@ class HTMLParser:
         fonts = self._extract_fonts(preloads)
         form_actions = self._extract_form_actions()
         external_links = self._extract_external_links()
+        discovered_options = self._extract_discovered_options()
 
         return HTMLParserResult(
             metadata=metadata,
@@ -90,7 +94,9 @@ class HTMLParser:
             form_actions=form_actions,
             external_links=external_links,
             soup=self.soup,
+            discovered_options=discovered_options,
         )
+
 
     def _extract_metadata(self) -> SiteMetadata:
         title_tag = self.soup.find("title")
@@ -293,3 +299,133 @@ class HTMLParser:
                 if link_host and link_host != base_host:
                     links.append(href)
         return links
+
+    def _extract_discovered_options(self) -> DiscoveredOptionsSummary:
+        base_parsed = urlparse(self.base_url)
+        base_host = base_parsed.netloc
+
+        internal_links: List[DiscoveredOption] = []
+        seen_links = set()
+
+        for a in self.soup.find_all("a", href=True):
+            raw_href = a["href"].strip()
+            if not raw_href or raw_href.startswith(("#", "javascript:", "mailto:", "tel:")):
+                continue
+            full_url = urljoin(self.base_url, raw_href)
+            parsed_full = urlparse(full_url)
+            is_internal = (parsed_full.netloc == base_host or not parsed_full.netloc)
+            if full_url not in seen_links:
+                seen_links.add(full_url)
+                anchor_text = a.get_text(separator=" ", strip=True) or a.get("title") or a.get("aria-label") or parsed_full.path or "Link"
+                anchor_text = anchor_text[:60].strip()
+                selector = f"a[href='{raw_href}']"
+                internal_links.append(
+                    DiscoveredOption(
+                        category="link",
+                        label=anchor_text + ("" if is_internal else " (External)"),
+                        target=full_url,
+                        selector=selector,
+                        attributes={"path": parsed_full.path or "/", "is_internal": str(is_internal)}
+                    )
+                )
+                if len(internal_links) >= 50:
+                    break
+
+        # Extract <select> dropdown options
+        select_options: List[DiscoveredOption] = []
+        for select in self.soup.find_all("select"):
+            select_name = select.get("name") or select.get("id") or "select"
+            select_id = select.get("id")
+            selector = f"#{select_id}" if select_id else f"select[name='{select_name}']"
+            for opt in select.find_all("option"):
+                val = opt.get("value")
+                if val is None:
+                    val = opt.get_text(strip=True)
+                opt_label = opt.get_text(strip=True) or str(val)
+                select_options.append(
+                    DiscoveredOption(
+                        category="select_option",
+                        label=f"{select_name} -> {opt_label}",
+                        target=str(val),
+                        selector=selector,
+                        name=select_name,
+                        attributes={"value": str(val)}
+                    )
+                )
+                if len(select_options) >= 40:
+                    break
+            if len(select_options) >= 40:
+                break
+
+        # Extract buttons & interactive triggers
+        buttons: List[DiscoveredOption] = []
+        seen_buttons = set()
+        btn_elements = self.soup.find_all(["button", "input"])
+        for btn in btn_elements:
+            tag_name = btn.name
+            if tag_name == "input" and btn.get("type", "").lower() not in ("button", "submit", "reset"):
+                continue
+            
+            btn_id = btn.get("id")
+            btn_name = btn.get("name")
+            btn_class = btn.get("class")
+            
+            label = btn.get_text(strip=True) or btn.get("value") or btn.get("aria-label") or btn.get("title") or ""
+            label = label[:50].strip()
+            if not label and not btn_id:
+                continue
+            if not label:
+                label = btn_id or "Button"
+
+            if btn_id:
+                selector = f"#{btn_id}"
+            elif btn_name:
+                selector = f"{tag_name}[name='{btn_name}']"
+            elif btn_class and len(btn_class) > 0:
+                selector = f"{tag_name}.{btn_class[0]}"
+            else:
+                selector = tag_name
+
+            key = (selector, label)
+            if key not in seen_buttons:
+                seen_buttons.add(key)
+                buttons.append(
+                    DiscoveredOption(
+                        category="button",
+                        label=label,
+                        target=selector,
+                        selector=selector,
+                        name=btn_name,
+                        attributes={"type": btn.get("type", "button")}
+                    )
+                )
+                if len(buttons) >= 35:
+                    break
+
+        # Extract forms
+        forms: List[DiscoveredOption] = []
+        for form in self.soup.find_all("form"):
+            form_id = form.get("id")
+            form_action = form.get("action", "")
+            resolved_action = urljoin(self.base_url, form_action) if form_action else self.base_url
+            form_method = form.get("method", "GET").upper()
+            selector = f"#{form_id}" if form_id else "form"
+            forms.append(
+                DiscoveredOption(
+                    category="form",
+                    label=f"{form_id or 'Form'} ({form_method})",
+                    target=resolved_action,
+                    selector=selector,
+                    attributes={"method": form_method, "action": resolved_action}
+                )
+            )
+
+        total_count = len(internal_links) + len(select_options) + len(buttons) + len(forms)
+        return DiscoveredOptionsSummary(
+            total_count=total_count,
+            internal_links=internal_links,
+            select_options=select_options,
+            buttons=buttons,
+            forms=forms,
+        )
+

@@ -1,10 +1,20 @@
+import gzip
 import time
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse
+import zlib
 import httpx
 from app.core.config import settings
 from app.core.logging import logger
 from app.core.security import validate_and_resolve_url, SSRFValidationError
+
+try:
+    import brotli
+    HAS_BROTLI = True
+except ImportError:
+    brotli = None
+    HAS_BROTLI = False
+
 
 
 class FetchResult:
@@ -58,10 +68,11 @@ class StaticFetcher:
 
         redirect_chain: List[str] = [canonical_url]
         current_url = canonical_url
+        accept_encoding = "gzip, deflate, br" if HAS_BROTLI else "gzip, deflate"
         headers_to_send = {
             "User-Agent": self.user_agent,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Encoding": accept_encoding,
             "Accept-Language": "en-US,en;q=0.9",
         }
 
@@ -117,12 +128,31 @@ class StaticFetcher:
                 await response.aclose()
                 raw_bytes = b"".join(content_chunks)
                 
+                # Check if content needs explicit decompression (e.g. if stream returned raw compressed bytes)
+                decompressed_bytes = raw_bytes
+                content_encoding = response.headers.get("content-encoding", "").lower().strip()
+                if "br" in content_encoding and brotli:
+                    try:
+                        decompressed_bytes = brotli.decompress(raw_bytes)
+                    except Exception:
+                        pass
+                elif "gzip" in content_encoding:
+                    try:
+                        decompressed_bytes = gzip.decompress(raw_bytes)
+                    except Exception:
+                        pass
+                elif "deflate" in content_encoding:
+                    try:
+                        decompressed_bytes = zlib.decompress(raw_bytes)
+                    except Exception:
+                        pass
+
                 # Detect text encoding or fallback to utf-8 / response.encoding
                 encoding = response.encoding or "utf-8"
                 try:
-                    text_content = raw_bytes.decode(encoding, errors="replace")
+                    text_content = decompressed_bytes.decode(encoding, errors="replace")
                 except Exception:
-                    text_content = raw_bytes.decode("utf-8", errors="replace")
+                    text_content = decompressed_bytes.decode("utf-8", errors="replace")
 
                 # Parse headers into dictionary
                 resp_headers = {k.lower(): v for k, v in response.headers.items()}
@@ -132,7 +162,7 @@ class StaticFetcher:
                     final_url=str(response.url),
                     status_code=response.status_code,
                     headers=resp_headers,
-                    content=raw_bytes,
+                    content=decompressed_bytes,
                     text=text_content,
                     ttfb_ms=ttfb_ms,
                     redirect_chain=redirect_chain,

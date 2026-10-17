@@ -53,6 +53,7 @@ PageLens is an automated, developer-first URL performance analyzer that audits w
 - **Security Audit**: Strict HTTPS enforcement, HSTS, CSP, X-Content-Type-Options, frame-ancestors/X-Frame-Options, Referrer-Policy, cookie security flags, mixed content detection, and vulnerable legacy library scans.
 - **Comprehensive Score Breakdown**: Weighted 0-100 score split across Structure (25%), Timing (35%), Shortcomings (25%), and Security (15%).
 - **Developer-Grade Dashboard**: Built with React 18, TailwindCSS, TanStack Query, Zustand, and Recharts, supporting Dark Mode, interactive gauges, resource breakdowns, and waterfall charts.
+- **Raw Scraped Source Inspector & Downloads**: Dedicated tab and streaming endpoints to inspect and download raw scraped HTML and aggregated CSS (inline `<style>` blocks + resolved external stylesheets) with real-time keyword search, line numbers, clipboard copying, and file downloads.
 - **Export Options**: Downloadable reports in structured JSON and printable PDF formats.
 
 ---
@@ -149,7 +150,25 @@ npm run dev
 `GET /api/v1/report/{job_id}/export?format=json|pdf`
 Downloads structured JSON or formatted PDF audit report.
 
-### 4. Health Check
+### 4. Raw Scraped Source
+`GET /api/v1/report/{job_id}/source`
+Returns the raw scraped HTML document and aggregated CSS stylesheets:
+```json
+{
+  "job_id": "a58b29c1-4b13-4e89-a2e6-7b494639e230",
+  "url": "https://example.com",
+  "html": "<!DOCTYPE html><html><head>...",
+  "css": "/* === Inline <style> Blocks === */...",
+  "html_bytes": 12560,
+  "css_bytes": 4820
+}
+```
+
+### 5. Download Scraped Source File
+`GET /api/v1/report/{job_id}/source/download?type=html|css`
+Streams raw `.html` or `.css` file as a direct browser attachment download (`Content-Disposition: attachment`).
+
+### 6. Health Check
 `GET /api/v1/health`
 ```json
 {

@@ -1,13 +1,21 @@
 import asyncio
+import gzip
 import re
 from typing import Dict, List, Set, Tuple, Optional
 from urllib.parse import urljoin
+import zlib
 import httpx
 import tinycss2
 from app.core.config import settings
 from app.core.logging import logger
 from app.core.security import validate_and_resolve_url, SSRFValidationError
 from app.scraper.assets import ParsedStylesheet
+
+try:
+    import brotli
+except ImportError:
+    brotli = None
+
 
 
 class CSSCollectionResult:
@@ -155,11 +163,30 @@ class CSSCollector:
                 return None
 
             raw_bytes = resp.content
-            if len(raw_bytes) > self.max_bytes_per_css:
-                raw_bytes = raw_bytes[: self.max_bytes_per_css]
+            decompressed_css = raw_bytes
+            css_encoding = resp.headers.get("content-encoding", "").lower().strip()
+            if "br" in css_encoding and brotli:
+                try:
+                    decompressed_css = brotli.decompress(raw_bytes)
+                except Exception:
+                    pass
+            elif "gzip" in css_encoding:
+                try:
+                    decompressed_css = gzip.decompress(raw_bytes)
+                except Exception:
+                    pass
+            elif "deflate" in css_encoding:
+                try:
+                    decompressed_css = zlib.decompress(raw_bytes)
+                except Exception:
+                    pass
 
-            css_text = raw_bytes.decode(resp.encoding or "utf-8", errors="replace")
+            if len(decompressed_css) > self.max_bytes_per_css:
+                decompressed_css = decompressed_css[: self.max_bytes_per_css]
+
+            css_text = decompressed_css.decode(resp.encoding or "utf-8", errors="replace")
             size_bytes = len(raw_bytes)
+
 
             imports: List[str] = []
             if depth < self.max_import_depth:
