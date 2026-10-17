@@ -1,5 +1,8 @@
 # PageLens — Deep Web Performance & Security Analyzer
 
+[![Backend Status](https://img.shields.io/badge/Railway-Backend%20Live-success)](https://pagelens-production-eee1.up.railway.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 PageLens is an automated, developer-first URL performance analyzer that audits websites for speed, size, and safety. It parses HTML/CSS statically and renders dynamic single-page applications via headless Playwright Chromium to compute actionable performance scores, pinpoint structural anti-patterns, and verify production security postures.
 
 ```
