@@ -68,6 +68,7 @@ async def ssrf_validation_exception_handler(request: Request, exc: SSRFValidatio
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={"detail": str(exc), "error_type": "SSRFValidationError"},
+        headers={"Access-Control-Allow-Origin": "*"},
     )
 
 
@@ -76,7 +77,11 @@ async def generic_exception_handler(request: Request, exc: Exception):
     logger.error(f"Unhandled server error on {request.url.path}: {exc}", exc_info=True)
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": "An internal server error occurred while processing the request."},
+        content={
+            "detail": f"An internal server error occurred while processing the request: {exc}",
+            "error_type": type(exc).__name__,
+        },
+        headers={"Access-Control-Allow-Origin": "*"},
     )
 
 

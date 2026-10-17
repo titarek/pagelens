@@ -333,18 +333,19 @@ class PlaywrightRunner:
         console_logs: List[str] = []
         triggered_requests: List[NetworkRequestLog] = []
         is_tracking_post_interaction = False
+        browser = None
 
-        async with async_playwright() as p:
-            browser: Browser = await p.chromium.launch(
-                headless=True,
-                args=[
-                    "--no-sandbox",
-                    "--disable-setuid-sandbox",
-                    "--disable-dev-shm-usage",
-                    "--disable-gpu",
-                ],
-            )
-            try:
+        try:
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(
+                    headless=True,
+                    args=[
+                        "--no-sandbox",
+                        "--disable-setuid-sandbox",
+                        "--disable-dev-shm-usage",
+                        "--disable-gpu",
+                    ],
+                )
                 context = await browser.new_context(
                     viewport={"width": 1280, "height": 800},
                     user_agent=settings.user_agent,
@@ -515,19 +516,23 @@ class PlaywrightRunner:
                     summary=summary,
                 )
 
-            except Exception as e:
-                logger.error(f"Interaction simulation failed for {target_url}: {e}", exc_info=True)
-                return InteractionResult(
-                    success=False,
-                    action_type=action_type,
-                    target_description=f"{action_type} on {target_url}",
-                    initial_url=target_url,
-                    final_url=target_url,
-                    duration_ms=round((time.perf_counter() - start_time) * 1000, 2),
-                    url_changed=False,
-                    summary=f"Interaction simulation failed: {e}",
-                    error=str(e),
-                )
-            finally:
-                await browser.close()
+        except Exception as e:
+            logger.error(f"Interaction simulation failed for {target_url}: {e}", exc_info=True)
+            return InteractionResult(
+                success=False,
+                action_type=action_type,
+                target_description=f"{action_type} on {target_url}",
+                initial_url=target_url,
+                final_url=target_url,
+                duration_ms=round((time.perf_counter() - start_time) * 1000, 2),
+                url_changed=False,
+                summary=f"Interaction simulation failed: {e}",
+                error=str(e),
+            )
+        finally:
+            if browser:
+                try:
+                    await browser.close()
+                except Exception:
+                    pass
 
