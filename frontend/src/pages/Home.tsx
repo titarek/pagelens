@@ -157,13 +157,13 @@ export const Home: React.FC = () => {
         <span>PageLens © 2026. Automated rate limit: 10 requests / minute / IP.</span>
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/titarek/pagelens"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-slate-300 transition flex items-center gap-1"
+            className="hover:text-slate-300 transition flex items-center gap-1 font-medium"
           >
             <span>GitHub Repository</span>
-            <ExternalLink className="w-3 h-3" />
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
       </footer>

@@ -18,6 +18,7 @@ import {
   Check,
   Code,
   Compass,
+  ExternalLink,
 } from 'lucide-react';
 
 import { fetchReport, getExportUrl, getSourceDownloadUrl, saveRecentAnalysis, submitAnalysis } from '../lib/api';
@@ -462,6 +463,21 @@ export const Report: React.FC = () => {
         )}
       </div>
 
+      {/* Footer */}
+      <footer className="w-full py-8 mt-12 border-t border-slate-200 dark:border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-7xl mx-auto">
+        <span>PageLens © 2026. Real-time website analysis and security scanner.</span>
+        <div className="flex items-center gap-4">
+          <a
+            href="https://github.com/titarek/pagelens"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-slate-300 transition flex items-center gap-1 font-medium"
+          >
+            <span>GitHub Repository</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
