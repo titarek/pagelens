@@ -33,11 +33,5 @@
         }
       ]
     }
-  ],
-  "env": {
-    "VITE_API_BASE_URL": {
-      "description": "URL of your deployed backend (Railway/Render). Example: https://pagelens-backend.railway.app",
-      "required": true
-    }
-  }
+  ]
 }
